@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh-Hans,fr-FR,h-hk,zh-tw,ru,en,default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xiaotiandada.github.io","root":"/","scheme":"Muse","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Поиск...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+  </script>
+
+  <meta name="description" content="学习 node mysql, 然后做了一些简单的增删改查, 小小总结总结 Go!!!">
+<meta property="og:type" content="article">
+<meta property="og:title" content="node mysql 增删改查【简易版】">
+<meta property="og:url" content="https://xiaotiandada.github.io/2019/09/02/node-mysql-%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5%E3%80%90%E7%AE%80%E6%98%93%E7%89%88%E3%80%91/index.html">
+<meta property="og:site_name" content="小田&#39;blog">
+<meta property="og:description" content="学习 node mysql, 然后做了一些简单的增删改查, 小小总结总结 Go!!!">
+<meta property="og:locale">
+<meta property="article:published_time" content="2019-09-02T06:35:40.000Z">
+<meta property="article:modified_time" content="2020-10-23T06:27:35.588Z">
+<meta property="article:author" content="小田">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://xiaotiandada.github.io/2019/09/02/node-mysql-%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5%E3%80%90%E7%AE%80%E6%98%93%E7%89%88%E3%80%91/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>node mysql 增删改查【简易版】 | 小田'blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Показать/скрыть меню">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">小田'blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">前端小菜鸡(〃∀〃)</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Содержание
+        </li>
+        <li class="sidebar-nav-overview">
+          Обзор
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#init"><span class="nav-number">1.</span> <span class="nav-text">init</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mysql"><span class="nav-number">2.</span> <span class="nav-text">mysql</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A2%9E"><span class="nav-number">3.</span> <span class="nav-text">增</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A0"><span class="nav-number">4.</span> <span class="nav-text">删</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%B9"><span class="nav-number">5.</span> <span class="nav-text">改</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5"><span class="nav-number">6.</span> <span class="nav-text">查</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#end"><span class="nav-number">7.</span> <span class="nav-text">end</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">小田</p>
+  <div class="site-description" itemprop="description">前端小菜鸡(〃∀〃)</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-name">Архив</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">Категории</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">Тэги</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://xiaotiandada.github.io/2019/09/02/node-mysql-%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5%E3%80%90%E7%AE%80%E6%98%93%E7%89%88%E3%80%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="小田">
+      <meta itemprop="description" content="前端小菜鸡(〃∀〃)">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小田'blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          node mysql 增删改查【简易版】
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Размещено</span>
+
+      <time title="Создано: 2019-09-02 14:35:40" itemprop="dateCreated datePublished" datetime="2019-09-02T14:35:40+08:00">2019-09-02</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Изменено</span>
+        <time title="Изменено: 2020-10-23 14:27:35" itemprop="dateModified" datetime="2020-10-23T14:27:35+08:00">2020-10-23</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">в категории</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/node/" itemprop="url" rel="index"><span itemprop="name">node</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>学习 node mysql, 然后做了一些简单的增删改查, 小小总结总结 Go!!!</p>
+<a id="more"></a>
+
+<p>资料: <a target="_blank" rel="noopener" href="https://www.oschina.net/translate/using-node-mysql-javascript-client">https://www.oschina.net/translate/using-node-mysql-javascript-client</a></p>
+<h2 id="init"><a href="#init" class="headerlink" title="init"></a>init</h2><p>使用 express 初始化</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> app = express()</span><br><span class="line"></span><br><span class="line">app.use(<span class="string">&#x27;/&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  res.send(<span class="string">`hello world`</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>, <span class="function">() =&gt;</span> <span class="built_in">console</span>.log(<span class="string">&#x27;port in 3000&#x27;</span>))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>懒得截图, 运行localhost:3000 就能看到hello world (擅长输出hello world 233)</p>
+<p>然后添加了nodemon 自动重启</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">yarn add nodemon -D</span><br><span class="line"></span><br><span class="line"><span class="comment">// package</span></span><br><span class="line"></span><br><span class="line"><span class="string">&quot;dev&quot;</span>: <span class="string">&quot;nodemon index.js&quot;</span></span><br><span class="line"></span><br><span class="line">yarn dev</span><br></pre></td></tr></table></figure>
+
+<p>方便</p>
+<h2 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h2><p>npm mysql</p>
+<p>文档: <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/mysql">https://www.npmjs.com/package/mysql</a></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mysql      = <span class="built_in">require</span>(<span class="string">&#x27;mysql&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> connection = mysql.createConnection(&#123;</span><br><span class="line">  host     : <span class="string">&#x27;localhost&#x27;</span>,</span><br><span class="line">  user     : <span class="string">&#x27;me&#x27;</span>,</span><br><span class="line">  password : <span class="string">&#x27;secret&#x27;</span>,</span><br><span class="line">  database : <span class="string">&#x27;my_db&#x27;</span></span><br><span class="line">&#125;);</span><br><span class="line">connection.connect();</span><br><span class="line"></span><br><span class="line">connection.query(<span class="string">&#x27;SELECT 1 + 1 AS solution&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">error, results, fields</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (error) <span class="keyword">throw</span> error;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;The solution is: &#x27;</span>, results[<span class="number">0</span>].solution);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">connection.end();</span><br></pre></td></tr></table></figure>
+
+<p>上面需要根据实际情况修改, 比如说账号密码数据库</p>
+<p>数据库我是用 Tool 创建的(不会终端命令 我真垃圾)</p>
+<ul>
+<li>navicat premium 有免费试用时间</li>
+</ul>
+<p>然后mysql我是用 brew 下载的 (方便)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install mysql</span><br></pre></td></tr></table></figure>
+
+<p>这里遇到一个问题</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Error: ER_NOT_SUPPORTED_AUTH_MODE: Client does not support authentication protocol requested by server; consider upgrading MySQL client</span><br></pre></td></tr></table></figure>
+
+<p>解决方案:<br><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/50093144/mysql-8-0-client-does-not-support-authentication-protocol-requested-by-server">https://stackoverflow.com/questions/50093144/mysql-8-0-client-does-not-support-authentication-protocol-requested-by-server</a></p>
+<h2 id="增"><a href="#增" class="headerlink" title="增"></a>增</h2><p><strong>数据新建了一个image, 设置主键ID key 自增</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 插入数据 id自增</span></span><br><span class="line"><span class="keyword">const</span> sqlAdd = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// posts 表名</span></span><br><span class="line">  <span class="keyword">let</span> sqlAdd = <span class="string">&#x27;INSERT INTO image SET ?&#x27;</span>;</span><br><span class="line">  <span class="keyword">let</span> sqlAddJson = &#123;</span><br><span class="line">    url: <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random()*<span class="number">100</span>) + <span class="string">&#x27;我是url&#x27;</span>,</span><br><span class="line">    title: <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random()*<span class="number">100</span>) + <span class="string">&#x27;我是标题&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">  connection.query(sqlAdd, sqlAddJson, <span class="function">(<span class="params">err,res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(err) <span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&#x27;INSERT INFO ERROR:&#x27;</span>,err.message);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;INSERT INFO&#x27;</span>, res.insertId);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// sqlAdd()</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="删"><a href="#删" class="headerlink" title="删"></a>删</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 删除数据 id</span></span><br><span class="line"><span class="keyword">const</span> sqlDelete = <span class="function"><span class="params">id</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 通过id查询</span></span><br><span class="line">  <span class="keyword">let</span> sql = <span class="string">`DELETE FROM image WHERE id = ?`</span>;</span><br><span class="line">  connection.query(sql, [id] , <span class="function">(<span class="params">err,res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(err) <span class="built_in">console</span>.log(<span class="string">&#x27;[DELETE ERROR]:&#x27;</span>,err.message);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;DELETE&#x27;</span>, res.affectedRows);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// sqlDelete(2)</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="改"><a href="#改" class="headerlink" title="改"></a>改</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 更新数据 id</span></span><br><span class="line"><span class="keyword">const</span> sqlUpdate = <span class="function"><span class="params">id</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> sqlAddJson = &#123;</span><br><span class="line">    url: <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random()*<span class="number">100</span>) + <span class="string">&#x27;我是url&#x27;</span>,</span><br><span class="line">    title: <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random()*<span class="number">100</span>) + <span class="string">&#x27;我是标题&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 需要改的数据和查询id</span></span><br><span class="line">  <span class="keyword">let</span> sqlAdd = <span class="string">`UPDATE image SET url = ?, title = ? WHERE id = ?`</span>;</span><br><span class="line">  connection.query(sqlAdd, [sqlAddJson.url, sqlAddJson.title, id], <span class="function">(<span class="params">err,res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(err) <span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&#x27;UPDATE ERROR:&#x27;</span>,err.message);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;UPDATE&#x27;</span>, res.changedRows);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// sqlUpdate(2)</span></span><br></pre></td></tr></table></figure>
+<h2 id="查"><a href="#查" class="headerlink" title="查"></a>查</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查询数据</span></span><br><span class="line"><span class="keyword">const</span> sqlSelect = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 查询那个表</span></span><br><span class="line">  <span class="keyword">let</span> sql = <span class="string">&#x27;SELECT * FROM image&#x27;</span>;</span><br><span class="line">  connection.query(sql,  <span class="function">(<span class="params">err,result</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(err) <span class="built_in">console</span>.log(<span class="string">&#x27;[SELECT ERROR]:&#x27;</span>,err.message);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;result&#x27;</span>, <span class="built_in">JSON</span>.stringify(result));  <span class="comment">//数据库查询结果返回到result中</span></span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// sqlSelect()</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="end"><a href="#end" class="headerlink" title="end"></a>end</h2><p>很简易的增删改查 嘿嘿</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/08/29/node%E7%88%AC%E8%99%AB-%E7%AE%80%E6%98%93%E7%89%88%E3%80%90%E7%AB%99%E9%85%B7%E3%80%91/" rel="prev" title="node爬虫 简易版【站酷】">
+                  <i class="fa fa-chevron-left"></i> node爬虫 简易版【站酷】
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/09/08/twitter-%E7%82%B9%E8%B5%9E%E7%AE%80%E6%98%93%E5%8A%A8%E7%94%BB/" rel="next" title="twitter 点赞简易动画">
+                  twitter 点赞简易动画 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小田</span>
+</div>
+  <div class="powered-by">Генератор — <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-Hans,fr-FR,h-hk,zh-tw,ru,en,default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xiaotiandada.github.io","root":"/","scheme":"Muse","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Поиск...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+  </script>
+
+  <meta name="description" content="node爬虫 简易版【站酷】 node mysql 增删改查【简易版】 结合上面的文章做了一个图片展示">
+<meta property="og:type" content="article">
+<meta property="og:title" content="node-mysql爬取图片并显示">
+<meta property="og:url" content="https://xiaotiandada.github.io/2019/11/03/node-mysql%E7%88%AC%E5%8F%96%E5%9B%BE%E7%89%87%E5%B9%B6%E6%98%BE%E7%A4%BA/index.html">
+<meta property="og:site_name" content="小田&#39;blog">
+<meta property="og:description" content="node爬虫 简易版【站酷】 node mysql 增删改查【简易版】 结合上面的文章做了一个图片展示">
+<meta property="og:locale">
+<meta property="og:image" content="https://xiaotiandada.github.io/2019/11/03/node-mysql%E7%88%AC%E5%8F%96%E5%9B%BE%E7%89%87%E5%B9%B6%E6%98%BE%E7%A4%BA/node-mysql%E7%88%AC%E5%8F%96%E5%9B%BE%E7%89%87%E5%B9%B6%E6%98%BE%E7%A4%BA/client.png">
+<meta property="og:image" content="https://xiaotiandada.github.io/2019/11/03/node-mysql%E7%88%AC%E5%8F%96%E5%9B%BE%E7%89%87%E5%B9%B6%E6%98%BE%E7%A4%BA/node-mysql%E7%88%AC%E5%8F%96%E5%9B%BE%E7%89%87%E5%B9%B6%E6%98%BE%E7%A4%BA/db.png">
+<meta property="og:image" content="https://xiaotiandada.github.io/2019/11/03/node-mysql%E7%88%AC%E5%8F%96%E5%9B%BE%E7%89%87%E5%B9%B6%E6%98%BE%E7%A4%BA/node-mysql%E7%88%AC%E5%8F%96%E5%9B%BE%E7%89%87%E5%B9%B6%E6%98%BE%E7%A4%BA/data.png">
+<meta property="og:image" content="https://xiaotiandada.github.io/2019/11/03/node-mysql%E7%88%AC%E5%8F%96%E5%9B%BE%E7%89%87%E5%B9%B6%E6%98%BE%E7%A4%BA/node-mysql%E7%88%AC%E5%8F%96%E5%9B%BE%E7%89%87%E5%B9%B6%E6%98%BE%E7%A4%BA/client.png">
+<meta property="article:published_time" content="2019-11-03T15:11:39.000Z">
+<meta property="article:modified_time" content="2020-10-23T06:27:35.588Z">
+<meta property="article:author" content="小田">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xiaotiandada.github.io/2019/11/03/node-mysql%E7%88%AC%E5%8F%96%E5%9B%BE%E7%89%87%E5%B9%B6%E6%98%BE%E7%A4%BA/node-mysql%E7%88%AC%E5%8F%96%E5%9B%BE%E7%89%87%E5%B9%B6%E6%98%BE%E7%A4%BA/client.png">
+
+
+<link rel="canonical" href="https://xiaotiandada.github.io/2019/11/03/node-mysql%E7%88%AC%E5%8F%96%E5%9B%BE%E7%89%87%E5%B9%B6%E6%98%BE%E7%A4%BA/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>node-mysql爬取图片并显示 | 小田'blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Показать/скрыть меню">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">小田'blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">前端小菜鸡(〃∀〃)</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Содержание
+        </li>
+        <li class="sidebar-nav-overview">
+          Обзор
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#start"><span class="nav-number">1.</span> <span class="nav-text">start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9crawler-js"><span class="nav-number">1.1.</span> <span class="nav-text">修改crawler.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E6%95%B0%E6%8D%AE"><span class="nav-number">1.2.</span> <span class="nav-text">查数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%95%E7%A4%BA"><span class="nav-number">1.3.</span> <span class="nav-text">展示</span></a></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">小田</p>
+  <div class="site-description" itemprop="description">前端小菜鸡(〃∀〃)</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-name">Архив</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">Категории</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">Тэги</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://xiaotiandada.github.io/2019/11/03/node-mysql%E7%88%AC%E5%8F%96%E5%9B%BE%E7%89%87%E5%B9%B6%E6%98%BE%E7%A4%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="小田">
+      <meta itemprop="description" content="前端小菜鸡(〃∀〃)">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小田'blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          node-mysql爬取图片并显示
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Размещено</span>
+
+      <time title="Создано: 2019-11-03 23:11:39" itemprop="dateCreated datePublished" datetime="2019-11-03T23:11:39+08:00">2019-11-03</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Изменено</span>
+        <time title="Изменено: 2020-10-23 14:27:35" itemprop="dateModified" datetime="2020-10-23T14:27:35+08:00">2020-10-23</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">в категории</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/node/" itemprop="url" rel="index"><span itemprop="name">node</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><a href="https://xiaotiandada.github.io/2019/08/29/node%E7%88%AC%E8%99%AB-%E7%AE%80%E6%98%93%E7%89%88%E3%80%90%E7%AB%99%E9%85%B7%E3%80%91/">node爬虫 简易版【站酷】</a></p>
+<p><a href="https://xiaotiandada.github.io/2019/09/02/node-mysql-%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5%E3%80%90%E7%AE%80%E6%98%93%E7%89%88%E3%80%91/">node mysql 增删改查【简易版】</a></p>
+<p>结合上面的文章做了一个图片展示</p>
+<a id="more"></a>
+
+<p><img src="node-mysql%E7%88%AC%E5%8F%96%E5%9B%BE%E7%89%87%E5%B9%B6%E6%98%BE%E7%A4%BA/client.png" alt="node-mysql爬取图片并显示"></p>
+<h2 id="start"><a href="#start" class="headerlink" title="start"></a>start</h2><p>启动node服务, 使用express</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> app = express()</span><br><span class="line"><span class="keyword">const</span> router = <span class="built_in">require</span>(<span class="string">&#x27;./router&#x27;</span>)</span><br><span class="line"></span><br><span class="line">app.use(router)</span><br><span class="line">app.listen(<span class="number">3000</span>, <span class="function">() =&gt;</span> <span class="built_in">console</span>.log(<span class="string">&#x27;port in 3000&#x27;</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">// router</span></span><br><span class="line"><span class="keyword">const</span> router = express.Router()</span><br><span class="line">router.get(<span class="string">&#x27;/&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  res.send(<span class="string">`hello world`</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">module</span>.exports = router</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">node index.js</span><br><span class="line"><span class="comment"># 或者利用nodemon监听</span></span><br><span class="line">nodemon index  <span class="comment"># 写入配置文件</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line">  <span class="string">&quot;dev&quot;</span>: <span class="string">&quot;nodemon index.js&quot;</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yarn dev</span><br><span class="line"></span><br><span class="line"><span class="comment">#or</span></span><br><span class="line"></span><br><span class="line">npm run dev</span><br></pre></td></tr></table></figure>
+
+<p>在屏幕看见 hello world 就算是成功了</p>
+<h3 id="修改crawler-js"><a href="#修改crawler-js" class="headerlink" title="修改crawler.js"></a>修改crawler.js</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在之前下载图片逻辑后面写入插入数据库逻辑</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="keyword">const</span> mysql = <span class="built_in">require</span>(<span class="string">&#x27;./mysql&#x27;</span>)</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 下载图片</span></span><br><span class="line">  <span class="keyword">const</span> download = <span class="function">(<span class="params">item, id</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="keyword">let</span> userAgent = userAgents[<span class="built_in">parseInt</span>(<span class="built_in">Math</span>.random() * userAgents.length)]</span><br><span class="line">      <span class="comment">// 通过 superagent 保存图片</span></span><br><span class="line">      <span class="keyword">const</span> req =  superagent.get(item.url)</span><br><span class="line">      .set(&#123; <span class="string">&#x27;User-Agent&#x27;</span>: userAgent &#125;)</span><br><span class="line">      <span class="comment">// 增加 url title</span></span><br><span class="line">      <span class="keyword">let</span> url = <span class="string">`/image/page<span class="subst">$&#123;id&#125;</span>/<span class="subst">$&#123;item.title&#125;</span>.png`</span></span><br><span class="line">      <span class="keyword">let</span> title = item.title</span><br><span class="line">      <span class="comment">// 使用了stream(流)</span></span><br><span class="line">      req.pipe(fs.createWriteStream(<span class="string">`./static/image/page<span class="subst">$&#123;id&#125;</span>/<span class="subst">$&#123;item.title&#125;</span>.png`</span>))</span><br><span class="line">      <span class="comment">// 写入数据库</span></span><br><span class="line">      mysql.sqlAdd(url, title)</span><br><span class="line">      <span class="keyword">return</span> <span class="string">`下载<span class="subst">$&#123;item.title&#125;</span>done`</span></span><br><span class="line">    &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">`下载图片失败<span class="subst">$&#123;item.title&#125;</span>`</span>, error)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// mysql 文件</span></span><br><span class="line">  <span class="comment">// 插入数据 id自增</span></span><br><span class="line">  sqlAdd  (url, title)  &#123;</span><br><span class="line">    <span class="keyword">let</span> sqlAdd = <span class="string">&#x27;INSERT INTO image SET ?&#x27;</span>;</span><br><span class="line">    <span class="keyword">let</span> sqlAddJson = &#123;</span><br><span class="line">      url,</span><br><span class="line">      title</span><br><span class="line">    &#125;</span><br><span class="line">    connection.query(sqlAdd, sqlAddJson, <span class="function">(<span class="params">err,res</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span>(err) <span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&#x27;INSERT INFO ERROR:&#x27;</span>,err.message);</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&#x27;INSERT INFO&#x27;</span>, res.insertId);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 没有做一些错误等预防(2333)</span></span><br></pre></td></tr></table></figure>
+
+<p>插入成功后, 打开数据库查一下</p>
+<p>记得启动数据库!!!</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql.server start</span><br></pre></td></tr></table></figure>
+
+<p><img src="node-mysql%E7%88%AC%E5%8F%96%E5%9B%BE%E7%89%87%E5%B9%B6%E6%98%BE%E7%A4%BA/db.png" alt="db"></p>
+<p>建表的过程就省略了…</p>
+<h3 id="查数据"><a href="#查数据" class="headerlink" title="查数据"></a>查数据</h3><p>数据有了之后, 开始查询数据</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> router = express.Router()</span><br><span class="line"><span class="keyword">const</span> controller = <span class="built_in">require</span>(<span class="string">&#x27;./controller&#x27;</span>)</span><br><span class="line">router.get(<span class="string">&#x27;/&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  res.send(<span class="string">`hello world 11qq`</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">router.get(<span class="string">&#x27;/allimg&#x27;</span>, <span class="keyword">async</span> (req, res) =&gt; &#123;</span><br><span class="line">  <span class="comment">// 调用controller.js</span></span><br><span class="line">  <span class="keyword">let</span> allImg = <span class="keyword">await</span> controller.getAllImg()</span><br><span class="line">  res.send(allImg)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = router</span><br></pre></td></tr></table></figure>
+
+<p>调用controller.getAllImg()并返回</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> mysql = <span class="built_in">require</span>(<span class="string">&#x27;./mysql&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="keyword">async</span> <span class="function"><span class="title">getAllImg</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="comment">// 调用mysql方法</span></span><br><span class="line">      <span class="keyword">let</span> res = <span class="keyword">await</span> mysql.getAllImg()</span><br><span class="line">      <span class="keyword">return</span> &#123;</span><br><span class="line">        code: <span class="number">0</span>,</span><br><span class="line">        data: res,</span><br><span class="line">        message: <span class="string">&#x27;success&#x27;</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&#x27;mysql getAllImg error&#x27;</span>, error)</span><br><span class="line">      <span class="keyword">return</span> &#123;</span><br><span class="line">        code: -<span class="number">1</span>,</span><br><span class="line">        data: &#123;&#125;,</span><br><span class="line">        message: <span class="string">&#x27;fail&#x27;</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>调用mysql.getAllImg()并返回</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// mysql.js</span></span><br><span class="line"><span class="comment">// 查询所有数据并且返回</span></span><br><span class="line">  <span class="function"><span class="title">getAllImg</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> sql = <span class="string">&#x27;SELECT * FROM image&#x27;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">      connection.query(sql, <span class="function">(<span class="params">err, result</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (err) <span class="keyword">return</span> reject(err)</span><br><span class="line">        resolve(result)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="node-mysql%E7%88%AC%E5%8F%96%E5%9B%BE%E7%89%87%E5%B9%B6%E6%98%BE%E7%A4%BA/data.png" alt="data"></p>
+<p>访问<a target="_blank" rel="noopener" href="http://localhost:3000/allimg%E8%B7%AF%E7%94%B1%E4%B9%8B%E5%90%8E%E5%8F%AF%E8%83%BD%E6%98%AF%E8%BF%99%E6%A0%B7">http://localhost:3000/allimg路由之后可能是这样</a></p>
+<h3 id="展示"><a href="#展示" class="headerlink" title="展示"></a>展示</h3><p>数据有了之后就可以展示了</p>
+<p>这里用了<a target="_blank" rel="noopener" href="https://parceljs.org/">parcel</a>打包工具</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 快速</span></span><br><span class="line"></span><br><span class="line">yarn init -y</span><br><span class="line"></span><br><span class="line">touch index.html</span><br><span class="line">touch index.ts</span><br><span class="line">touch index.less</span><br><span class="line"></span><br><span class="line">yarn add --dev typescript</span><br><span class="line">yarn add --dev parcel-bundler</span><br><span class="line"></span><br><span class="line">// package.json</span><br><span class="line"><span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line">  <span class="string">&quot;start&quot;</span>: <span class="string">&quot;parcel index.html&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">yarn start <span class="comment"># 启动一个服务, 会有一个新页面</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- ... --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;./index.ts&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- ... --&gt;</span></span><br></pre></td></tr></table></figure>
+<p>内容很简单</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用axios</span></span><br><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">&#x27;axios&#x27;</span></span><br><span class="line"><span class="comment">// 导入 less</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;./index.less&#x27;</span></span><br><span class="line"><span class="keyword">const</span> APP_URL = <span class="string">&#x27;http://127.0.0.1:3000&#x27;</span></span><br><span class="line"><span class="keyword">const</span> API = axios.create(&#123;</span><br><span class="line">  baseURL: APP_URL,</span><br><span class="line">  timeout: <span class="number">1000</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">API.get(<span class="string">&#x27;/allimg&#x27;</span>)</span><br><span class="line">  .then( <span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res)</span><br><span class="line">    <span class="keyword">if</span> (res.status === <span class="number">200</span> &amp;&amp; res.data.code === <span class="number">0</span>)</span><br><span class="line">    setList(res.data.data)</span><br><span class="line">  &#125;)</span><br><span class="line">  .catch( <span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(error);</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 写入html结构</span></span><br><span class="line"><span class="keyword">const</span> setList = <span class="function">(<span class="params">arr: <span class="built_in">object</span>[]</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> app = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;#app&#x27;</span>)</span><br><span class="line">  <span class="keyword">let</span> ulDom = <span class="built_in">document</span>.createElement(<span class="string">&#x27;ul&#x27;</span>)</span><br><span class="line">  ulDom.classList.add(<span class="string">&#x27;list&#x27;</span>)</span><br><span class="line">  ulDom.setAttribute(<span class="string">&#x27;role&#x27;</span>, <span class="string">&#x27;list&#x27;</span>)</span><br><span class="line">  <span class="keyword">let</span> dom: <span class="built_in">string</span> = <span class="string">``</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">interface</span> Img &#123;</span><br><span class="line">    url: <span class="built_in">string</span>,</span><br><span class="line">    title: <span class="built_in">string</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  arr.map(<span class="function">(<span class="params">i: Img</span>) =&gt;</span> &#123;</span><br><span class="line">    dom += <span class="string">`&lt;li&gt;</span></span><br><span class="line"><span class="string">      &lt;img src=&quot;<span class="subst">$&#123;APP_URL&#125;</span><span class="subst">$&#123;i.url&#125;</span>&quot;&gt;</span></span><br><span class="line"><span class="string">      &lt;div&gt;</span></span><br><span class="line"><span class="string">      &lt;span&gt;url: <span class="subst">$&#123;i.url&#125;</span>&lt;/span&gt;</span></span><br><span class="line"><span class="string">      &lt;span&gt;title: <span class="subst">$&#123;i.title&#125;</span>&lt;/span&gt;</span></span><br><span class="line"><span class="string">      &lt;/div&gt;</span></span><br><span class="line"><span class="string">    &lt;/li&gt;`</span></span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  ulDom.innerHTML = dom</span><br><span class="line">  app.append(ulDom)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后查看, 发现有问题,接口请求 Network Error (这里是跨域问题)</p>
+<p>我们使用cors来解决</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// yarn add cors</span></span><br><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> router = express.Router()</span><br><span class="line"><span class="keyword">const</span> cors = <span class="built_in">require</span>(<span class="string">&#x27;cors&#x27;</span>) <span class="comment">// 导入</span></span><br><span class="line"><span class="keyword">const</span> controller = <span class="built_in">require</span>(<span class="string">&#x27;./controller&#x27;</span>)</span><br><span class="line"></span><br><span class="line">router.use(cors()) <span class="comment">// 全局允许 如果需要单独配置, 看官方文档</span></span><br><span class="line">router.get(<span class="string">&#x27;/&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  res.send(<span class="string">`hello world 11qq`</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">router.get(<span class="string">&#x27;/allimg&#x27;</span>, <span class="keyword">async</span> (req, res) =&gt; &#123;</span><br><span class="line">  <span class="keyword">let</span> allImg = <span class="keyword">await</span> controller.getAllImg()</span><br><span class="line">  res.send(allImg)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = router</span><br></pre></td></tr></table></figure>
+
+<p>解决跨域之后就出现数据了, 然后把样式美化一下, 到这里上面的图片还没有加上!!!</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.list</span> &#123;</span><br><span class="line">  <span class="selector-tag">li</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">6px</span> <span class="number">0</span>;</span><br><span class="line">    <span class="selector-tag">&amp;</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">      <span class="attribute">background-color</span>: <span class="number">#eee</span>;</span><br><span class="line">      <span class="selector-tag">img</span> &#123;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">300px</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-tag">&amp;</span> &gt; <span class="selector-tag">span</span> &#123;</span><br><span class="line">      <span class="attribute">font-size</span>: <span class="number">14px</span>;</span><br><span class="line">      <span class="attribute">color</span>: <span class="number">#333</span>;</span><br><span class="line">      <span class="attribute">list-style</span>: <span class="number">1.5</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-tag">&amp;</span> &gt; <span class="selector-tag">div</span> &#123;</span><br><span class="line">      <span class="attribute">display</span>: flex;</span><br><span class="line">      <span class="attribute">flex-direction</span>: column;</span><br><span class="line">      <span class="attribute">justify-content</span>: center;</span><br><span class="line">      <span class="attribute">margin-left</span>: <span class="number">20px</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-tag">img</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">transition</span>: width .<span class="number">3s</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>为了假如图片, 我设置了node静态资源(也不知道做法对不对 反正是跑起来了)</p>
+<p><a target="_blank" rel="noopener" href="https://expressjs.com/zh-cn/starter/static-files.html">在 Express 中提供静态文件</a></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> app = express()</span><br><span class="line"><span class="comment">// 设置static</span></span><br><span class="line">app.use(express.static(<span class="string">&#x27;static&#x27;</span>));</span><br><span class="line"><span class="keyword">const</span> mysql = <span class="built_in">require</span>(<span class="string">&#x27;./mysql&#x27;</span>)</span><br><span class="line">mysql.init()</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> router = <span class="built_in">require</span>(<span class="string">&#x27;./router&#x27;</span>)</span><br><span class="line">app.use(router)</span><br><span class="line"><span class="comment">// 这里是爬虫的方法</span></span><br><span class="line"><span class="comment">// const crawler = require(&#x27;./crawler&#x27;)</span></span><br><span class="line"><span class="comment">// crawler.init()</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>, <span class="function">() =&gt;</span> <span class="built_in">console</span>.log(<span class="string">&#x27;port in 3000&#x27;</span>))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>然后访问接口数据的路径加上<a target="_blank" rel="noopener" href="http://localhost:3000/%E5%B0%B1%E5%8F%AF%E4%BB%A5%E4%BA%86">http://localhost:3000/就可以了</a></p>
+<p>效果展示</p>
+<p><img src="node-mysql%E7%88%AC%E5%8F%96%E5%9B%BE%E7%89%87%E5%B9%B6%E6%98%BE%E7%A4%BA/client.png" alt="node-mysql爬取图片并显示"></p>
+<p>还有很多优化点可以做, 分页什么什么吧啦吧啦, 代码优化 错误处理 emmmmm</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/11/02/vue%E5%BE%AE%E4%BF%A1%E5%88%86%E4%BA%AB/" rel="prev" title="vue微信分享">
+                  <i class="fa fa-chevron-left"></i> vue微信分享
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/11/21/vue%E4%BC%98%E5%8C%96%E8%AE%B0%E5%BD%95/" rel="next" title="vue优化记录">
+                  vue优化记录 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小田</span>
+</div>
+  <div class="powered-by">Генератор — <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

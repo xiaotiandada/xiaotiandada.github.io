@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="zh-Hans,fr-FR,h-hk,zh-tw,ru,en,default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xiaotiandada.github.io","root":"/","scheme":"Muse","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Поиск...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+  </script>
+
+  <meta name="description" content="更多信息可以查看我的github仓库  MDN 定位https:&#x2F;&#x2F;developer.mozilla.org&#x2F;zh-CN&#x2F;docs&#x2F;Learn&#x2F;CSS&#x2F;CSS_layout&#x2F;%E5%AE%9A%E4%BD%8D MDN 定位实战https:&#x2F;&#x2F;developer.mozilla.org&#x2F;zh-CN&#x2F;docs&#x2F;Learn&#x2F;CSS&#x2F;CSS_layout&#x2F;Practical_positioning_">
+<meta property="og:type" content="article">
+<meta property="og:title" content="css布局">
+<meta property="og:url" content="https://xiaotiandada.github.io/2018/06/20/css%E5%B8%83%E5%B1%80/index.html">
+<meta property="og:site_name" content="小田&#39;blog">
+<meta property="og:description" content="更多信息可以查看我的github仓库  MDN 定位https:&#x2F;&#x2F;developer.mozilla.org&#x2F;zh-CN&#x2F;docs&#x2F;Learn&#x2F;CSS&#x2F;CSS_layout&#x2F;%E5%AE%9A%E4%BD%8D MDN 定位实战https:&#x2F;&#x2F;developer.mozilla.org&#x2F;zh-CN&#x2F;docs&#x2F;Learn&#x2F;CSS&#x2F;CSS_layout&#x2F;Practical_positioning_">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-06-20T08:50:52.000Z">
+<meta property="article:modified_time" content="2019-08-16T04:10:07.950Z">
+<meta property="article:author" content="小田">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://xiaotiandada.github.io/2018/06/20/css%E5%B8%83%E5%B1%80/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>css布局 | 小田'blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Показать/скрыть меню">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">小田'blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">前端小菜鸡(〃∀〃)</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Содержание
+        </li>
+        <li class="sidebar-nav-overview">
+          Обзор
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#MDN-%E5%AE%9A%E4%BD%8D"><span class="nav-number">1.</span> <span class="nav-text">MDN 定位</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MDN-%E5%AE%9A%E4%BD%8D%E5%AE%9E%E6%88%98"><span class="nav-number">2.</span> <span class="nav-text">MDN 定位实战</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MDN-Flexbox"><span class="nav-number">3.</span> <span class="nav-text">MDN Flexbox</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%83%E5%B1%80"><span class="nav-number">4.</span> <span class="nav-text">布局</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">小田</p>
+  <div class="site-description" itemprop="description">前端小菜鸡(〃∀〃)</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-name">Архив</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">Категории</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">Тэги</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://xiaotiandada.github.io/2018/06/20/css%E5%B8%83%E5%B1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="小田">
+      <meta itemprop="description" content="前端小菜鸡(〃∀〃)">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小田'blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          css布局
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Размещено</span>
+
+      <time title="Создано: 2018-06-20 16:50:52" itemprop="dateCreated datePublished" datetime="2018-06-20T16:50:52+08:00">2018-06-20</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Изменено</span>
+        <time title="Изменено: 2019-08-16 12:10:07" itemprop="dateModified" datetime="2019-08-16T12:10:07+08:00">2019-08-16</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">в категории</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Css/" itemprop="url" rel="index"><span itemprop="name">Css</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <blockquote>
+<p>更多信息可以查看我的github仓库</p>
+</blockquote>
+<h3 id="MDN-定位"><a href="#MDN-定位" class="headerlink" title="MDN 定位"></a>MDN 定位</h3><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Learn/CSS/CSS_layout/%E5%AE%9A%E4%BD%8D">https://developer.mozilla.org/zh-CN/docs/Learn/CSS/CSS_layout/%E5%AE%9A%E4%BD%8D</a></p>
+<h3 id="MDN-定位实战"><a href="#MDN-定位实战" class="headerlink" title="MDN 定位实战"></a>MDN 定位实战</h3><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Learn/CSS/CSS_layout/Practical_positioning_examples">https://developer.mozilla.org/zh-CN/docs/Learn/CSS/CSS_layout/Practical_positioning_examples</a></p>
+<h3 id="MDN-Flexbox"><a href="#MDN-Flexbox" class="headerlink" title="MDN Flexbox"></a>MDN Flexbox</h3><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Learn/CSS/CSS_layout/Flexbox">https://developer.mozilla.org/zh-CN/docs/Learn/CSS/CSS_layout/Flexbox</a></p>
+<a id="more"></a>
+
+<h3 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h3><blockquote>
+<p>这个基础需要恶补</p>
+</blockquote>
+<blockquote>
+<p>圣杯布局</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># css</span></span><br><span class="line">body &#123;</span><br><span class="line">    margin: 0;</span><br><span class="line">    padding: 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.header,</span><br><span class="line">.footer &#123;</span><br><span class="line">    background: red;</span><br><span class="line">    padding: 20px 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.container &#123;</span><br><span class="line">    padding-left: 200px;</span><br><span class="line">    padding-right: 200px;</span><br><span class="line">    /* min-width: 600px; */</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.content,</span><br><span class="line">.left,</span><br><span class="line">.right &#123;</span><br><span class="line">    height: 200px;</span><br><span class="line">    <span class="built_in">float</span>: left;</span><br><span class="line">    position: relative;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">.content &#123;</span><br><span class="line">    width: 100%;</span><br><span class="line">    background: gold;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.left &#123;</span><br><span class="line">    width: 200px;</span><br><span class="line">    height: 200px;</span><br><span class="line">    background: <span class="comment">#333;</span></span><br><span class="line">    margin-left: -100%;</span><br><span class="line">    right: 200px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.right &#123;</span><br><span class="line">    width: 200px;</span><br><span class="line">    height: 200px;</span><br><span class="line">    background: <span class="comment">#eee;</span></span><br><span class="line">    margin-right: -200px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.footer &#123;</span><br><span class="line">    clear: both;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">* html .left &#123;</span><br><span class="line">    left: 200px;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># html</span></span><br><span class="line">&lt;div class=<span class="string">&quot;header&quot;</span>&gt;</span><br><span class="line">    header</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;div class=<span class="string">&quot;container&quot;</span>&gt;</span><br><span class="line">    &lt;div class=<span class="string">&quot;content&quot;</span>&gt;Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati iusto cumque quibusdam quis qui sit quisquam iure repellat perferendis. Tempora accusantium dignissimos, magnam est placeat enim dicta dolores nam distinctio!&lt;/div&gt;</span><br><span class="line">    &lt;div class=<span class="string">&quot;left&quot;</span>&gt;&lt;/div&gt;</span><br><span class="line">    &lt;div class=<span class="string">&quot;right&quot;</span>&gt;&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;div class=<span class="string">&quot;footer&quot;</span>&gt;</span><br><span class="line">    footer</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>双飞翼布局</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#css </span></span><br><span class="line"></span><br><span class="line">.left,</span><br><span class="line">.main,</span><br><span class="line">.right &#123;</span><br><span class="line">    <span class="built_in">float</span>: left;</span><br><span class="line">    min-height: 200px;</span><br><span class="line">&#125;</span><br><span class="line">.left &#123;</span><br><span class="line">    background: gray;</span><br><span class="line">    width: 200px;</span><br><span class="line">    margin-left: -100%;</span><br><span class="line">&#125;</span><br><span class="line">.main &#123;</span><br><span class="line">    background: rgb(252, 102, 102);</span><br><span class="line">    width: 100%;</span><br><span class="line">&#125;</span><br><span class="line">.right &#123;</span><br><span class="line">    background: <span class="comment">#333;</span></span><br><span class="line">    width: 200px;</span><br><span class="line">    margin-left: -200px;</span><br><span class="line">&#125;</span><br><span class="line">.content &#123;</span><br><span class="line">    margin: 0 200px;</span><br><span class="line">    overflow: hidden;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#html </span></span><br><span class="line">&lt;div class=<span class="string">&quot;container&quot;</span>&gt;</span><br><span class="line"></span><br><span class="line">    &lt;div class=<span class="string">&quot;main&quot;</span>&gt;</span><br><span class="line">        &lt;div class=<span class="string">&quot;content&quot;</span>&gt;Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quos labore, ad officiis animi libero ipsam dolorum explicabo placeat facere fuga ex suscipit porro nesciunt quod mollitia corrupti voluptatem a?&lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;div class=<span class="string">&quot;left&quot;</span>&gt;left&lt;/div&gt;</span><br><span class="line">    &lt;div class=<span class="string">&quot;right&quot;</span>&gt;right&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>圣杯布局和双飞翼布局的作用和区别</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/woodk/p/5147085.html">http://www.cnblogs.com/woodk/p/5147085.html</a></p>
+</blockquote>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/imwtr/p/4441741.html">http://www.cnblogs.com/imwtr/p/4441741.html</a></p>
+</blockquote>
+<p>flex 布局</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#css</span></span><br><span class="line">.container &#123;</span><br><span class="line">    -webkit-display:flex;</span><br><span class="line">    display: flex;</span><br><span class="line">    min-height: 200px;</span><br><span class="line">&#125;</span><br><span class="line">.left &#123;</span><br><span class="line">    order: -1;</span><br><span class="line">    background: red;</span><br><span class="line">    flex-basis: 200px;</span><br><span class="line">&#125;</span><br><span class="line">.main &#123;</span><br><span class="line">    background: forestgreen;</span><br><span class="line">    flex-grow: 1;</span><br><span class="line">&#125;</span><br><span class="line">.right&#123;</span><br><span class="line">    background: gold;</span><br><span class="line">    flex-basis: 300px;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">#html</span></span><br><span class="line">&lt;div class=<span class="string">&quot;container&quot;</span>&gt;</span><br><span class="line"></span><br><span class="line">    &lt;div class=<span class="string">&quot;main&quot;</span>&gt;Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque quae, veritatis dignissimos laborum debitis id accusantium dolore inventore odit sed! Sunt officiis temporibus esse eum ab fuga ad sequi officia?&lt;/div&gt;</span><br><span class="line">    &lt;div class=<span class="string">&quot;left&quot;</span>&gt;left&lt;/div&gt;</span><br><span class="line">    &lt;div class=<span class="string">&quot;right&quot;</span>&gt;right&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>绝对定位布局</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># css </span></span><br><span class="line"></span><br><span class="line">.container &#123;</span><br><span class="line">    position: relative;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.main,</span><br><span class="line">.right,</span><br><span class="line">.left &#123;</span><br><span class="line">    top: 0;</span><br><span class="line">    height: 130px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.main &#123;</span><br><span class="line">    background: gray;</span><br><span class="line">    margin: 0 300px 0 200px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.right &#123;</span><br><span class="line">    position: absolute;</span><br><span class="line">    width: 300px;</span><br><span class="line">    right: 0;</span><br><span class="line">    background: red;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.left &#123;</span><br><span class="line">    width: 200px;</span><br><span class="line">    position: absolute;</span><br><span class="line">    left: 0;</span><br><span class="line">    background: green;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#html</span></span><br><span class="line">&lt;div class=<span class="string">&quot;container&quot;</span>&gt;</span><br><span class="line">    &lt;div class=<span class="string">&quot;main&quot;</span>&gt;man&lt;/div&gt;</span><br><span class="line">    &lt;div class=<span class="string">&quot;left&quot;</span>&gt;left&lt;/div&gt;</span><br><span class="line">    &lt;div class=<span class="string">&quot;right&quot;</span>&gt;right&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>实现布局还原</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">#css </span></span><br><span class="line">body&#123;</span><br><span class="line">    margin: 0;</span><br><span class="line">    padding: 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">* &#123;</span><br><span class="line">    box-sizing: border-box;</span><br><span class="line">&#125;</span><br><span class="line">.fl&#123;</span><br><span class="line">    <span class="built_in">float</span>: left;</span><br><span class="line">&#125;</span><br><span class="line">.ri &#123;</span><br><span class="line">    <span class="built_in">float</span>: right;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.header&#123;</span><br><span class="line">    width: 100%;</span><br><span class="line">    min-width: 960px;</span><br><span class="line">    height: 100px;</span><br><span class="line">    background: <span class="comment">#333;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.header-content&#123;</span><br><span class="line">    width: 960px;</span><br><span class="line">    height: 100%;</span><br><span class="line">    margin: 0 auto;</span><br><span class="line">&#125;</span><br><span class="line">.header-content .logo&#123;</span><br><span class="line">    width: 100px;</span><br><span class="line">    height: 100%;</span><br><span class="line">&#125;</span><br><span class="line">.header-content .logo h1 &#123;</span><br><span class="line">    margin: 0;</span><br><span class="line">    padding: 0;</span><br><span class="line">    font-size: 40px;</span><br><span class="line">    color: <span class="comment">#fff;</span></span><br><span class="line">    line-height: 100px;</span><br><span class="line">    text-align: center;</span><br><span class="line">&#125;</span><br><span class="line">.header-content .about a&#123;</span><br><span class="line">    display: inline-block;</span><br><span class="line">    padding: 0 4px;</span><br><span class="line">    color: <span class="comment">#fff;</span></span><br><span class="line">    font-size: 16px;</span><br><span class="line">    line-height: 100px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">.banner&#123;</span><br><span class="line">    width: 100%;</span><br><span class="line">    height: 400px;</span><br><span class="line">    background: rgb(77, 206, 77);</span><br><span class="line">    position: relative;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.list&#123;</span><br><span class="line">    position: absolute;</span><br><span class="line">    bottom: 10px;</span><br><span class="line">    right: 10%;</span><br><span class="line">    -webkit-display: flex;</span><br><span class="line">    display: flex;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.list span &#123;</span><br><span class="line">    display: block;</span><br><span class="line">    width: 30px;</span><br><span class="line">    height: 40px;</span><br><span class="line">    line-height: 40px;</span><br><span class="line">    background: rgba(238, 238, 238, 0.7);</span><br><span class="line">    border: 1px solid <span class="comment">#333;</span></span><br><span class="line">    <span class="built_in">float</span>: left;</span><br><span class="line">    text-align: center;</span><br><span class="line">    align-self: flex-end;</span><br><span class="line">    margin: 0 2px;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">/* .list span:hover&#123;</span><br><span class="line">    height: 50px;</span><br><span class="line">    line-height: 60px;    </span><br><span class="line">&#125; */</span><br><span class="line">.list span.active&#123;</span><br><span class="line">    height: 50px;</span><br><span class="line">    line-height: 60px;    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.nav&#123;</span><br><span class="line">    width: 100%;</span><br><span class="line">    height: 80px;</span><br><span class="line">    background: <span class="comment">#fff;</span></span><br><span class="line">    border-bottom: 1px solid <span class="comment">#eee;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.nav-content &#123;</span><br><span class="line">    width: 960px;</span><br><span class="line">    height: 100%;</span><br><span class="line">    margin: 0 auto;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.nav-content a&#123;</span><br><span class="line">    display: block;</span><br><span class="line">    <span class="built_in">float</span>: left;</span><br><span class="line">    width: 140px;</span><br><span class="line">    height: 50px;</span><br><span class="line">    line-height: 50PX;</span><br><span class="line">    text-align: center;</span><br><span class="line">    text-decoration: none;</span><br><span class="line">    color: <span class="comment">#000;</span></span><br><span class="line">    border-left: 1px solid <span class="comment">#c5c5c5;</span></span><br><span class="line">    border-top: 1px solid <span class="comment">#c5c5c5;</span></span><br><span class="line">    border-right: 1px solid <span class="comment">#c5c5c5;</span></span><br><span class="line">    border-bottom: 1px solid <span class="comment">#c5c5c5;</span></span><br><span class="line">    background: <span class="comment">#eee;</span></span><br><span class="line">    border-radius: 20px 20px 0 0;</span><br><span class="line">    margin-top: 30px;</span><br><span class="line">&#125;</span><br><span class="line">.nav-content a.active&#123;</span><br><span class="line">    background: <span class="comment">#fff;</span></span><br><span class="line">    border-bottom: 1px solid <span class="comment">#fff;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">.main&#123;</span><br><span class="line">    width: 960px;</span><br><span class="line">    overflow: hidden;</span><br><span class="line">    margin: 10px auto 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.main .row&#123;</span><br><span class="line">    -webkit-display: flex;</span><br><span class="line">    display: flex;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.main .row .row-content &#123;</span><br><span class="line">    flex: 1;</span><br><span class="line">    height: 200px;</span><br><span class="line">    text-align: center;</span><br><span class="line">    border: 1px solid <span class="comment">#bfbfbf;</span></span><br><span class="line">    /* padding: 80px; */</span><br><span class="line">    margin: 4px;</span><br><span class="line">    align-items: center;</span><br><span class="line">    justify-content: center;</span><br><span class="line">    -webkit-display: flex;</span><br><span class="line">    display: flex;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">.footer&#123;</span><br><span class="line">    width: 100%;</span><br><span class="line">    height: 100px;</span><br><span class="line">    background: <span class="comment">#404040;</span></span><br><span class="line">    text-align: center;</span><br><span class="line">    line-height: 100px;</span><br><span class="line">    font-size: 16px;</span><br><span class="line">    color: <span class="comment">#fff;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># html</span></span><br><span class="line"></span><br><span class="line">&lt;div class=<span class="string">&quot;header&quot;</span>&gt;</span><br><span class="line">    &lt;div class=<span class="string">&quot;header-content&quot;</span>&gt;</span><br><span class="line">        &lt;div class=<span class="string">&quot;logo fl&quot;</span>&gt;</span><br><span class="line">            &lt;h1&gt;logo&lt;/h1&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">        &lt;div class=<span class="string">&quot;about ri&quot;</span>&gt;</span><br><span class="line">            &lt;a href=<span class="string">&quot;#&quot;</span>&gt;Github&lt;/a&gt;</span><br><span class="line">            &lt;a href=<span class="string">&quot;#&quot;</span>&gt;Register&lt;/a&gt;</span><br><span class="line">            &lt;a href=<span class="string">&quot;#&quot;</span>&gt;Login&lt;/a&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;div class=<span class="string">&quot;banner&quot;</span>&gt;</span><br><span class="line">    &lt;div class=<span class="string">&quot;list&quot;</span>&gt;</span><br><span class="line">        &lt;span&gt;1&lt;/span&gt;</span><br><span class="line">        &lt;span class=<span class="string">&quot;active&quot;</span>&gt;2&lt;/span&gt;</span><br><span class="line">        &lt;span&gt;3&lt;/span&gt;</span><br><span class="line">        &lt;span&gt;4&lt;/span&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;div class=<span class="string">&quot;nav&quot;</span>&gt;</span><br><span class="line">    &lt;div class=<span class="string">&quot;nav-content&quot;</span>&gt;</span><br><span class="line">        &lt;a href=<span class="string">&quot;#&quot;</span> class=<span class="string">&quot;active&quot;</span>&gt;HOME&lt;/a&gt;</span><br><span class="line">        &lt;a href=<span class="string">&quot;#&quot;</span>&gt;PROFLE&lt;/a&gt;</span><br><span class="line">        &lt;a href=<span class="string">&quot;#&quot;</span>&gt;ABOUT&lt;/a&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;div class=<span class="string">&quot;main&quot;</span>&gt;</span><br><span class="line">    &lt;div class=<span class="string">&quot;row&quot;</span>&gt;</span><br><span class="line">        &lt;div class=<span class="string">&quot;row-content&quot;</span>&gt;content&lt;/div&gt;</span><br><span class="line">        &lt;div class=<span class="string">&quot;row-content&quot;</span>&gt;content&lt;/div&gt;</span><br><span class="line">        &lt;div class=<span class="string">&quot;row-content&quot;</span>&gt;content&lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;div class=<span class="string">&quot;row&quot;</span>&gt;</span><br><span class="line">        &lt;div class=<span class="string">&quot;row-content&quot;</span>&gt;content&lt;/div&gt;</span><br><span class="line">        &lt;div class=<span class="string">&quot;row-content&quot;</span>&gt;content&lt;/div&gt;</span><br><span class="line">        &lt;div class=<span class="string">&quot;row-content&quot;</span>&gt;content&lt;/div&gt;</span><br><span class="line">        &lt;div class=<span class="string">&quot;row-content&quot;</span>&gt;content&lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;div class=<span class="string">&quot;row&quot;</span>&gt;</span><br><span class="line">        &lt;div class=<span class="string">&quot;row-content&quot;</span>&gt;content&lt;/div&gt;</span><br><span class="line">        &lt;div class=<span class="string">&quot;row-content&quot;</span>&gt;content&lt;/div&gt;</span><br><span class="line">        &lt;div class=<span class="string">&quot;row-content&quot;</span>&gt;content&lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;div class=<span class="string">&quot;footer&quot;</span>&gt;</span><br><span class="line">    &lt;p&gt;&amp;copy; 2018 ife.baidu.com&lt;/p&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><a href="https://xiaotiandada.github.io/ife/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%AD%A6%E9%99%A2/%E7%AC%AC%E4%B8%83%E5%A4%A9%E5%88%B0%E7%AC%AC%E5%85%AB%E5%A4%A9%EF%BC%9A%E5%AD%A6%E4%B9%A0%E5%B8%83%E5%B1%80/%E8%AE%BE%E8%AE%A1%E6%90%9E%E5%B8%83%E5%B1%80%E8%BF%98%E5%8E%9F/%E8%AE%BE%E8%AE%A1%E6%90%9E%E5%B8%83%E5%B1%80%E8%BF%98%E5%8E%9F.html">预览地址</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/06/08/CSS3%E5%9B%BE%E7%89%87%E6%97%8B%E8%BD%AC%E6%9C%A8%E9%A9%AC%E6%95%88%E6%9E%9C/" rel="prev" title="CSS3图片旋转木马效果">
+                  <i class="fa fa-chevron-left"></i> CSS3图片旋转木马效果
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/06/22/vue%E4%B8%AA%E4%BA%BA%E5%B0%8F%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/" rel="next" title="vue个人小项目总结">
+                  vue个人小项目总结 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小田</span>
+</div>
+  <div class="powered-by">Генератор — <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

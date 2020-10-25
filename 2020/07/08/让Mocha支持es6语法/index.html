@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-Hans,fr-FR,h-hk,zh-tw,ru,en,default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xiaotiandada.github.io","root":"/","scheme":"Muse","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Поиск...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+  </script>
+
+  <meta name="description" content="因为 Mocha 默认支持 commonJS 参考资料 https:&#x2F;&#x2F;greenfavo.github.io&#x2F;blog&#x2F;docs&#x2F;02.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="让Mocha支持es6语法">
+<meta property="og:url" content="https://xiaotiandada.github.io/2020/07/08/%E8%AE%A9Mocha%E6%94%AF%E6%8C%81es6%E8%AF%AD%E6%B3%95/index.html">
+<meta property="og:site_name" content="小田&#39;blog">
+<meta property="og:description" content="因为 Mocha 默认支持 commonJS 参考资料 https:&#x2F;&#x2F;greenfavo.github.io&#x2F;blog&#x2F;docs&#x2F;02.html">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-07-08T10:23:34.000Z">
+<meta property="article:modified_time" content="2020-10-23T06:27:35.619Z">
+<meta property="article:author" content="小田">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://xiaotiandada.github.io/2020/07/08/%E8%AE%A9Mocha%E6%94%AF%E6%8C%81es6%E8%AF%AD%E6%B3%95/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>让Mocha支持es6语法 | 小田'blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Показать/скрыть меню">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">小田'blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">前端小菜鸡(〃∀〃)</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Содержание
+        </li>
+        <li class="sidebar-nav-overview">
+          Обзор
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">小田</p>
+  <div class="site-description" itemprop="description">前端小菜鸡(〃∀〃)</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-name">Архив</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">Категории</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">Тэги</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://xiaotiandada.github.io/2020/07/08/%E8%AE%A9Mocha%E6%94%AF%E6%8C%81es6%E8%AF%AD%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="小田">
+      <meta itemprop="description" content="前端小菜鸡(〃∀〃)">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小田'blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          让Mocha支持es6语法
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Размещено</span>
+
+      <time title="Создано: 2020-07-08 18:23:34" itemprop="dateCreated datePublished" datetime="2020-07-08T18:23:34+08:00">2020-07-08</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Изменено</span>
+        <time title="Изменено: 2020-10-23 14:27:35" itemprop="dateModified" datetime="2020-10-23T14:27:35+08:00">2020-10-23</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>因为 Mocha 默认支持 commonJS</p>
+<p>参考资料 <a target="_blank" rel="noopener" href="https://greenfavo.github.io/blog/docs/02.html">https://greenfavo.github.io/blog/docs/02.html</a></p>
+<a id="more"></a>
+
+<p>如果直接引入 import 会报错, 这让 写 es 语法的时候无法通过 import 来直接测试</p>
+<p>这里借助 babel 转换    </p>
+<p>定义 <strong>scripts</strong> 运行 <strong>test</strong> Mocha 会自动执行 test 目录的测试代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line">  <span class="string">&quot;test&quot;</span>: <span class="string">&quot;mocha&quot;</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>为了支持es6语法，加上以下代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line">  <span class="string">&quot;test&quot;</span>: <span class="string">&quot;mocha --require babel-register --bail&quot;</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>安装依赖</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install babel-register  babel-preset-env -D</span><br></pre></td></tr></table></figure>
+
+<p>新建 <strong>.babelrc</strong> </p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;presets&quot;</span>: [</span><br><span class="line">    [<span class="string">&quot;env&quot;</span>]</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>babel会自动读取<code>.babelrc</code>配置文件，这样就让我们的Mocha代码支持es6的模块系统和es6的其他语法了</p>
+<p>运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+
+<p>Mocha配置说明 (纯复制</p>
+<blockquote>
+<p>Mocha的两个配置–require和–bail,官方文档是这样说的：</p>
+<p>–require</p>
+<p>The –require option is useful for libraries such as should.js, so you may simply –require should instead of manually invoking require(‘should’) within each test file.</p>
+<p>意思是–require和在代码里手动require(‘babel-register’)一样，但写在配置里会作用到每个test文件。默认支持.es .js .jsx扩展名. 老版本的Mocha使用–compilers命令支持其他文件扩展名，但在4.0后就废弃掉了。</p>
+<p>–bail</p>
+<p>Only interested in the first exception? use –bail!</p>
+<p>–bail可以在第一个异常抛出的时候停止运行测试,这对集成测试很重要。</p>
+<p>About Babel</p>
+<p>If your ES6 modules have extension .js, you can npm install –save-dev babel-register and use mocha –require babel-register; –compilers is only necessary if you need to specify a file extension.</p>
+<p>babel-register可以让Mocha支持ES6 module，就是import export 写法.</p>
+<p>babel-preset-env在没有任何配置选项的情况下，与 babel-preset-latest（或者babel-preset-es2015，babel-preset-es2016和babel-preset-es2017一起）的行为完全相同。官方推荐使用babel-preset-env.</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/07/07/GraphQL%E5%AD%A6%E4%B9%A0/" rel="prev" title="GraphQL学习">
+                  <i class="fa fa-chevron-left"></i> GraphQL学习
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/07/10/Nginx-%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/" rel="next" title="Nginx 负载均衡">
+                  Nginx 负载均衡 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小田</span>
+</div>
+  <div class="powered-by">Генератор — <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh-Hans,fr-FR,h-hk,zh-tw,ru,en,default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xiaotiandada.github.io","root":"/","scheme":"Muse","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Поиск...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+  </script>
+
+  <meta name="description" content="搬砖系列Position Sticky and Table Headers (css-tricks.com) 防止大家打不开Page,我特地复制了下来(偷懒添加内容)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Position Sticky and Table Headers【表格头部固定】">
+<meta property="og:url" content="https://xiaotiandada.github.io/2019/07/15/Position-Sticky-and-Table-Headers%E3%80%90%E8%A1%A8%E6%A0%BC%E5%A4%B4%E9%83%A8%E5%9B%BA%E5%AE%9A%E3%80%91/index.html">
+<meta property="og:site_name" content="小田&#39;blog">
+<meta property="og:description" content="搬砖系列Position Sticky and Table Headers (css-tricks.com) 防止大家打不开Page,我特地复制了下来(偷懒添加内容)">
+<meta property="og:locale">
+<meta property="article:published_time" content="2019-07-15T03:16:27.000Z">
+<meta property="article:modified_time" content="2020-10-23T06:27:35.575Z">
+<meta property="article:author" content="小田">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://xiaotiandada.github.io/2019/07/15/Position-Sticky-and-Table-Headers%E3%80%90%E8%A1%A8%E6%A0%BC%E5%A4%B4%E9%83%A8%E5%9B%BA%E5%AE%9A%E3%80%91/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>Position Sticky and Table Headers【表格头部固定】 | 小田'blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Показать/скрыть меню">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">小田'blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">前端小菜鸡(〃∀〃)</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Содержание
+        </li>
+        <li class="sidebar-nav-overview">
+          Обзор
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%90%AC%E7%A0%96%E7%B3%BB%E5%88%97"><span class="nav-number">1.</span> <span class="nav-text">搬砖系列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#View"><span class="nav-number">2.</span> <span class="nav-text">View</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML"><span class="nav-number">3.</span> <span class="nav-text">HTML</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS"><span class="nav-number">4.</span> <span class="nav-text">CSS</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">小田</p>
+  <div class="site-description" itemprop="description">前端小菜鸡(〃∀〃)</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-name">Архив</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">Категории</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">Тэги</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://xiaotiandada.github.io/2019/07/15/Position-Sticky-and-Table-Headers%E3%80%90%E8%A1%A8%E6%A0%BC%E5%A4%B4%E9%83%A8%E5%9B%BA%E5%AE%9A%E3%80%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="小田">
+      <meta itemprop="description" content="前端小菜鸡(〃∀〃)">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小田'blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Position Sticky and Table Headers【表格头部固定】
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Размещено</span>
+
+      <time title="Создано: 2019-07-15 11:16:27" itemprop="dateCreated datePublished" datetime="2019-07-15T11:16:27+08:00">2019-07-15</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Изменено</span>
+        <time title="Изменено: 2020-10-23 14:27:35" itemprop="dateModified" datetime="2020-10-23T14:27:35+08:00">2020-10-23</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">в категории</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Css/" itemprop="url" rel="index"><span itemprop="name">Css</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="搬砖系列"><a href="#搬砖系列" class="headerlink" title="搬砖系列"></a>搬砖系列</h2><p><a target="_blank" rel="noopener" href="https://css-tricks.com/position-sticky-and-table-headers/?unapproved=1748290&moderation-hash=d1f92665656ca041fa89843eaa10b10f#comment-1748290">Position Sticky and Table Headers (css-tricks.com)</a></p>
+<p>防止大家打不开Page,我特地复制了下来(偷懒添加内容)</p>
+<a id="more"></a>
+
+<p>You can’t position: sticky; a <code>&lt;thead&gt;</code>. Nor a <code>&lt;tr&gt;</code>. But you can sticky a <code>&lt;th&gt;</code>, which means you can make sticky headers inside a regular ol’ <code>&lt;table&gt;</code>. This is tricky stuff, because if you didn’t know this weird quirk, it would be hard to blame you. It makes way more sense to sticky a parent element like the table header rather than each individiaul element in a row.</p>
+<p>The issue boils down to the fact that stickiness requires position: relative to work and that <a target="_blank" rel="noopener" href="https://bugs.chromium.org/p/chromium/issues/detail?id=702927#c1">doesn’t apply to <code>&lt;thead&gt;</code> and <code>&lt;tr&gt;</code></a> in the CSS 2.1 spec.</p>
+<p>There are two very extreme reactions to this, should you need to implement sticky table headers and not be aware of the <code>&lt;th&gt;</code> workaround.</p>
+<ul>
+<li>Don’t use table markup at all. Instead, use different elements (<code>&lt;div&gt;</code>s and whatnot) and other CSS layout methods to replicate the style of a table, but not locked out of using position: relative and creating position: sticky parent elements.</li>
+<li>Use table elements, but totally remove all their styling defaults with new display values.</li>
+</ul>
+<p>The first is dangerous because you aren’t using semantic and accessible elements for the content to be read and navigated. The second is almost the same. You can go that route, but need to be really careful to re-apply semantic roles.</p>
+<p>Anyway, none of that matters if you just stick (get it?!) to using a sticky value on those <code>&lt;th&gt;</code> elements.</p>
+<p>It’s probably a bit weird to have table headers as a row in the middle of a table, but it’s just illustrating the idea. I was imagining colored header bars separating players on different sports teams or something.</p>
+<p>Anytime I think about data tables, I also think about how tricky it can be to make them responsive. Fortunately, there are a variety of ways, all depending on the best way to group and explore the data in them.</p>
+<p>大概就是这么多内容(自己翻译2333 逃)</p>
+<h2 id="View"><a href="#View" class="headerlink" title="View"></a>View</h2><p>我这个写的比较简陋, 大家可以看原文的Demo,样式写得挺多的(好看++)</p>
+<iframe src="https://codei.netlify.com/gist/489b67de218cf9e436ea3510738ebd01" width="100%" height="600"></iframe>
+
+<h2 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="tag">&lt;<span class="name">table</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">thead</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span> <span class="attr">class</span>=<span class="string">&quot;red&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">th</span>&gt;</span>Name<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">th</span>&gt;</span>Age<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">th</span>&gt;</span>Job<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">th</span>&gt;</span>Color<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">th</span>&gt;</span>URL<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">thead</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">tbody</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">td</span>&gt;</span>Lorem.<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">td</span>&gt;</span>Ullam.<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">td</span>&gt;</span>Vel.<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">td</span>&gt;</span>At.<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">td</span>&gt;</span>Quis.<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line">  <span class="tag">&lt;/<span class="name">tbody</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>大概就是这样的, 然后通过css设定tr th来达到固定表头</p>
+<h2 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">table</span> &#123;</span><br><span class="line">  <span class="attribute">text-align</span>: left;</span><br><span class="line">  <span class="attribute">position</span>:relative;</span><br><span class="line">  <span class="attribute">border-collapse</span>: collapse;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">tr</span><span class="selector-class">.red</span> <span class="selector-tag">th</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#ff4b4b</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">tr</span><span class="selector-class">.green</span> <span class="selector-tag">th</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#0db50d</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">tr</span> <span class="selector-tag">th</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: sticky;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">10px</span> <span class="number">4px</span>;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过设置 tr rh position: sticky, (记得设置top or bottom 评论是这样说的 具体为什么我也不造233)</p>
+<p><strong>评论</strong></p>
+<blockquote>
+<p> reminder, folks: don’t forget to add a scope attribute to your th elements.<br>Also, define a top (or bottom) property for the sticky elements (can’t count the times I couldn’t understand why it didn’t work ‍♂️).</p>
+</blockquote>
+<p>搬砖结束(🍑</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/07/07/svg%E5%8A%A8%E7%94%BB%E7%94%A8%E5%A4%8D%E6%9D%82%E4%BA%A4%E4%BA%92%E5%8A%A8%E7%94%BB%E6%94%B9%E5%96%84%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C-%E7%BB%83%E4%B9%A0/" rel="prev" title="svg动画用复杂交互动画改善用户体验-练习">
+                  <i class="fa fa-chevron-left"></i> svg动画用复杂交互动画改善用户体验-练习
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/07/16/chrome-extensions-%E5%BC%80%E5%8F%91%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/" rel="next" title="chrome extensions 开发中遇到的坑">
+                  chrome extensions 开发中遇到的坑 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小田</span>
+</div>
+  <div class="powered-by">Генератор — <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

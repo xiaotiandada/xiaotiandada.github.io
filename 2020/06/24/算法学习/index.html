@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-Hans,fr-FR,h-hk,zh-tw,ru,en,default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xiaotiandada.github.io","root":"/","scheme":"Muse","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Поиск...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+  </script>
+
+  <meta name="description" content="排序算法学习 📒 repo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法学习">
+<meta property="og:url" content="https://xiaotiandada.github.io/2020/06/24/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="小田&#39;blog">
+<meta property="og:description" content="排序算法学习 📒 repo">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-06-24T03:32:04.000Z">
+<meta property="article:modified_time" content="2020-10-23T06:27:35.611Z">
+<meta property="article:author" content="小田">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://xiaotiandada.github.io/2020/06/24/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>算法学习 | 小田'blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Показать/скрыть меню">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">小田'blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">前端小菜鸡(〃∀〃)</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Содержание
+        </li>
+        <li class="sidebar-nav-overview">
+          Обзор
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F"><span class="nav-number">1.</span> <span class="nav-text">排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F"><span class="nav-number">1.1.</span> <span class="nav-text">快速排序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F"><span class="nav-number">2.</span> <span class="nav-text">归并排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F"><span class="nav-number">3.</span> <span class="nav-text">选择排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F"><span class="nav-number">4.</span> <span class="nav-text">插入排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F"><span class="nav-number">5.</span> <span class="nav-text">冒泡排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A0%86%E6%8E%92%E5%BA%8F"><span class="nav-number">6.</span> <span class="nav-text">堆排序</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">小田</p>
+  <div class="site-description" itemprop="description">前端小菜鸡(〃∀〃)</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-name">Архив</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">Категории</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">Тэги</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://xiaotiandada.github.io/2020/06/24/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="小田">
+      <meta itemprop="description" content="前端小菜鸡(〃∀〃)">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小田'blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          算法学习
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Размещено</span>
+
+      <time title="Создано: 2020-06-24 11:32:04" itemprop="dateCreated datePublished" datetime="2020-06-24T11:32:04+08:00">2020-06-24</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Изменено</span>
+        <time title="Изменено: 2020-10-23 14:27:35" itemprop="dateModified" datetime="2020-10-23T14:27:35+08:00">2020-10-23</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">в категории</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><p>算法学习 📒 <a target="_blank" rel="noopener" href="https://github.com/xiaotiandada/algorithm">repo</a></p>
+<a id="more"></a>
+
+<h3 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h3><p><a target="_blank" rel="noopener" href="http://www.conardli.top/docs/algorithm/%E6%8E%92%E5%BA%8F/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F.html#%E6%80%9D%E6%83%B3">http://www.conardli.top/docs/algorithm/%E6%8E%92%E5%BA%8F/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F.html#%E6%80%9D%E6%83%B3</a></p>
+<p>这个方法比较简单也很好理解</p>
+<p><strong>方法一</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> list = [<span class="number">6</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">10</span>, <span class="number">8</span>];</span><br><span class="line"><span class="comment">// 自定义个数</span></span><br><span class="line"><span class="keyword">let</span> ageLists = []</span><br><span class="line"><span class="function"><span class="title">for</span>(<span class="params"><span class="keyword">let</span> i = <span class="number">0</span>; i &lt;=<span class="number">100</span>; i++</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> id = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * <span class="number">100</span> + <span class="number">1</span>)</span><br><span class="line">    ageLists.push(&#123;</span><br><span class="line">        id: id,</span><br><span class="line">        age: <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * <span class="number">40</span> + <span class="number">1</span>),</span><br><span class="line">        name: <span class="string">`学号<span class="subst">$&#123;i&#125;</span>`</span>,</span><br><span class="line">        type: <span class="string">&#x27;student&#x27;</span></span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(ageLists)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 排数组</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">quickSort</span>(<span class="params">array</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (array.length &lt;= <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> array</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> target = array[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">let</span> left = []</span><br><span class="line">    <span class="keyword">let</span> right = []</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt; array.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (array[i] &lt; target) &#123;</span><br><span class="line">            left.push(array[i])</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            right.push(array[i])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> quickSort(left).concat([target], quickSort(right))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(quickSort(list))</span><br><span class="line"></span><br><span class="line"><span class="comment">// 排对象</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">quickSortObj</span>(<span class="params">array, key</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (array.length &lt;= <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> array</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> target = array[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">let</span> left = []</span><br><span class="line">    <span class="keyword">let</span> right = []</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt; array.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (array[i][key] &lt; target[key]) &#123;</span><br><span class="line">            left.push(array[i])</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            right.push(array[i])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> quickSortObj(left, key).concat([target], quickSortObj(right, key))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.time(<span class="string">&#x27;quickSortObj&#x27;</span>)</span><br><span class="line"><span class="built_in">console</span>.log(quickSortObj(ageLists, <span class="string">&#x27;id&#x27;</span>))</span><br><span class="line"><span class="built_in">console</span>.timeEnd(<span class="string">&#x27;quickSortObj&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>方法二</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 排序数组</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">quickSort</span>(<span class="params">array, start, end</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (end - start &lt; <span class="number">1</span>) <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> target = array[start]</span><br><span class="line">    <span class="keyword">let</span> l = start</span><br><span class="line">    <span class="keyword">let</span> r = end</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (l &lt; r) &#123;</span><br><span class="line">        <span class="keyword">while</span> (l &lt; r &amp;&amp; array[r] &gt;= target) &#123;</span><br><span class="line">            r--</span><br><span class="line">        &#125;</span><br><span class="line">        array[l] = array[r]</span><br><span class="line">        <span class="keyword">while</span> (l &lt; r &amp;&amp; array[l] &lt; target) &#123;</span><br><span class="line">            l++</span><br><span class="line">        &#125;</span><br><span class="line">        array[r] = array[l]</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    array[l] = target</span><br><span class="line"></span><br><span class="line">    quickSort22(array, start, l - <span class="number">1</span>)</span><br><span class="line">    quickSort22(array, l + <span class="number">1</span>, end)</span><br><span class="line">    <span class="keyword">return</span> array</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.time(<span class="string">&#x27;quickSort&#x27;</span>)</span><br><span class="line"><span class="built_in">console</span>.log(quickSort(list, <span class="number">0</span>, list.length - <span class="number">1</span>))</span><br><span class="line"><span class="built_in">console</span>.timeEnd(<span class="string">&#x27;quickSort&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 拍对象</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">quickSort2Obj</span>(<span class="params">array, start, end, key</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (end - start &lt; <span class="number">1</span>) <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> target = array[start]</span><br><span class="line">    <span class="keyword">let</span> l = start</span><br><span class="line">    <span class="keyword">let</span> r = end</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="title">while</span>(<span class="params">l &lt; r</span>)</span> &#123;</span><br><span class="line">        <span class="function"><span class="title">while</span>(<span class="params">l &lt; r &amp;&amp; array[r][key] &gt;= target[key]</span>)</span> &#123;</span><br><span class="line">            r--</span><br><span class="line">        &#125;</span><br><span class="line">        array[l] = array[r]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(l &lt; r &amp;&amp; array[l][key] &lt; target[key]) [</span><br><span class="line">            l++</span><br><span class="line">        ]</span><br><span class="line">        array[r] = array[l]</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    array[l] = target</span><br><span class="line"></span><br><span class="line">    quickSort2Obj(array, start, l - <span class="number">1</span>, key)</span><br><span class="line">    quickSort2Obj(array, l + <span class="number">1</span>, end, key)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> array</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.time(<span class="string">&#x27;quickSort2Obj&#x27;</span>)</span><br><span class="line"><span class="built_in">console</span>.log(quickSort2Obj(ageLists, <span class="number">0</span>, ageLists.length - <span class="number">1</span>, <span class="string">&#x27;id&#x27;</span>))</span><br><span class="line"><span class="built_in">console</span>.timeEnd(<span class="string">&#x27;quickSort2Obj&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>这个对比方法一难点, 一下不容易理解</p>
+<p>经过测试 少量的数据 方法二有时候比方法一要慢(10 - 100), 但是数据足够大的时候 方法二比方法一就要快很多(10000左右)</p>
+<h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> list = [<span class="number">6</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">10</span>, <span class="number">8</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mergeSort</span>(<span class="params">array</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (array.length &lt; <span class="number">2</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> array</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> mid = <span class="built_in">Math</span>.floor(array.length / <span class="number">2</span>)</span><br><span class="line">  <span class="keyword">let</span> front = array.slice(<span class="number">0</span>, mid)</span><br><span class="line">  <span class="keyword">let</span> end = array.slice(mid)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> merge(mergeSort(front), mergeSort(end))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">merge</span>(<span class="params">front, end</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> temp = []</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> (front.length &amp;&amp; end.length) &#123;</span><br><span class="line">    <span class="keyword">if</span> (front[<span class="number">0</span>] &lt; end[<span class="number">0</span>] )&#123;</span><br><span class="line">      temp.push(front.shift())</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      temp.push(end.shift())</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">while</span>(<span class="params">front.length</span>)</span> &#123;</span><br><span class="line">    temp.push(front.shift())</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">while</span>(<span class="params">end.length</span>)</span> &#123;</span><br><span class="line">    temp.push(end.shift())</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> temp</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.time()</span><br><span class="line"><span class="built_in">console</span>.log(mergeSort(list))</span><br><span class="line"><span class="built_in">console</span>.timeEnd()</span><br></pre></td></tr></table></figure>
+
+<h2 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> list = [<span class="number">6</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">10</span>, <span class="number">8</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">selectionSort</span>(<span class="params">array</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; array.length - <span class="number">1</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">let</span> minIndex = i</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> j = i + <span class="number">1</span>; j &lt; array.length; j++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (array[j] &lt; array[minIndex]) &#123;</span><br><span class="line">        minIndex = j</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    [array[minIndex], array[i]] = [array[i], array[minIndex]]</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> array</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.time()</span><br><span class="line"><span class="built_in">console</span>.log(selectionSort(list))</span><br><span class="line"><span class="built_in">console</span>.timeEnd()</span><br></pre></td></tr></table></figure>
+
+<h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> list = [<span class="number">6</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">10</span>, <span class="number">8</span>];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">insertSort</span>(<span class="params">array</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt; array.length; i++) &#123;</span><br><span class="line">    <span class="keyword">let</span> target = i</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> j = i - <span class="number">1</span>; j &gt;= <span class="number">0</span>; j--) &#123;</span><br><span class="line">      <span class="keyword">if</span> (array[target] &lt; array[j]) &#123;</span><br><span class="line">        [array[target], array[j]] = [array[j], array[target]]</span><br><span class="line">        target = j</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> array</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.time()</span><br><span class="line"><span class="built_in">console</span>.log(insertSort(list))</span><br><span class="line"><span class="built_in">console</span>.timeEnd()</span><br></pre></td></tr></table></figure>
+
+<h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> list = [<span class="number">6</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">10</span>, <span class="number">8</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bubbleSort</span>(<span class="params">array</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; array.length; i++) &#123;</span><br><span class="line">    <span class="keyword">let</span> complate = <span class="literal">true</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; array.length - <span class="number">1</span> - i; j++) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="number">1</span>, array.length - <span class="number">1</span> - i)</span><br><span class="line">      <span class="keyword">if</span> (array[j] &gt; array[j + <span class="number">1</span>]) &#123;</span><br><span class="line">        [array[j], array[j + <span class="number">1</span>]] = [array[j + <span class="number">1</span>], array[j]]</span><br><span class="line">        complate = <span class="literal">false</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (complate) &#123;</span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> array</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.time()</span><br><span class="line"><span class="built_in">console</span>.log(bubbleSort(list))</span><br><span class="line"><span class="built_in">console</span>.timeEnd()</span><br></pre></td></tr></table></figure>
+
+<h2 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> list = [<span class="number">6</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">10</span>, <span class="number">8</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">heapSort</span>(<span class="params">array</span>) </span>&#123;</span><br><span class="line">  createHeap(array)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;array&#x27;</span>, array)</span><br><span class="line">  <span class="comment">// 交换第一个和最后一个元素，然后重新调整大顶堆</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = array.length - <span class="number">1</span>; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">    [array[i], array[<span class="number">0</span>]] = [array[<span class="number">0</span>], array[i]]</span><br><span class="line">    adJust(array, <span class="number">0</span>, i)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> array</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 构建大顶堆，从第一个非叶子节点开始，进行下沉操作</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createHeap</span>(<span class="params">array</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> len = array.length</span><br><span class="line">  <span class="keyword">const</span> start = <span class="built_in">parseInt</span>(len / <span class="number">2</span>) - <span class="number">1</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = start; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">    adJust(array, i, len)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 将第target个元素进行下沉，孩子节点有比他大的就下沉</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">adJust</span>(<span class="params">array, target, len</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">2</span> * target + <span class="number">1</span>; i &lt; len; i= <span class="number">2</span> * i + <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="comment">// 找到孩子节点中最大的</span></span><br><span class="line">    <span class="keyword">if</span> (i + <span class="number">1</span> &lt; len &amp;&amp; array[i + <span class="number">1</span>] &gt; array[i]) &#123;</span><br><span class="line">      i = i + <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 下沉</span></span><br><span class="line">    <span class="keyword">if</span> (array[i] &gt; array[target]) &#123;</span><br><span class="line">      [array[i] ,array[target]] = [array[target], array[i]]</span><br><span class="line">      target = i</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.time()</span><br><span class="line"><span class="built_in">console</span>.log(heapSort(list))</span><br><span class="line"><span class="built_in">console</span>.timeEnd()</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/05/29/toString-36/" rel="prev" title="toString(36)">
+                  <i class="fa fa-chevron-left"></i> toString(36)
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/06/24/%E9%80%82%E9%85%8DiPhonex/" rel="next" title="适配iPhonex">
+                  适配iPhonex <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小田</span>
+</div>
+  <div class="powered-by">Генератор — <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

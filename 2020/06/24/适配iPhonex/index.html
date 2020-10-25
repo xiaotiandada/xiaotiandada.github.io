@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="zh-Hans,fr-FR,h-hk,zh-tw,ru,en,default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xiaotiandada.github.io","root":"/","scheme":"Muse","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Поиск...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+  </script>
+
+  <meta name="description" content="Wap-网页适配iPhoneX.md Designing Websites for iPhone X">
+<meta property="og:type" content="article">
+<meta property="og:title" content="适配iPhonex">
+<meta property="og:url" content="https://xiaotiandada.github.io/2020/06/24/%E9%80%82%E9%85%8DiPhonex/index.html">
+<meta property="og:site_name" content="小田&#39;blog">
+<meta property="og:description" content="Wap-网页适配iPhoneX.md Designing Websites for iPhone X">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-06-24T14:30:32.000Z">
+<meta property="article:modified_time" content="2020-10-23T06:27:35.621Z">
+<meta property="article:author" content="小田">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://xiaotiandada.github.io/2020/06/24/%E9%80%82%E9%85%8DiPhonex/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>适配iPhonex | 小田'blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Показать/скрыть меню">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">小田'blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">前端小菜鸡(〃∀〃)</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Содержание
+        </li>
+        <li class="sidebar-nav-overview">
+          Обзор
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%82%E9%85%8D%E4%B9%8B%E5%89%8D%E9%9C%80%E8%A6%81%E4%BA%86%E8%A7%A3%E7%9A%84%E5%87%A0%E4%B8%AA%E6%96%B0%E7%9F%A5%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">适配之前需要了解的几个新知识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#viewport-fit"><span class="nav-number">2.</span> <span class="nav-text">viewport-fit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#env-%E5%92%8C-constant"><span class="nav-number">3.</span> <span class="nav-text">env() 和 constant()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E9%80%82%E9%85%8D"><span class="nav-number">4.</span> <span class="nav-text">如何适配</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">小田</p>
+  <div class="site-description" itemprop="description">前端小菜鸡(〃∀〃)</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-name">Архив</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">Категории</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">Тэги</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://xiaotiandada.github.io/2020/06/24/%E9%80%82%E9%85%8DiPhonex/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="小田">
+      <meta itemprop="description" content="前端小菜鸡(〃∀〃)">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小田'blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          适配iPhonex
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Размещено</span>
+
+      <time title="Создано: 2020-06-24 22:30:32" itemprop="dateCreated datePublished" datetime="2020-06-24T22:30:32+08:00">2020-06-24</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Изменено</span>
+        <time title="Изменено: 2020-10-23 14:27:35" itemprop="dateModified" datetime="2020-10-23T14:27:35+08:00">2020-10-23</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><a href="%5Bhttps://github.com/gqzydh/blog/blob/7fa5f844c11b53f926a9bf405051cb07ed24966f/source/_posts/Wap-%E7%BD%91%E9%A1%B5%E9%80%82%E9%85%8DiPhoneX.md%5D(https://github.com/gqzydh/blog/blob/7fa5f844c11b53f926a9bf405051cb07ed24966f/source/_posts/Wap-%E7%BD%91%E9%A1%B5%E9%80%82%E9%85%8DiPhoneX.md)">Wap-网页适配iPhoneX.md</a></p>
+<p><a target="_blank" rel="noopener" href="https://webkit.org/blog/7929/designing-websites-for-iphone-x/?hmsr=funteas.com&utm_medium=funteas.com&utm_source=funteas.com"><a target="_blank" rel="noopener" href="https://webkit.org/blog/7929/designing-websites-for-iphone-x/">Designing Websites for iPhone X</a></a></p>
+<a id="more"></a>
+
+<p>这篇文章写得很不错了, 介绍了很多种情况 摘要一些内容(copy)…</p>
+<hr>
+<p>前言</p>
+<p>iPhoneX 取消了物理按键，改成底部小黑条，这一改动导致网页出现了比较尴尬的屏幕适配问题。对于网页而言，顶部（刘海部位）的适配问题浏览器已经做了处理，所以我们只需要关注底部与小黑条的适配问题即可（即常见的吸底导航、返回顶部等各种相对底部 fixed 定位的元素）。</p>
+<p>笔者通过查阅了一些官方文档，以及结合实际项目中的一些处理经验，整理了一套简单的适配方案.</p>
+<h2 id="适配之前需要了解的几个新知识"><a href="#适配之前需要了解的几个新知识" class="headerlink" title="适配之前需要了解的几个新知识"></a>适配之前需要了解的几个新知识</h2><p>安全区域</p>
+<p>安全区域指的是一个可视窗口范围，处于安全区域的内容不受圆角（corners）、齐刘海（sensor housing）、小黑条（Home Indicator）影响，也就是说，我们要做好适配，必须保证页面可视、可操作区域是在安全区域内。</p>
+<p>更详细说明，参考文档：<a target="_blank" rel="noopener" href="https://developer.apple.com/ios/human-interface-guidelines/overview/iphone-x/">Human Interface Guidelines - iPhoneX</a></p>
+<h2 id="viewport-fit"><a href="#viewport-fit" class="headerlink" title="viewport-fit"></a>viewport-fit</h2><p>iOS11 新增特性，苹果公司为了适配 iPhoneX 对现有 viewport meta 标签的一个扩展，用于设置网页在可视窗口的布局方式，可设置三个值：</p>
+<p>contain: 可视窗口完全包含网页内容<br>cover：网页内容完全覆盖可视窗口<br>auto：默认值，跟 contain 表现一致</p>
+<blockquote>
+<p>注意：网页默认不添加扩展的表现是 viewport-fit=contain，需要适配 iPhoneX 必须设置 viewport-fit=cover，这是适配的关键步骤。</p>
+</blockquote>
+<p>更详细说明，参考文档：<a target="_blank" rel="noopener" href="https://www.w3.org/TR/css-round-display-1/#viewport-fit-descriptor">viewport-fit-descriptor</a></p>
+<h2 id="env-和-constant"><a href="#env-和-constant" class="headerlink" title="env() 和 constant()"></a>env() 和 constant()</h2><p>iOS11 新增特性，Webkit 的一个 CSS 函数，用于设定安全区域与边界的距离，有四个预定义的变量：</p>
+<p>safe-area-inset-left：安全区域距离左边边界距离<br>safe-area-inset-right：安全区域距离右边边界距离<br>safe-area-inset-top：安全区域距离顶部边界距离<br>safe-area-inset-bottom：安全区域距离底部边界距离<br>这里我们只需要关注 safe-area-inset-bottom 这个变量，因为它对应的就是小黑条的高度（横竖屏时值不一样）。</p>
+<p>注意：当 viewport-fit=contain 时 env() 是不起作用的，必须要配合 viewport-fit=cover 使用。对于不支持env() 的浏览器，浏览器将会忽略它。</p>
+<p>在这之前，笔者使用的是 constant()，后来，官方文档加了这么一段注释（坑）：</p>
+<p>The env() function shipped in iOS 11 with the name constant(). Beginning with Safari Technology Preview 41 and the iOS 11.2 beta, constant() has been removed and replaced with env(). You can use the CSS fallback mechanism to support both versions, if necessary, but should prefer env() going forward.</p>
+<p>这就意味着，之前使用的 constant() 在 iOS11.2 之后就不能使用的，但我们还是需要做向后兼容，像这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">padding-bottom: constant(safe-area-inset-bottom); &#x2F;* 兼容 iOS &lt; 11.2 *&#x2F;</span><br><span class="line">padding-bottom: env(safe-area-inset-bottom); &#x2F;* 兼容 iOS &gt;&#x3D; 11.2 *&#x2F;</span><br><span class="line">注意：env() 跟 constant() 需要同时存在，而且顺序不能换。</span><br></pre></td></tr></table></figure>
+<p>更详细说明，参考文档：<a target="_blank" rel="noopener" href="https://webkit.org/blog/7929/designing-websites-for-iphone-x/?hmsr=funteas.com&utm_medium=funteas.com&utm_source=funteas.com">Designing Websites for iPhone X</a></p>
+<h2 id="如何适配"><a href="#如何适配" class="headerlink" title="如何适配"></a>如何适配</h2><p>了解了以上所说的几个知识点，接下来我们适配的思路就很清晰了。</p>
+<p>第一步：设置网页在可视窗口的布局方式</p>
+<p>新增 viweport-fit 属性，使得页面内容完全覆盖整个窗口：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, viewport-fit=cover&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>前面也有提到过，只有设置了 viewport-fit=cover，才能使用 env()。</p>
+<p>第二步：页面主体内容限定在安全区域内</p>
+<p>这一步根据实际页面场景选择，如果不设置这个值，可能存在小黑条遮挡页面最底部内容的情况。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">  <span class="attribute">padding-bottom</span>: <span class="built_in">constant</span>(safe-area-inset-bottom);</span><br><span class="line">  <span class="attribute">padding-bottom</span>: <span class="built_in">env</span>(safe-area-inset-bottom);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>第三步：fixed 元素的适配</p>
+<p>类型一：fixed 完全吸底元素（bottom = 0），比如下图这两种情况：</p>
+<p>可以通过加内边距 padding 扩展高度：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attribute">padding-bottom</span>: <span class="built_in">constant</span>(safe-area-inset-bottom);</span><br><span class="line">  <span class="attribute">padding-bottom</span>: <span class="built_in">env</span>(safe-area-inset-bottom);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>或者通过计算函数 calc 覆盖原来高度：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="built_in">calc</span>(<span class="number">60px</span>(假设值) + <span class="built_in">constant</span>(safe-area-inset-bottom));</span><br><span class="line">  <span class="attribute">height</span>: <span class="built_in">calc</span>(<span class="number">60px</span>(假设值) + <span class="built_in">env</span>(safe-area-inset-bottom));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意，这个方案需要吸底条必须是有背景色的，因为扩展的部分背景是跟随外容器的，否则出现镂空情况。</p>
+<p>还有一种方案就是，可以通过新增一个新的元素（空的颜色块，主要用于小黑条高度的占位），然后吸底元素可以不改变高度只需要调整位置，像这样：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attribute">margin-bottom</span>: <span class="built_in">constant</span>(safe-area-inset-bottom);</span><br><span class="line">  <span class="attribute">margin-bottom</span>: <span class="built_in">env</span>(safe-area-inset-bottom);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>空的颜色块：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attribute">position</span>: fixed;</span><br><span class="line">  <span class="attribute">bottom</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="built_in">constant</span>(safe-area-inset-bottom);</span><br><span class="line">  <span class="attribute">height</span>: <span class="built_in">env</span>(safe-area-inset-bottom);</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#fff</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>类型二：fixed 非完全吸底元素（bottom ≠ 0），比如 “返回顶部”、“侧边广告” 等</p>
+<p>像这种只是位置需要对应向上调整，可以仅通过外边距 margin 来处理：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attribute">margin-bottom</span>: <span class="built_in">constant</span>(safe-area-inset-bottom);</span><br><span class="line">  <span class="attribute">margin-bottom</span>: <span class="built_in">env</span>(safe-area-inset-bottom);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>或者，你也可以通过计算函数 calc 覆盖原来 bottom 值：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attribute">bottom</span>: <span class="built_in">calc</span>(<span class="number">50px</span>(假设值) + <span class="built_in">constant</span>(safe-area-inset-bottom));</span><br><span class="line">  <span class="attribute">bottom</span>: <span class="built_in">calc</span>(<span class="number">50px</span>(假设值) + <span class="built_in">env</span>(safe-area-inset-bottom));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>你也可以使用 @supports 隔离兼容样式</p>
+<p>写到这里，我们常见的两种类型的 fixed 元素适配方案已经了解了吧。如果我们只希望 iPhoneX 才需要新增适配样式，我们可以配合 @supports 来隔离兼容样式，当然这个处理对页面展示实际不会有任何影响：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@supports</span> (<span class="attribute">bottom:</span> constant(safe-area-inset-bottom)) <span class="keyword">or</span> (<span class="attribute">bottom:</span> env(safe-area-inset-bottom)) &#123;</span><br><span class="line">  <span class="selector-tag">div</span> &#123;</span><br><span class="line">    <span class="attribute">margin-bottom</span>: <span class="built_in">constant</span>(safe-area-inset-bottom);</span><br><span class="line">    <span class="attribute">margin-bottom</span>: <span class="built_in">env</span>(safe-area-inset-bottom);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>ps: 某些css功能不支持的时候可以使用 @supports</p>
+<p><a target="_blank" rel="noopener" href="http://matataki.io/">效果地址</a> 使用移动端打开任意一篇文章查看 底栏部分!!! </p>
+<p>原作者总结得比我好, 拿过来学习学习!!!</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/06/24/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" rel="prev" title="算法学习">
+                  <i class="fa fa-chevron-left"></i> 算法学习
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/07/07/GraphQL%E5%AD%A6%E4%B9%A0/" rel="next" title="GraphQL学习">
+                  GraphQL学习 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小田</span>
+</div>
+  <div class="powered-by">Генератор — <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

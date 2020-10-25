@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh-Hans,fr-FR,h-hk,zh-tw,ru,en,default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xiaotiandada.github.io","root":"/","scheme":"Muse","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Поиск...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+  </script>
+
+  <meta name="description" content="一、负载均衡 - 初探资料参考:  https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;89356016 https:&#x2F;&#x2F;juejin.im&#x2F;post&#x2F;5e60edbf5188254940670f75">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nginx 负载均衡">
+<meta property="og:url" content="https://xiaotiandada.github.io/2020/07/10/Nginx-%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/index.html">
+<meta property="og:site_name" content="小田&#39;blog">
+<meta property="og:description" content="一、负载均衡 - 初探资料参考:  https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;89356016 https:&#x2F;&#x2F;juejin.im&#x2F;post&#x2F;5e60edbf5188254940670f75">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-07-10T06:39:18.000Z">
+<meta property="article:modified_time" content="2020-10-23T06:27:35.574Z">
+<meta property="article:author" content="小田">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://xiaotiandada.github.io/2020/07/10/Nginx-%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>Nginx 负载均衡 | 小田'blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Показать/скрыть меню">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">小田'blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">前端小菜鸡(〃∀〃)</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Содержание
+        </li>
+        <li class="sidebar-nav-overview">
+          Обзор
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1-%E5%88%9D%E6%8E%A2"><span class="nav-number">1.</span> <span class="nav-text">一、负载均衡 - 初探</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">小田</p>
+  <div class="site-description" itemprop="description">前端小菜鸡(〃∀〃)</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-name">Архив</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">Категории</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">Тэги</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://xiaotiandada.github.io/2020/07/10/Nginx-%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="小田">
+      <meta itemprop="description" content="前端小菜鸡(〃∀〃)">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小田'blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Nginx 负载均衡
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Размещено</span>
+
+      <time title="Создано: 2020-07-10 14:39:18" itemprop="dateCreated datePublished" datetime="2020-07-10T14:39:18+08:00">2020-07-10</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Изменено</span>
+        <time title="Изменено: 2020-10-23 14:27:35" itemprop="dateModified" datetime="2020-10-23T14:27:35+08:00">2020-10-23</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">в категории</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Nginx/" itemprop="url" rel="index"><span itemprop="name">Nginx</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="一、负载均衡-初探"><a href="#一、负载均衡-初探" class="headerlink" title="一、负载均衡 - 初探"></a>一、负载均衡 - 初探</h2><p><strong>资料参考:</strong> </p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/89356016">https://zhuanlan.zhihu.com/p/89356016</a></p>
+<p><a target="_blank" rel="noopener" href="https://juejin.im/post/5e60edbf5188254940670f75">https://juejin.im/post/5e60edbf5188254940670f75</a></p>
+<a id="more"></a>
+
+<p>服务器这边使用了 <strong>Nodejs</strong> 分别启两个服务 <strong>7001</strong> <strong>7002</strong>  和 两台机器 启动 <strong>7001</strong></p>
+<p><strong>Nginx</strong> 这边使用 <strong>upstream</strong> </p>
+<p>nginx的upstream目前支持的5种方式的分配</p>
+<p>1、轮询（默认） <strong>本地测试了这种</strong></p>
+<p>每个请求按时间顺序逐一分配到不同的后端服务器，如果后端服务器down掉，能自动剔除。</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">upstream</span> node &#123; </span><br><span class="line">  <span class="attribute">server</span> <span class="number">127.0.0.1:7001</span>; </span><br><span class="line">  <span class="attribute">server</span> <span class="number">127.0.0.1:7002</span>; </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p>2 - 4 没有测试过 复制的….</p>
+<p>2、指定权重</p>
+<p>指定轮询几率，weight和访问比率成正比，用于后端服务器性能不均的情况。</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">upstream</span> backserver &#123; </span><br><span class="line">  <span class="attribute">server</span> <span class="number">127.0.0.1:7001</span> weight=<span class="number">8</span>; </span><br><span class="line">  <span class="attribute">server</span> <span class="number">127.0.0.1:7002</span> weight=<span class="number">10</span>; </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p>3、IP绑定 ip_hash</p>
+<p>每个请求按访问ip的hash结果分配，这样每个访客固定访问一个后端服务器，可以解决session的问题。</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">upstream</span> backserver &#123; </span><br><span class="line">  ip_hash; </span><br><span class="line">  <span class="attribute">server</span> <span class="number">127.0.0.1:7001</span>; </span><br><span class="line">  <span class="attribute">server</span> <span class="number">127.0.0.1:7002</span>; </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p>4、fair（第三方）</p>
+<p>按后端服务器的响应时间来分配请求，响应时间短的优先分配。</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">upstream</span> backserver &#123; </span><br><span class="line">  <span class="attribute">server</span> <span class="number">127.0.0.1:7001</span>; </span><br><span class="line">  <span class="attribute">server</span> <span class="number">127.0.0.1:7002</span>; </span><br><span class="line">  fair; </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p>5、url_hash（第三方）</p>
+<p>按访问url的hash结果来分配请求，使每个url定向到同一个后端服务器，后端服务器为缓存时比较有效。</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">upstream</span> backserver &#123; </span><br><span class="line">  <span class="attribute">server</span> <span class="number">127.0.0.1:7001</span>; </span><br><span class="line">  <span class="attribute">server</span> <span class="number">127.0.0.1:7002</span>; </span><br><span class="line">  <span class="attribute">hash</span> <span class="variable">$request_uri</span>; </span><br><span class="line">  <span class="attribute">hash_method</span> crc32; </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>max_fails ：允许请求失败的次数默认为1.当超过最大次数时，返回proxy_next_upstream 模块定义的错误</p>
+<p>fail_timeout:max_fails次失败后，暂停的时间 (复制的…</p>
+</blockquote>
+<p>在 <strong>Nginx</strong> 定义 测试机</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">http</span> &#123;</span><br><span class="line">	<span class="attribute">upstream</span> node &#123;</span><br><span class="line">    <span class="attribute">server</span> <span class="number">127.0.0.1:7001</span>;</span><br><span class="line">    <span class="attribute">server</span> <span class="number">192.168.1.11:7002</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment"># 因为 80 端口别的占用了 开了7000 代理</span></span><br><span class="line">  <span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">7000</span>;</span><br><span class="line">    <span class="attribute">server_name</span> localhost;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">location</span> / &#123;</span><br><span class="line">      <span class="attribute">proxy_pass</span> http://node;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">nginx -t</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果没有启动先</span></span><br><span class="line">nginx</span><br><span class="line"></span><br><span class="line">nginx -s reload</span><br></pre></td></tr></table></figure>
+
+<p>因为 <strong>egg</strong> 定义的 <strong>router</strong> 返回了 <strong>port</strong> 直接访问 <strong>127.0.0.1:7000</strong> 可以查看结果 随机返回 <strong>7001/7002</strong></p>
+<p>测试用了 <strong>jmeter</strong> 但是接口没异常 <strong>jmeter</strong> 倒是g了 使用不太熟练 请求次数太大了 但是效果还是可以看出来的</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/07/08/%E8%AE%A9Mocha%E6%94%AF%E6%8C%81es6%E8%AF%AD%E6%B3%95/" rel="prev" title="让Mocha支持es6语法">
+                  <i class="fa fa-chevron-left"></i> 让Mocha支持es6语法
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/07/12/You-Dont-Need-Lodash-Underscore/" rel="next" title="You-Dont-Need-Lodash-Underscore">
+                  You-Dont-Need-Lodash-Underscore <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小田</span>
+</div>
+  <div class="powered-by">Генератор — <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

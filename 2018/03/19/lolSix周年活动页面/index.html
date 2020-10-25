@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh-Hans,fr-FR,h-hk,zh-tw,ru,en,default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xiaotiandada.github.io","root":"/","scheme":"Muse","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Поиск...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+  </script>
+
+  <meta name="description" content="前言小白文采不好,大佬们看见了多多指点,自己的代码可能也有很多”毒瘤”希望大佬们指正,蟹蟹~~ 在掘金看到了一个大佬发的 LOL六周年里的按钮动画 的文章 效果非常 very nice 也很有意思 于是进 lolSix周年活动页面 看看效果 只剩下哇塞!哇塞!哇塞! 于是自己决定试试,参考首页写一部分效果,于是… 有图有真相">
+<meta property="og:type" content="article">
+<meta property="og:title" content="lolSix周年活动页面">
+<meta property="og:url" content="https://xiaotiandada.github.io/2018/03/19/lolSix%E5%91%A8%E5%B9%B4%E6%B4%BB%E5%8A%A8%E9%A1%B5%E9%9D%A2/index.html">
+<meta property="og:site_name" content="小田&#39;blog">
+<meta property="og:description" content="前言小白文采不好,大佬们看见了多多指点,自己的代码可能也有很多”毒瘤”希望大佬们指正,蟹蟹~~ 在掘金看到了一个大佬发的 LOL六周年里的按钮动画 的文章 效果非常 very nice 也很有意思 于是进 lolSix周年活动页面 看看效果 只剩下哇塞!哇塞!哇塞! 于是自己决定试试,参考首页写一部分效果,于是… 有图有真相">
+<meta property="og:locale">
+<meta property="og:image" content="https://xiaotiandada.github.io/2018/03/19/lolSix%E5%91%A8%E5%B9%B4%E6%B4%BB%E5%8A%A8%E9%A1%B5%E9%9D%A2/lolSix%E5%91%A8%E5%B9%B4%E6%B4%BB%E5%8A%A8%E9%A1%B5%E9%9D%A2/lolsix.png">
+<meta property="article:published_time" content="2018-03-19T04:27:36.000Z">
+<meta property="article:modified_time" content="2019-07-15T16:43:10.940Z">
+<meta property="article:author" content="小田">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xiaotiandada.github.io/2018/03/19/lolSix%E5%91%A8%E5%B9%B4%E6%B4%BB%E5%8A%A8%E9%A1%B5%E9%9D%A2/lolSix%E5%91%A8%E5%B9%B4%E6%B4%BB%E5%8A%A8%E9%A1%B5%E9%9D%A2/lolsix.png">
+
+
+<link rel="canonical" href="https://xiaotiandada.github.io/2018/03/19/lolSix%E5%91%A8%E5%B9%B4%E6%B4%BB%E5%8A%A8%E9%A1%B5%E9%9D%A2/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>lolSix周年活动页面 | 小田'blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Показать/скрыть меню">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">小田'blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">前端小菜鸡(〃∀〃)</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Содержание
+        </li>
+        <li class="sidebar-nav-overview">
+          Обзор
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">小田</p>
+  <div class="site-description" itemprop="description">前端小菜鸡(〃∀〃)</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-name">Архив</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">Категории</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">Тэги</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://xiaotiandada.github.io/2018/03/19/lolSix%E5%91%A8%E5%B9%B4%E6%B4%BB%E5%8A%A8%E9%A1%B5%E9%9D%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="小田">
+      <meta itemprop="description" content="前端小菜鸡(〃∀〃)">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小田'blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          lolSix周年活动页面
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Размещено</span>
+
+      <time title="Создано: 2018-03-19 12:27:36" itemprop="dateCreated datePublished" datetime="2018-03-19T12:27:36+08:00">2018-03-19</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Изменено</span>
+        <time title="Изменено: 2019-07-16 00:43:10" itemprop="dateModified" datetime="2019-07-16T00:43:10+08:00">2019-07-16</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">в категории</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%8A%A8%E6%95%88/" itemprop="url" rel="index"><span itemprop="name">动效</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>小白文采不好,大佬们看见了多多指点,自己的代码可能也有很多”毒瘤”希望大佬们指正,蟹蟹~~</p>
+<p>在掘金看到了一个大佬发的 <a target="_blank" rel="noopener" href="https://juejin.im/entry/59ad11f3f265da247158203d">LOL六周年里的按钮动画</a> 的文章</p>
+<p>效果非常 very nice 也很有意思</p>
+<p>于是进 <a target="_blank" rel="noopener" href="http://lol.qq.com/act/a20170810sixyears/index.html?ADTAG=lolweb.index">lolSix周年活动页面</a> 看看效果 只剩下哇塞!哇塞!哇塞!</p>
+<p>于是自己决定试试,参考首页写一部分效果,于是… 有图有真相 </p>
+<a id="more"></a>
+
+
+<p><img src="lolSix%E5%91%A8%E5%B9%B4%E6%B4%BB%E5%8A%A8%E9%A1%B5%E9%9D%A2/lolsix.png" alt="效果图"> </p>
+<p>ps: <a href="https://xiaotiandada.github.io/lolSix/">demo</a> <a target="_blank" rel="noopener" href="https://github.com/xiaotiandada/lolSix">demo仓库</a></p>
+<p>如果觉得不错的话,可以给个star鼓励一下 蟹蟹~~</p>
+<p>两个动画都是通过改变class来完成的效果,简单粗暴 赞<del>(≧▽≦)/</del>\</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">(<span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">    // 定义所需要的变量</span><br><span class="line">    <span class="built_in">let</span> navBtns = $(<span class="string">&#x27;#nav-ul i&#x27;</span>)</span><br><span class="line">    <span class="built_in">let</span> navBtnli = $(<span class="string">&#x27;#nav-ul li&#x27;</span>)</span><br><span class="line">    <span class="built_in">let</span> navhs = $(<span class="string">&#x27;#nav li&#x27;</span>)</span><br><span class="line">    <span class="built_in">let</span> navhem = $(<span class="string">&#x27;#nav em&#x27;</span>)</span><br><span class="line">    // 两个改变class的计数变量</span><br><span class="line">    <span class="built_in">let</span> numLi = &#123;</span><br><span class="line">        numi: 1,</span><br><span class="line">        numh: 1</span><br><span class="line">    &#125;</span><br><span class="line">    // 清楚定时器的变量</span><br><span class="line">    <span class="built_in">let</span> time = null</span><br><span class="line"></span><br><span class="line">    // 鼠标经过和移除 触发run方法</span><br><span class="line">    navBtnli.on(<span class="string">&#x27;mouseover&#x27;</span>, <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">        <span class="built_in">let</span> navI = $(this).children(<span class="string">&#x27;i&#x27;</span>)</span><br><span class="line">        run(navI, <span class="string">&#x27;ans2_btn&#x27;</span>, numLi.numi)</span><br><span class="line">    &#125;)</span><br><span class="line">    navBtnli.on(<span class="string">&#x27;mouseout&#x27;</span>, <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">        <span class="built_in">let</span> target = $(this).children(<span class="string">&#x27;i&#x27;</span>)</span><br><span class="line">        stop(target)</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    navhs.on(<span class="string">&#x27;mouseover&#x27;</span>, <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">        $(this).removeClass(<span class="string">&#x27;ligb&#x27;</span>)</span><br><span class="line">        <span class="built_in">let</span> navh = $(this).children(<span class="string">&#x27;em&#x27;</span>)</span><br><span class="line">        run(navh, <span class="string">&#x27;ans_btn&#x27;</span>, numLi.numh)</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    navhs.on(<span class="string">&#x27;mouseout&#x27;</span>, <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">        <span class="built_in">let</span> target = $(this).children(<span class="string">&#x27;em&#x27;</span>)</span><br><span class="line">        stop(target)</span><br><span class="line">        $(this).addClass(<span class="string">&#x27;ligb&#x27;</span>)</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    // 接受三个参数, 需要改变的对象, 需要改变的名字, 需要改变的数</span><br><span class="line">    <span class="keyword">function</span> run(obj, name, num) &#123;</span><br><span class="line">        // js定时器setTimeout 无法调用局部变量的解决办法</span><br><span class="line">        <span class="keyword">function</span> <span class="function"><span class="title">runs</span></span>() &#123;</span><br><span class="line">            <span class="keyword">if</span> (num &gt; 25) &#123;</span><br><span class="line">                num = 1</span><br><span class="line">            &#125;</span><br><span class="line">            obj.css(<span class="string">&#x27;display&#x27;</span>, <span class="string">&#x27;block&#x27;</span>)</span><br><span class="line">            obj.removeClass()</span><br><span class="line">            obj.addClass(nameNav + num)</span><br><span class="line">            num++</span><br><span class="line">            time = setTimeout(<span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">                clearTimeout(time)</span><br><span class="line">                runs()</span><br><span class="line">            &#125;, 30)</span><br><span class="line">        &#125;</span><br><span class="line">        runs()</span><br><span class="line">    &#125;</span><br><span class="line">    // 停止动画</span><br><span class="line">    <span class="keyword">function</span> stop(target) &#123;</span><br><span class="line">        clearTimeout(time)</span><br><span class="line">        target.css(<span class="string">&#x27;display&#x27;</span>, <span class="string">&#x27;none&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+
+<p>html结构请参考 官方页面或者我的仓库里面的html文件</p>
+<p>然后就是中间的 flash 动画,使用了html object标签,</p>
+<p>但是我在Ubuntu上面chrome测试的时候正常没有问题,(自己在Ubuntu开虚拟机上win测试,IE11,360有效果,chrome,firefox就没有了,懵逼 希望有大佬可以跟我提点一二)</p>
+<p>但是在Firefox测试的时候不会显示,</p>
+<p>于是用了兼容的处理方法,先贴一个通用的处理方法(自己也研究了一会儿,第一次接触2333~~),</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// 这是活动页面的解决办法</span><br><span class="line">// 大家也可以看看这个文档 https://github.com/swfobject/swfobject </span><br><span class="line">// An open <span class="built_in">source</span> Javascript framework <span class="keyword">for</span> detecting the Adobe Flash Player plugin and embedding Flash (swf) files.</span><br><span class="line">// 自己英文比较垃圾 chrome 翻译过来就是</span><br><span class="line">// 用于检测Adobe Flash Player插件并嵌入Flash（swf）文件的开源Javascript框架。</span><br><span class="line"></span><br><span class="line">// 这个文件可以引用腾讯的,也可以下载,也可以新建文件复制粘贴</span><br><span class="line">&lt;script src=<span class="string">&quot;./public/js/swfobject.js&quot;</span>&gt;&lt;/script&gt;</span><br><span class="line">&lt;script src=<span class="string">&quot;index.swf&quot;</span>&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var params = &#123;</span><br><span class="line">        scale: <span class="string">&quot;noscale&quot;</span>,</span><br><span class="line">        wmode: <span class="string">&quot;transparent&quot;</span>,</span><br><span class="line">        align: <span class="string">&quot;middle&quot;</span>,</span><br><span class="line">        allowFullscreen: <span class="string">&quot;true&quot;</span>,</span><br><span class="line">        allowScriptAccess: <span class="string">&quot;always&quot;</span>,</span><br><span class="line">        FlashVars: <span class="string">&quot;timer=1480586966506&amp;endtimer=1481094000000&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">    swfobject.embedSWF(<span class="string">&quot;index.swf&quot;</span>, <span class="string">&quot;mymovie&quot;</span>, <span class="string">&quot;100%&quot;</span>, <span class="string">&quot;670&quot;</span>, <span class="string">&quot;8.0.0&quot;</span>,<span class="string">&quot;expressInstall.swf&quot;</span>, null, params);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>虽然解决了引入swf动画的兼容问题,但是在firefox上面根本不显示啊 23333<del>~</del></p>
+<p>大佬的解决办法非常简单 请继续细心观看文章!</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 提前在html结构上面写一个静态的替代图片,然后隐藏</span><br><span class="line">&lt;div class=<span class="string">&quot;logob&quot;</span>&gt;英雄联盟6周年盛典&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">// 这里是swf文件的位置</span><br><span class="line">&lt;div id=<span class="string">&quot;mymovie&quot;</span> class=<span class="string">&quot;mymovie&quot;</span>&gt;&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">// 通过判断 来显示静态图片(虽然没有了swf动画,但是总不不显示比较好 赞 学习了~!)</span><br><span class="line"> setTimeout(<span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">    <span class="keyword">if</span> ($(<span class="string">&quot;.mymovie&quot;</span>).length &gt; 0) &#123;</span><br><span class="line">        $(<span class="string">&quot;.logob&quot;</span>).css(&#123;</span><br><span class="line">            <span class="string">&quot;display&quot;</span>: <span class="string">&quot;block&quot;</span></span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;, 1000)</span><br></pre></td></tr></table></figure>
+
+<p>大概就是跌么多了! 如果有不对的地方希望大佬们多多指正,</p>
+<p>也可以加小白我交流2333~~ Qq: 952822399</p>
+<p>自己大二也快要毕业了QAQ,希望被大佬们带走!!!</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/01/27/github-hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" rel="prev" title="github+hexo搭建博客">
+                  <i class="fa fa-chevron-left"></i> github+hexo搭建博客
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/05/19/%E6%A8%A1%E4%BB%BFsan%E7%9A%84hover%E5%8A%A8%E7%94%BB/" rel="next" title="模仿san的hover动画">
+                  模仿san的hover动画 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小田</span>
+</div>
+  <div class="powered-by">Генератор — <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

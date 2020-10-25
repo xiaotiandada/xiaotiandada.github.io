@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="zh-Hans,fr-FR,h-hk,zh-tw,ru,en,default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xiaotiandada.github.io","root":"/","scheme":"Muse","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Поиск...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+  </script>
+
+  <meta name="description" content="在百度前端技术学院学习 设计师学院 绿(大佬)的课程 (第一课QAQ) 传送门 然后模仿san官网的动画效果 san 这是我模仿的效果 传送们 pc端食用更佳！ 大佬的实现已经很棒了 个人只让部分动画变得平滑 比如说鼠标移出的时候增加了">
+<meta property="og:type" content="article">
+<meta property="og:title" content="模仿san的hover动画">
+<meta property="og:url" content="https://xiaotiandada.github.io/2018/05/19/%E6%A8%A1%E4%BB%BFsan%E7%9A%84hover%E5%8A%A8%E7%94%BB/index.html">
+<meta property="og:site_name" content="小田&#39;blog">
+<meta property="og:description" content="在百度前端技术学院学习 设计师学院 绿(大佬)的课程 (第一课QAQ) 传送门 然后模仿san官网的动画效果 san 这是我模仿的效果 传送们 pc端食用更佳！ 大佬的实现已经很棒了 个人只让部分动画变得平滑 比如说鼠标移出的时候增加了">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-05-18T17:10:14.000Z">
+<meta property="article:modified_time" content="2019-07-09T15:41:51.560Z">
+<meta property="article:author" content="小田">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://xiaotiandada.github.io/2018/05/19/%E6%A8%A1%E4%BB%BFsan%E7%9A%84hover%E5%8A%A8%E7%94%BB/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>模仿san的hover动画 | 小田'blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Показать/скрыть меню">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">小田'blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">前端小菜鸡(〃∀〃)</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Содержание
+        </li>
+        <li class="sidebar-nav-overview">
+          Обзор
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">小田</p>
+  <div class="site-description" itemprop="description">前端小菜鸡(〃∀〃)</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-name">Архив</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">Категории</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">Тэги</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://xiaotiandada.github.io/2018/05/19/%E6%A8%A1%E4%BB%BFsan%E7%9A%84hover%E5%8A%A8%E7%94%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="小田">
+      <meta itemprop="description" content="前端小菜鸡(〃∀〃)">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小田'blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          模仿san的hover动画
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Размещено</span>
+
+      <time title="Создано: 2018-05-19 01:10:14" itemprop="dateCreated datePublished" datetime="2018-05-19T01:10:14+08:00">2018-05-19</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Изменено</span>
+        <time title="Изменено: 2019-07-09 23:41:51" itemprop="dateModified" datetime="2019-07-09T23:41:51+08:00">2019-07-09</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">в категории</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%8A%A8%E6%95%88/" itemprop="url" rel="index"><span itemprop="name">动效</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>在百度前端技术学院学习 设计师学院 绿(大佬)的课程 (第一课QAQ) <a target="_blank" rel="noopener" href="http://ife.baidu.com/course/detail/id/18">传送门</a></p>
+<p>然后模仿san官网的动画效果 <a target="_blank" rel="noopener" href="https://baidu.github.io/san/">san</a></p>
+<p>这是我模仿的效果 <a href="https://xiaotiandada.github.io/Case/Anime/sanDemo/app/">传送们</a> pc端食用更佳！</p>
+<p>大佬的实现已经很棒了 个人只让部分动画变得平滑 比如说鼠标移出的时候增加了</p>
+<a id="more"></a>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">transition: transform .3s;</span><br></pre></td></tr></table></figure>
+
+<p>这样可以让鼠标移出Div的时候更加平滑</p>
+<p>分界线～～～</p>
+<hr>
+<p>首先贴出资料和大佬的教程</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://ife.baidu.com/course/detail/id/18">http://ife.baidu.com/course/detail/id/18</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/uxelement">https://zhuanlan.zhihu.com/uxelement</a></li>
+<li><a target="_blank" rel="noopener" href="https://baidu.github.io/san/">https://baidu.github.io/san/</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/airbnb/lottie-web">https://github.com/airbnb/lottie-web</a></li>
+<li><a target="_blank" rel="noopener" href="https://codepen.io/airnan/project/editor/ZeNONO/">https://codepen.io/airnan/project/editor/ZeNONO/</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=5XMUJdjI0L8">https://www.youtube.com/watch?v=5XMUJdjI0L8</a></li>
+<li>……</li>
+</ul>
+<p>大概就是这么写 大家可以去Google搜教程 官方案例很不错</p>
+<p>首先布局 结构和样式都可以借鉴san官网 利用控制台(so easy~)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=<span class="string">&quot;resource-block&quot;</span>&gt;</span><br><span class="line">  &lt;a href=<span class="string">&quot;&quot;</span> class=<span class="string">&quot;resource-item&quot;</span>&gt;</span><br><span class="line">    &lt;div class=<span class="string">&quot;resource-item-top resource-item-top-two&quot;</span>&gt;</span><br><span class="line">        &lt;div</span><br><span class="line">        id=<span class="string">&quot;bm&quot;</span></span><br><span class="line">        class=<span class="string">&quot;bodymovin&quot;</span></span><br><span class="line">        data-movpath=<span class="string">&quot;js/compass.json&quot;</span>&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">    &lt;div class=<span class="string">&quot;resource-item-bottom&quot;</span>&gt;</span><br><span class="line">      &lt;h5&gt;教程&lt;/h5&gt;</span><br><span class="line">      &lt;p&gt;教程是入门的捷径，请从这里开始了解San&lt;/p&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/a&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这是结构 具体样式可以查看我的github文件 <a target="_blank" rel="noopener" href="https://github.com/xiaotiandada/Case/tree/master/Anime">传送门</a></p>
+<p>然后就是js 控制动画效果了</p>
+<p>引入jquery (方便～)</p>
+<ul>
+<li><p>在github上的build/player获取最新版本的lottie.js文件 或者 从AE的插件导出</p>
+</li>
+<li><p>在HTML引入文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">&quot;js/lottie.js&quot;</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>调用lottie.loadAnimation()启动一个动画。将一个对象作为参数</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">var animData = &#123;</span><br><span class="line">  container: bodymovinLayer,</span><br><span class="line">  renderer: <span class="string">&#x27;svg&#x27;</span>,</span><br><span class="line">  prerender: <span class="literal">true</span>,</span><br><span class="line">  loop: <span class="literal">false</span>,</span><br><span class="line">  autoplay: <span class="literal">false</span>,</span><br><span class="line">  path: bodymovinLayer.getAttribute(<span class="string">&#x27;data-movpath&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># animData 导出的动画数据的Object</span></span><br><span class="line"><span class="comment"># container 渲染动画的dom元素</span></span><br><span class="line"><span class="comment"># renderer &#x27;svg&#x27;/&#x27;canvas&#x27;/&#x27;html&#x27;来设置渲染器</span></span><br><span class="line"><span class="comment"># prerender 这个根据英文应该是预渲染</span></span><br><span class="line"><span class="comment"># loop 是否循环播放</span></span><br><span class="line"><span class="comment"># autoplay 是否自动播放</span></span><br><span class="line"><span class="comment"># path 路径</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>while循环绑定事件 将上面封装进一个方法</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">setBodymovin = <span class="keyword">function</span> (cards, len) &#123;</span><br><span class="line">  <span class="keyword">while</span> (len--) &#123;</span><br><span class="line">    var bodymovinLayer = cards[len].getElementsByClassName(<span class="string">&#x27;bodymovin&#x27;</span>)[0]</span><br><span class="line"></span><br><span class="line">    var animData = &#123;</span><br><span class="line">      container: bodymovinLayer,</span><br><span class="line">      renderer: <span class="string">&#x27;svg&#x27;</span>,</span><br><span class="line">      prerender: <span class="literal">true</span>,</span><br><span class="line">      loop: <span class="literal">false</span>,</span><br><span class="line">      autoplay: <span class="literal">false</span>,</span><br><span class="line">      path: bodymovinLayer.getAttribute(<span class="string">&#x27;data-movpath&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    anim = lottie.loadAnimation(animData);</span><br><span class="line"></span><br><span class="line">    (<span class="keyword">function</span> (anim) &#123;</span><br><span class="line">      var card = cards[len]</span><br><span class="line"></span><br><span class="line">      $(card).on(<span class="string">&#x27;mouseenter&#x27;</span>, <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">        anim.play()</span><br><span class="line">      &#125;)</span><br><span class="line"></span><br><span class="line">      $(card).on(<span class="string">&#x27;mouseleave&#x27;</span>, <span class="keyword">function</span> (e) &#123;</span><br><span class="line">        anim.stop()</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;)(anim)</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>最后获取元素调用<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">var resourceCards = document.querySelectorAll(<span class="string">&#x27;.resource-block&#x27;</span>)</span><br><span class="line">var facilityCards = document.querySelectorAll(<span class="string">&#x27;.facility-block&#x27;</span>)</span><br><span class="line">var len = resourceCards.length</span><br><span class="line"></span><br><span class="line">setBodymovin(resourceCards, len)</span><br><span class="line">setBodymovin(facilityCards, len)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>最后贴 gulp 任务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">const gulp = require(<span class="string">&#x27;gulp&#x27;</span>)</span><br><span class="line">const connect = require(<span class="string">&#x27;gulp-connect&#x27;</span>)</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">&#x27;connect&#x27;</span>, <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">  connect.server(&#123;</span><br><span class="line">    root: <span class="string">&#x27;app&#x27;</span>,</span><br><span class="line">    port: 8000,</span><br><span class="line">    livereload: <span class="literal">true</span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">&#x27;html&#x27;</span>, <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">  gulp.src(<span class="string">&#x27;./app/*.html&#x27;</span>)</span><br><span class="line">    .pipe(connect.reload())</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">&#x27;css&#x27;</span>, <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">  gulp.src(<span class="string">&#x27;./app/css/*.css&#x27;</span>)</span><br><span class="line">    .pipe(connect.reload())</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">&#x27;watch&#x27;</span>, <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">  gulp.watch([<span class="string">&#x27;./app/*.html&#x27;</span>], [<span class="string">&#x27;html&#x27;</span>])</span><br><span class="line">  gulp.watch([<span class="string">&#x27;./app/css/*.css&#x27;</span>], [<span class="string">&#x27;css&#x27;</span>])</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">&#x27;default&#x27;</span>, [<span class="string">&#x27;connect&#x27;</span>,<span class="string">&#x27;watch&#x27;</span>])</span><br></pre></td></tr></table></figure>
+
+<p>具体代码见github源码</p>
+<p>大佬多给给意见哦～～～</p>
+<p>Qq： 952822399</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/03/19/lolSix%E5%91%A8%E5%B9%B4%E6%B4%BB%E5%8A%A8%E9%A1%B5%E9%9D%A2/" rel="prev" title="lolSix周年活动页面">
+                  <i class="fa fa-chevron-left"></i> lolSix周年活动页面
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/06/04/%E6%8E%98%E9%87%91%E5%A4%B4%E5%83%8F%E6%97%8B%E8%BD%AC%E5%8A%A8%E7%94%BB/" rel="next" title="掘金头像旋转动画">
+                  掘金头像旋转动画 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小田</span>
+</div>
+  <div class="powered-by">Генератор — <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="zh-Hans,fr-FR,h-hk,zh-tw,ru,en,default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xiaotiandada.github.io","root":"/","scheme":"Muse","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Поиск...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+  </script>
+
+  <meta name="description" content="首先来写一个示例吧 Web Components 标准非常重要的一个特性是，它使开发者能够将HTML页面的功能封装为 custom elements（自定义标签），而往常，开发者不得不写一大堆冗长、深层嵌套的标签来实现同样的页面功能。这篇文章将会介绍如何使用HTML的custom elements。 - MDN https:&#x2F;&#x2F;developer.mozilla.org&#x2F;zh-CN&#x2F;docs&#x2F;We">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Building Components Custom Elements 自定义元素">
+<meta property="og:url" content="https://xiaotiandada.github.io/2019/09/15/Building-Components-Custom-Elements-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%83%E7%B4%A0/index.html">
+<meta property="og:site_name" content="小田&#39;blog">
+<meta property="og:description" content="首先来写一个示例吧 Web Components 标准非常重要的一个特性是，它使开发者能够将HTML页面的功能封装为 custom elements（自定义标签），而往常，开发者不得不写一大堆冗长、深层嵌套的标签来实现同样的页面功能。这篇文章将会介绍如何使用HTML的custom elements。 - MDN https:&#x2F;&#x2F;developer.mozilla.org&#x2F;zh-CN&#x2F;docs&#x2F;We">
+<meta property="og:locale">
+<meta property="og:image" content="https://xiaotiandada.github.io/2019/09/15/Building-Components-Custom-Elements-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%83%E7%B4%A0/Building-Components-Custom-Elements-自定义元素/button.png">
+<meta property="og:image" content="https://xiaotiandada.github.io/2019/09/15/Building-Components-Custom-Elements-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%83%E7%B4%A0/Building-Components-Custom-Elements-自定义元素/shadow.png">
+<meta property="og:image" content="https://xiaotiandada.github.io/2019/09/15/Building-Components-Custom-Elements-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%83%E7%B4%A0/Building-Components-Custom-Elements-自定义元素/template.png">
+<meta property="og:image" content="https://xiaotiandada.github.io/2019/09/15/Building-Components-Custom-Elements-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%83%E7%B4%A0/Building-Components-Custom-Elements-自定义元素/style.png">
+<meta property="og:image" content="https://xiaotiandada.github.io/2019/09/15/Building-Components-Custom-Elements-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%83%E7%B4%A0/Building-Components-Custom-Elements-自定义元素/get.png">
+<meta property="og:image" content="https://xiaotiandada.github.io/2019/09/15/Building-Components-Custom-Elements-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%83%E7%B4%A0/Building-Components-Custom-Elements-自定义元素/whenDefined.png">
+<meta property="og:image" content="https://xiaotiandada.github.io/2019/09/15/Building-Components-Custom-Elements-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%83%E7%B4%A0/Building-Components-Custom-Elements-自定义元素/in.png">
+<meta property="article:published_time" content="2019-09-14T17:42:32.000Z">
+<meta property="article:modified_time" content="2020-10-25T17:19:52.750Z">
+<meta property="article:author" content="小田">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xiaotiandada.github.io/2019/09/15/Building-Components-Custom-Elements-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%83%E7%B4%A0/Building-Components-Custom-Elements-自定义元素/button.png">
+
+
+<link rel="canonical" href="https://xiaotiandada.github.io/2019/09/15/Building-Components-Custom-Elements-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%83%E7%B4%A0/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>Building Components Custom Elements 自定义元素 | 小田'blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Показать/скрыть меню">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">小田'blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">前端小菜鸡(〃∀〃)</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Содержание
+        </li>
+        <li class="sidebar-nav-overview">
+          Обзор
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">小田</p>
+  <div class="site-description" itemprop="description">前端小菜鸡(〃∀〃)</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-name">Архив</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">Категории</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">Тэги</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://xiaotiandada.github.io/2019/09/15/Building-Components-Custom-Elements-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%83%E7%B4%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="小田">
+      <meta itemprop="description" content="前端小菜鸡(〃∀〃)">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小田'blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Building Components Custom Elements 自定义元素
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Размещено</span>
+
+      <time title="Создано: 2019-09-15 01:42:32" itemprop="dateCreated datePublished" datetime="2019-09-15T01:42:32+08:00">2019-09-15</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Изменено</span>
+        <time title="Изменено: 2020-10-26 01:19:52" itemprop="dateModified" datetime="2020-10-26T01:19:52+08:00">2020-10-26</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">в категории</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/css/" itemprop="url" rel="index"><span itemprop="name">css</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/html/" itemprop="url" rel="index"><span itemprop="name">html</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>首先来写一个示例吧</p>
+<p>Web Components 标准非常重要的一个特性是，它使开发者能够将HTML页面的功能封装为 custom elements（自定义标签），而往常，开发者不得不写一大堆冗长、深层嵌套的标签来实现同样的页面功能。这篇文章将会介绍如何使用HTML的custom elements。 - MDN</p>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/Web_Components/Using_custom_elements">https://developer.mozilla.org/zh-CN/docs/Web/Web_Components/Using_custom_elements</a></p>
+<p>具体看MDN文档,(复制完应该就差不多了 然后去这里玩)</p>
+<p><a target="_blank" rel="noopener" href="https://developers.google.com/web/fundamentals/web-components/">https://developers.google.com/web/fundamentals/web-components/</a></p>
+<a id="more"></a>
+
+<p><strong>查看demo</strong></p>
+<style for-run for-show>
+.popup-info {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  top: 100px;
+  left: 300px;
+}
+.popup-info1 {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  top: 160px;
+  left: 600px;
+}
+.popup-info img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+}
+.popup-info .info {
+  font-size: 20px;
+  width: 200px;
+  display: inline-block;
+  border: 1px solid black;
+  padding: 10px;
+  background: white;
+  border-radius: 4px;
+  opacity: 0;
+  transition: 0.6s all;
+  position: absolute;
+  bottom: 110px;
+  left: 0px;
+  z-index: 3;
+}
+.popup-info:hover .info{
+  opacity: 1;
+}
+</style>
+
+<template for-run for-show>
+
+<p><popup-info role="popup" img="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=4038933139,466219061&fm=26&gp=0.jpg" data-text="I Learn Js 💗"></popup-info><br><button id="remove">remove</button><br><button id="move">move</button><br><button id="toggle">toggle attribute</button></p>
+<p><popup-info1 role="popup" img="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=4038933139,466219061&fm=26&gp=0.jpg" data-text="I Learn Js 💗"></popup-info1></p>
+<p><button is="popup-button">popup-button!</button></p>
+</template>
+
+<script for-run for-show>
+class popupInfo extends HTMLElement {
+  constructor() {
+    super()
+
+  }
+  static get observedAttributes() {
+    return ['role']
+  }
+  // 生命周期钩子
+  connectedCallback() {
+    // 创建 div
+    let div = document.createElement('div')
+    div.setAttribute('role', 'popup-info')
+
+    // 创建 img
+    let img = document.createElement('img')
+    let src = this.getAttribute('img')
+
+    // 创建info信息
+    let info = document.createElement('span')
+    let text = this.getAttribute('data-text')
+
+    // 设置img内容
+    img.src = src
+    img.alt = text
+
+    // 设置info内容
+    info.classList.add('info')
+    info.innerText = text
+
+    // 添加class
+    div.classList.add('popup-info')
+
+    // 添加内容 img info
+    div.appendChild(img)
+    div.appendChild(info)
+
+    this.appendChild(div)
+  }
+  disconnectedCallback() {
+    console.log('我没有了呀')
+  }
+  attributeChangedCallback(attrName, oldVal, newVal) {
+    console.log('当前的属性:', attrName)
+    console.log('当前的属性 old:', oldVal)
+    console.log('当前的属性 new:', newVal)
+  }
+  adoptedCallback() {
+    console.log('adoptedCallback 自定义元素被移入新的 document')
+  }
+}
+
+customElements.define('popup-info', popupInfo)
+
+
+// 测试 自定义元素被移入新的 document
+const testAdoptedCallback = ()=> {
+  // 创建 iframe
+  const createWindow = () => {
+    let iframe = document.createElement('iframe')
+    document.body.appendChild(iframe)
+    return iframe.contentWindow
+  }
+  let cw = createWindow()
+  // 创建 自定义元素
+  let cw1 = document.querySelector('popup-info')
+
+  // 创建的元素插入到 新创建的iframe
+  cw.document.body.appendChild(cw1)
+}
+
+const move = () => {
+  let move = document.querySelector('#move')
+  move.onclick = function() {
+    testAdoptedCallback()
+  }
+}
+move()
+
+// 测试移除 popup-info
+const remove = () => {
+  let remove = document.querySelector('#remove')
+  remove.onclick = function() {
+    document.querySelector('popup-info').remove()
+  }
+}
+remove()
+
+// 测试属性被修改 toggle
+const toggle = () => {
+  let i = 0
+  let toggle = document.querySelector('#toggle')
+  toggle.onclick = function() {
+    i++
+    document.querySelector('popup-info').setAttribute('role', `popup-info-change, ${i}`)
+  }
+}
+toggle()
+
+
+
+class popupInfo1 extends popupInfo {
+  constructor() {
+    super()
+  }
+  connectedCallback() {
+    this.innerText = 'extends popupInfo'
+  }
+}
+
+customElements.define('popup-info1', popupInfo1)
+
+
+class popupButton extends HTMLButtonElement {
+  constructor() {
+    super()
+  }
+  connectedCallback() {
+    this.innerText += ' extends'
+  }
+}
+
+customElements.define('popup-button', popupButton, {extends: 'button'})
+
+</script>
+
+
+<p><strong>定义新元素</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">popupInfo</span> <span class="keyword">extends</span> <span class="title">HTMLElement</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">super</span>()</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">get</span> <span class="title">observedAttributes</span>() &#123;</span><br><span class="line">    <span class="keyword">return</span> [<span class="string">&#x27;role&#x27;</span>]</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 生命周期钩子</span></span><br><span class="line">  <span class="function"><span class="title">connectedCallback</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="comment">// 创建 div</span></span><br><span class="line">    <span class="keyword">let</span> div = <span class="built_in">document</span>.createElement(<span class="string">&#x27;div&#x27;</span>)</span><br><span class="line">    div.setAttribute(<span class="string">&#x27;role&#x27;</span>, <span class="string">&#x27;popup-info&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建 img</span></span><br><span class="line">    <span class="keyword">let</span> img = <span class="built_in">document</span>.createElement(<span class="string">&#x27;img&#x27;</span>)</span><br><span class="line">    <span class="keyword">let</span> src = <span class="built_in">this</span>.getAttribute(<span class="string">&#x27;img&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建info信息</span></span><br><span class="line">    <span class="keyword">let</span> info = <span class="built_in">document</span>.createElement(<span class="string">&#x27;span&#x27;</span>)</span><br><span class="line">    <span class="keyword">let</span> text = <span class="built_in">this</span>.getAttribute(<span class="string">&#x27;data-text&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置img内容</span></span><br><span class="line">    img.src = src</span><br><span class="line">    img.alt = text</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置info内容</span></span><br><span class="line">    info.classList.add(<span class="string">&#x27;info&#x27;</span>)</span><br><span class="line">    info.innerText = text</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 添加class</span></span><br><span class="line">    div.classList.add(<span class="string">&#x27;popup-info&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 添加内容 img info</span></span><br><span class="line">    div.appendChild(img)</span><br><span class="line">    div.appendChild(info)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">this</span>.appendChild(div)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">disconnectedCallback</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;我没有了呀&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">attributeChangedCallback</span>(<span class="params">attrName, oldVal, newVal</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;当前的属性:&#x27;</span>, attrName)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;当前的属性 old:&#x27;</span>, oldVal)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;当前的属性 new:&#x27;</span>, newVal)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">adoptedCallback</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;adoptedCallback 自定义元素被移入新的 document&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">customElements.define(<span class="string">&#x27;popup-info&#x27;</span>, popupInfo)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">popup-info</span> <span class="attr">role</span>=<span class="string">&quot;popup&quot;</span> <span class="attr">img</span>=<span class="string">&quot;https://miro.medium.com/max/1440/1*LjR0UrFB2a__5h1DWqzstA.png&quot;</span> <span class="attr">data-text</span>=<span class="string">&quot;I Learn Js 💗&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">popup-info</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>定义一个自定义的元素 然后使用</p>
+</blockquote>
+<p><strong>扩展元素</strong></p>
+<p><strong>扩展自定义元素</strong></p>
+<p>customElements 全局性用于定义自定义元素</p>
+<p> customElements.define()，并使用 JavaScript class 扩展基础 HTMLElement</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">popupInfo1</span> <span class="keyword">extends</span> <span class="title">popupInfo</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">super</span>()</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">connectedCallback</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.innerText = <span class="string">&#x27;extends popupInfo&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">customElements.define(<span class="string">&#x27;popup-info1&#x27;</span>, popupInfo1)</span><br></pre></td></tr></table></figure>
+
+<p>继承自定义元素好像效果有点不对(我还没找到为啥 希望大佬教教我)</p>
+<p>有关创建自定义元素的规则</p>
+<ul>
+<li>自定义元素的名称必须包含短横线 (-)。因此，<x-tags>、<my-element> 和 <my-awesome-app> 等均为有效名称，而 <tabs> 和 <foo_bar> 则为无效名称….</li>
+<li>您不能多次注册同一标记…</li>
+<li>自定义元素不能自我封闭标签</li>
+</ul>
+<blockquote>
+<p>教程里面更详细</p>
+</blockquote>
+<p>和上面很相识, 扩展了自定义的元素</p>
+<p><strong>扩展原生 HTML 元素</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">popupButton</span> <span class="keyword">extends</span> <span class="title">HTMLButtonElement</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">super</span>()</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">connectedCallback</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.innerText += <span class="string">&#x27; extends&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">customElements.define(<span class="string">&#x27;popup-button&#x27;</span>, popupButton, &#123;<span class="attr">extends</span>: <span class="string">&#x27;button&#x27;</span>&#125;)</span><br></pre></td></tr></table></figure>
+<img src="Building-Components-Custom-Elements-自定义元素/button.png" />
+
+
+<p>要扩展元素，您需要创建继承自正确 DOM 接口的类定义</p>
+<p>扩展原生元素时，对 define() 的调用会稍有不同。所需的第三个参数告知浏览器要扩展的标记。</p>
+<p>这很有必要，因为许多 HTML 标记均使用同一 DOM 接口</p>
+<p>例如 section address 和 em（以及其他）都使用 HTMLElement；q 和 blockquote 则使用 HTMLQuoteElement；等等。</p>
+<p>指定 {extends: ‘blockquote’} 可让浏览器知道您创建的是 blockquote 而不是 q。有关 HTML DOM 接口的完整列表，请参阅 HTML 规范。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">popupButton</span> <span class="keyword">extends</span> <span class="title">HTMLButtonElement</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">customElements.define(<span class="string">&#x27;popup-button&#x27;</span>, popupButton)</span><br></pre></td></tr></table></figure>
+
+<p><strong>自定义元素响应</strong></p>
+<p>自定义元素可以定义特殊生命周期钩子</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>constructor</td>
+<td>创建或升级元素的一个实例。用于初始化状态、设置事件侦听器或创建 Shadow DOM…</td>
+</tr>
+<tr>
+<td>connectedCallback</td>
+<td>元素每次插入到 DOM 时都会调用…</td>
+</tr>
+<tr>
+<td>disconnectedCallback()</td>
+<td>元素每次从 DOM 中移除时都会调用…</td>
+</tr>
+<tr>
+<td>attributeChangedCallback(attrName, oldVal, newVal)</td>
+<td>属性添加、移除、更新或替换…</td>
+</tr>
+<tr>
+<td>adoptedCallback(attrName, oldVal, newVal)</td>
+<td>自定义元素被移入新的 document…</td>
+</tr>
+</tbody></table>
+<p><a target="_blank" rel="noopener" href="https://developers.google.com/web/fundamentals/web-components/customelements#extendhtml">https://developers.google.com/web/fundamentals/web-components/customelements#extendhtml</a></p>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/Web_Components/Using_custom_elements#%E4%BD%BF%E7%94%A8%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0">https://developer.mozilla.org/zh-CN/docs/Web/Web_Components/Using_custom_elements#%E4%BD%BF%E7%94%A8%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0</a></p>
+<blockquote>
+<p>上面写得很清晰 比我这个容易理解</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 生命周期钩子</span></span><br><span class="line"><span class="function"><span class="title">connectedCallback</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  <span class="comment">// 创建 div</span></span><br><span class="line">  <span class="keyword">let</span> div = <span class="built_in">document</span>.createElement(<span class="string">&#x27;div&#x27;</span>)</span><br><span class="line">  div.setAttribute(<span class="string">&#x27;role&#x27;</span>, <span class="string">&#x27;popup-info&#x27;</span>)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 创建 img</span></span><br><span class="line">  <span class="keyword">let</span> img = <span class="built_in">document</span>.createElement(<span class="string">&#x27;img&#x27;</span>)</span><br><span class="line">  <span class="keyword">let</span> src = <span class="built_in">this</span>.getAttribute(<span class="string">&#x27;img&#x27;</span>)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 创建info信息</span></span><br><span class="line">  <span class="keyword">let</span> info = <span class="built_in">document</span>.createElement(<span class="string">&#x27;span&#x27;</span>)</span><br><span class="line">  <span class="keyword">let</span> text = <span class="built_in">this</span>.getAttribute(<span class="string">&#x27;data-text&#x27;</span>)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 设置img内容</span></span><br><span class="line">  img.src = src</span><br><span class="line">  img.alt = text</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 设置info内容</span></span><br><span class="line">  info.classList.add(<span class="string">&#x27;info&#x27;</span>)</span><br><span class="line">  info.innerText = text</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 添加class</span></span><br><span class="line">  div.classList.add(<span class="string">&#x27;popup-info&#x27;</span>)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 添加内容 img info</span></span><br><span class="line">  div.appendChild(img)</span><br><span class="line">  div.appendChild(info)</span><br><span class="line"></span><br><span class="line">  <span class="built_in">this</span>.appendChild(div)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>dom创建时候 创建内容</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">  <span class="function"><span class="title">disconnectedCallback</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;我没有了呀&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  ...</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 测试移除 popup-info</span></span><br><span class="line"><span class="keyword">const</span> remove = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> remove = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;#remove&#x27;</span>)</span><br><span class="line">  remove.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">document</span>.querySelector(<span class="string">&#x27;popup-info&#x27;</span>).remove()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">remove()</span><br></pre></td></tr></table></figure>
+
+<p>dom 移除执行的方法 可以移除事件什么的</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">  <span class="function"><span class="title">attributeChangedCallback</span>(<span class="params">attrName, oldVal, newVal</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;当前的属性:&#x27;</span>, attrName)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;当前的属性 old:&#x27;</span>, oldVal)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;当前的属性 new:&#x27;</span>, newVal)</span><br><span class="line">  &#125;</span><br><span class="line">...</span><br><span class="line">  <span class="comment">// 测试属性被修改 toggle</span></span><br><span class="line"><span class="keyword">const</span> toggle = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> i = <span class="number">0</span></span><br><span class="line">  <span class="keyword">let</span> toggle = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;#toggle&#x27;</span>)</span><br><span class="line">  toggle.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    i++</span><br><span class="line">    <span class="built_in">document</span>.querySelector(<span class="string">&#x27;popup-info&#x27;</span>).setAttribute(<span class="string">&#x27;role&#x27;</span>, <span class="string">`popup-info-change, <span class="subst">$&#123;i&#125;</span>`</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">toggle()</span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是，如果需要在元素属性变化后，触发 attributeChangedCallback()回调函数，你必须监听这个属性。这可以通过定义observedAttributes() get函数来实现，observedAttributes()函数体内包含一个 return语句，返回一个数组，包含了需要监听的属性名称：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">get</span> <span class="title">observedAttributes</span>() &#123;</span><br><span class="line">  <span class="keyword">return</span> [<span class="string">&#x27;role&#x27;</span>]</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>监听属性变化 调用的方法 比如 role=”popup” 什么的</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">  <span class="function"><span class="title">adoptedCallback</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;adoptedCallback 自定义元素被移入新的 document&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 测试 自定义元素被移入新的 document</span></span><br><span class="line"><span class="keyword">const</span> testAdoptedCallback = <span class="function">()=&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 创建 iframe</span></span><br><span class="line">  <span class="keyword">const</span> createWindow = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> iframe = <span class="built_in">document</span>.createElement(<span class="string">&#x27;iframe&#x27;</span>)</span><br><span class="line">    <span class="built_in">document</span>.body.appendChild(iframe)</span><br><span class="line">    <span class="keyword">return</span> iframe.contentWindow</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">let</span> cw = createWindow()</span><br><span class="line">  <span class="comment">// 创建 自定义元素</span></span><br><span class="line">  <span class="keyword">let</span> cw1 = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;popup-info&#x27;</span>)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 创建的元素插入到 新创建的iframe</span></span><br><span class="line">  cw.document.body.appendChild(cw1)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> move = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> move = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;#move&#x27;</span>)</span><br><span class="line">  move.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    testAdoptedCallback()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">move()</span><br></pre></td></tr></table></figure>
+
+<p>自定义元素被移入新的 document</p>
+<p><strong>元素定义的内容</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">popupInfo</span> <span class="keyword">extends</span> <span class="title">HTMLElement</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">super</span>()</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">connectedCallback</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">     <span class="built_in">this</span>.innerHTML = <span class="string">&quot;xxxxxx&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以新内容覆盖元素的子项并非一种好的做法，因为这样做会不符合设想。<br>添加元素定义内容的更好做法是使用 shadow DOM，下一篇文章会写</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">popupInfoShadow</span> <span class="keyword">extends</span> <span class="title">HTMLElement</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">super</span>()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> shadowRoot = <span class="built_in">this</span>.attachShadow(&#123;<span class="attr">mode</span>: <span class="string">&#x27;open&#x27;</span>&#125;)</span><br><span class="line">    shadowRoot.innerHTML = <span class="string">&quot;&lt;span&gt;hello&lt;/span&gt;&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">customElements.define(<span class="string">&#x27;popup-info-shadow&#x27;</span>, popupInfoShadow)</span><br></pre></td></tr></table></figure>
+
+<img src="Building-Components-Custom-Elements-自定义元素/shadow.png" />
+
+
+<p><strong>通过 template 创建元素</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;info-template&gt;&lt;/info-template&gt;</span><br><span class="line"></span><br><span class="line">&lt;template id=<span class="string">&quot;info-template&quot;</span>&gt;</span><br><span class="line">  &lt;style&gt;</span><br><span class="line">    p &#123;</span><br><span class="line">      color: red;</span><br><span class="line">    &#125;</span><br><span class="line">  &lt;/style&gt;</span><br><span class="line">  &lt;p&gt;hello template&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">infoTemplate</span> <span class="keyword">extends</span> <span class="title">HTMLElement</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">super</span>()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> shadowRoot = <span class="built_in">this</span>.attachShadow(&#123;<span class="attr">mode</span>: <span class="string">&#x27;open&#x27;</span>&#125;)</span><br><span class="line">    <span class="keyword">const</span> t = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;#info-template&#x27;</span>)</span><br><span class="line">    <span class="keyword">const</span> instance = t.content.cloneNode(<span class="literal">true</span>)</span><br><span class="line">    shadowRoot.appendChild(instance)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">customElements.define(<span class="string">&#x27;info-template&#x27;</span>, infoTemplate)</span><br></pre></td></tr></table></figure>
+
+<img src="Building-Components-Custom-Elements-自定义元素/template.png" />
+
+<ul>
+<li>我们在 HTML 中定义新的元素：info-template</li>
+<li>元素的 Shadow DOM 使用 template 创建</li>
+<li>由于是 Shadow DOM，元素的 DOM 局限于元素本地</li>
+<li>由于是 Shadow DOM，元素的内部 CSS 作用域限于元素内</li>
+</ul>
+<p><strong>设置自定义元素样式</strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="selector-tag">style</span>&gt;</span><br><span class="line"><span class="selector-tag">p</span> &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+<p>:defined CSS 伪类 表示任何已定义的元素。这包括任何浏览器内置的标准元素以及已成功定义的自定义元素 (例如通过 CustomElementRegistry.define() 方法)。</p>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/:defined">https://developer.mozilla.org/zh-CN/docs/Web/CSS/:defined</a></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">app-drawer</span><span class="selector-pseudo">:not(</span><span class="selector-pseudo">:defined)</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">info-template &#123;</span><br><span class="line"><span class="css">  <span class="selector-tag">color</span><span class="selector-pseudo">:red</span>;</span></span><br><span class="line">  opacity: 0;</span><br><span class="line">&#125;</span><br><span class="line"><span class="css"><span class="selector-tag">aa-bb</span><span class="selector-pseudo">:not(</span><span class="selector-pseudo">:defined)</span> &#123;</span></span><br><span class="line"><span class="css">  <span class="selector-tag">color</span><span class="selector-pseudo">:red</span>;</span></span><br><span class="line">  opacity: 0;</span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">info-template</span>&gt;</span><span class="tag">&lt;/<span class="name">info-template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">info-template</span>&gt;</span>123<span class="tag">&lt;/<span class="name">info-template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">aa-bb</span>&gt;</span>123<span class="tag">&lt;/<span class="name">aa-bb</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<img src="Building-Components-Custom-Elements-自定义元素/style.png" />
+
+
+<p>定义之前会隐藏起来哦</p>
+<p><strong>其他详情</strong></p>
+<p>未知元素与未定义的自定义元素</p>
+<p>HTML 使用起来非常宽松和灵活。例如，在页面上声明 randomtagthatdoesntexist，浏览器将非常乐意接受它。为什么非标准标记可以生效？答案在于 HTML 规范允许这样。规范没有定义的元素作为 HTMLUnknownElement 进行解析。</p>
+<p>自定义元素则并非如此。如果在创建时使用有效的名称（包含“-”），则潜在的自定义元素将解析为 HTMLElement。 您可以在支持自定义元素的浏览器中核实这一点。打开控制台：Ctrl+Shift+J（或者在 Mac 上，Cmd+Opt+J）并粘贴下列代码行：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// &quot;tabs&quot; is not a valid custom element name</span></span><br><span class="line"><span class="built_in">document</span>.createElement(<span class="string">&#x27;tabs&#x27;</span>) <span class="keyword">instanceof</span> HTMLUnknownElement === <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// &quot;x-tabs&quot; is a valid custom element name</span></span><br><span class="line"><span class="built_in">document</span>.createElement(<span class="string">&#x27;x-tabs&#x27;</span>) <span class="keyword">instanceof</span> HTMLElement === <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>API 参考</strong></p>
+<p>全局性 customElements 定义了处理自定义元素的方法。</p>
+<p><strong>define(tagName, constructor, options)</strong></p>
+<p>在浏览器中定义新的自定义元素。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">customElements.define(<span class="string">&#x27;my-app&#x27;</span>, <span class="class"><span class="keyword">class</span> <span class="keyword">extends</span> <span class="title">HTMLElement</span> </span>&#123; ... &#125;);</span><br><span class="line">customElements.define(</span><br><span class="line">  <span class="string">&#x27;fancy-button&#x27;</span>, <span class="class"><span class="keyword">class</span> <span class="keyword">extends</span> <span class="title">HTMLButtonElement</span> </span>&#123; ... &#125;, &#123;<span class="attr">extends</span>: <span class="string">&#x27;button&#x27;</span>&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>抽离出来可以更利于阅读</p>
+<p><strong>get(tagName)</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> Drawer = customElements.get(<span class="string">&#x27;app-drawer&#x27;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(Drawer)</span><br><span class="line"><span class="keyword">if</span> (Drawer) &#123;</span><br><span class="line">  <span class="keyword">let</span> drawer = <span class="keyword">new</span> Drawer();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> PopupInfo = customElements.get(<span class="string">&#x27;popup-info&#x27;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(PopupInfo)</span><br><span class="line"><span class="keyword">if</span> (PopupInfo) &#123;</span><br><span class="line">  <span class="keyword">let</span> popupInfo = <span class="keyword">new</span> PopupInfo();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在给定有效自定义元素标记名称的情况下，返回元素的构造函数。</p>
+<p>如果没有注册元素定义，则返回 undefined。</p>
+<img src="Building-Components-Custom-Elements-自定义元素/get.png" />
+
+
+<p><strong>whenDefined(tagName)</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">customElements.whenDefined(<span class="string">&#x27;popup-info&#x27;</span>).then(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;popup-info ready!&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">customElements.whenDefined(<span class="string">&#x27;app-drawer&#x27;</span>).then(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;app-drawer ready!&#x27;</span>);</span><br><span class="line">&#125;).catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;err&#x27;</span>, err)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<img src="Building-Components-Custom-Elements-自定义元素/whenDefined.png" />
+
+<p>如果定义了自定义元素，则返回可解析的 Promise。如果元素已定义，则立即得到解析。</p>
+<p>如果标记名称并非有效自定义元素名称，则拒绝(好像也不会走catch)</p>
+<p><strong>历史记录和浏览器支持</strong></p>
+<p>如果您最近几年持续关注网络组件，您应知道 Chrome 36+ 实施的自定义元素 API 版本使用了 document.registerElement() 而不是 customElements.define()。</p>
+<p>但前者是标准的弃用版本，称为 v0。customElements.define() 成为现行标准并逐步获得各大浏览器厂商的支持。这称为自定义元素 v1。</p>
+<p><a target="_blank" rel="noopener" href="https://developers.google.com/web/fundamentals/web-components/customelements">https://developers.google.com/web/fundamentals/web-components/customelements</a></p>
+<p><strong>浏览器支持</strong></p>
+<p>要检测自定义元素功能，检测是否存在 window.customElements：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> supportsCustomElementsV1 = <span class="string">&#x27;customElements&#x27;</span> <span class="keyword">in</span> <span class="built_in">window</span>;</span><br></pre></td></tr></table></figure>
+
+<img src="Building-Components-Custom-Elements-自定义元素/in.png" />
+
+<p><strong>Polyfill</strong></p>
+<p><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/@webcomponents/custom-elements">https://www.npmjs.com/package/@webcomponents/custom-elements</a></p>
+<p>注：无法对 :defined CSS 伪类执行 polyfill。 (没测试过)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> supportsCustomElementsV1 = <span class="string">&#x27;customElements&#x27;</span> <span class="keyword">in</span> <span class="built_in">window</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">loadScript</span>(<span class="params">src</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> script = <span class="built_in">document</span>.createElement(<span class="string">&#x27;script&#x27;</span>)</span><br><span class="line">    script.src = src</span><br><span class="line">    script.onload = resolve</span><br><span class="line">    script.onerror = reject</span><br><span class="line">    <span class="built_in">document</span>.head.appendChild(script)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!supportsCustomElementsV1) &#123;</span><br><span class="line">  loadScript(<span class="string">&#x27;https://unpkg.com/@webcomponents/custom-elements&#x27;</span>)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;use polyfill&#x27;</span>)</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="comment">// Native support.Good to go.</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;native&#x27;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>总结:</p>
+<p>自定义元素提供了一种新工具，可让我们在浏览器中定义新 HTML 标记并创建可重用的组件。<br>它们与 Shadow DOM 和 template 等新平台原语结合使用，我们可开始实现更多的可能</p>
+<ul>
+<li>创建和扩展可重复使用组件的跨浏览器（网络标准）</li>
+<li>无需库或框架即可使用。原生 JS/HTML 威武！</li>
+<li>提供熟悉的编程模型。仅需使用 DOM/CSS/HTML。</li>
+<li>与其他网络平台功能良好匹配（Shadow DOM、template、CSS 自定义属性等）</li>
+<li>与浏览器的 DevTools 紧密集成。</li>
+<li>利用现有的无障碍功能。</li>
+<li>(我也是复制的 2333)</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://developers.google.com/web/fundamentals/web-components/customelements">https://developers.google.com/web/fundamentals/web-components/customelements</a></p>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/Web_Components/Using_custom_elements">https://developer.mozilla.org/zh-CN/docs/Web/Web_Components/Using_custom_elements</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/09/08/twitter-%E7%82%B9%E8%B5%9E%E7%AE%80%E6%98%93%E5%8A%A8%E7%94%BB/" rel="prev" title="twitter 点赞简易动画">
+                  <i class="fa fa-chevron-left"></i> twitter 点赞简易动画
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/09/24/hexo-%E5%AD%98%E6%94%BEdemo-source/" rel="next" title="hexo 存放demo source">
+                  hexo 存放demo source <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小田</span>
+</div>
+  <div class="powered-by">Генератор — <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

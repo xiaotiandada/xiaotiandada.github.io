@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="zh-Hans,fr-FR,h-hk,zh-tw,ru,en,default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xiaotiandada.github.io","root":"/","scheme":"Muse","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Поиск...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+  </script>
+
+  <meta name="description" content="前言首先说说为什么自己会想着写一个小程序emmmmmm 感觉没有为什么 就是想写了 我就干了~hhhhh 我就粗略看了一下小程序的官方文档和mpvue的文档 然后就开撸了。  项目仓库 欢迎start和pr哦~~ 为了节省大家的宝贵时间，不废话 直接进入正题；">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mpvue外卖小程序">
+<meta property="og:url" content="https://xiaotiandada.github.io/2018/09/09/mpvue%E5%A4%96%E5%8D%96%E5%B0%8F%E7%A8%8B%E5%BA%8F/index.html">
+<meta property="og:site_name" content="小田&#39;blog">
+<meta property="og:description" content="前言首先说说为什么自己会想着写一个小程序emmmmmm 感觉没有为什么 就是想写了 我就干了~hhhhh 我就粗略看了一下小程序的官方文档和mpvue的文档 然后就开撸了。  项目仓库 欢迎start和pr哦~~ 为了节省大家的宝贵时间，不废话 直接进入正题；">
+<meta property="og:locale">
+<meta property="og:image" content="https://xiaotiandada.github.io/2018/09/09/mpvue%E5%A4%96%E5%8D%96%E5%B0%8F%E7%A8%8B%E5%BA%8F/mpvue%E5%A4%96%E5%8D%96%E5%B0%8F%E7%A8%8B%E5%BA%8F/mpvue1.png">
+<meta property="og:image" content="https://xiaotiandada.github.io/2018/09/09/mpvue%E5%A4%96%E5%8D%96%E5%B0%8F%E7%A8%8B%E5%BA%8F/mpvue%E5%A4%96%E5%8D%96%E5%B0%8F%E7%A8%8B%E5%BA%8F/mpvue2.png">
+<meta property="og:image" content="https://xiaotiandada.github.io/2018/09/09/mpvue%E5%A4%96%E5%8D%96%E5%B0%8F%E7%A8%8B%E5%BA%8F/mpvue%E5%A4%96%E5%8D%96%E5%B0%8F%E7%A8%8B%E5%BA%8F/mpvue3.png">
+<meta property="og:image" content="https://xiaotiandada.github.io/2018/09/09/mpvue%E5%A4%96%E5%8D%96%E5%B0%8F%E7%A8%8B%E5%BA%8F/mpvue%E5%A4%96%E5%8D%96%E5%B0%8F%E7%A8%8B%E5%BA%8F/mpvue4.png">
+<meta property="og:image" content="https://xiaotiandada.github.io/2018/09/09/mpvue%E5%A4%96%E5%8D%96%E5%B0%8F%E7%A8%8B%E5%BA%8F/mpvue%E5%A4%96%E5%8D%96%E5%B0%8F%E7%A8%8B%E5%BA%8F/mpvue5.png">
+<meta property="og:image" content="https://xiaotiandada.github.io/2018/09/09/mpvue%E5%A4%96%E5%8D%96%E5%B0%8F%E7%A8%8B%E5%BA%8F/mpvue%E5%A4%96%E5%8D%96%E5%B0%8F%E7%A8%8B%E5%BA%8F/mpvue6.png">
+<meta property="article:published_time" content="2018-09-08T16:37:52.000Z">
+<meta property="article:modified_time" content="2019-07-15T16:43:49.700Z">
+<meta property="article:author" content="小田">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xiaotiandada.github.io/2018/09/09/mpvue%E5%A4%96%E5%8D%96%E5%B0%8F%E7%A8%8B%E5%BA%8F/mpvue%E5%A4%96%E5%8D%96%E5%B0%8F%E7%A8%8B%E5%BA%8F/mpvue1.png">
+
+
+<link rel="canonical" href="https://xiaotiandada.github.io/2018/09/09/mpvue%E5%A4%96%E5%8D%96%E5%B0%8F%E7%A8%8B%E5%BA%8F/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>mpvue外卖小程序 | 小田'blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Показать/скрыть меню">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">小田'blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">前端小菜鸡(〃∀〃)</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Содержание
+        </li>
+        <li class="sidebar-nav-overview">
+          Обзор
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8A%80%E6%9C%AF%E6%A0%88"><span class="nav-number">2.</span> <span class="nav-text">技术栈</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#mpvue"><span class="nav-number">2.1.</span> <span class="nav-text">mpvue</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iview-weapp"><span class="nav-number">2.2.</span> <span class="nav-text">iview weapp</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%95%8C%E9%9D%A2%E5%B1%95%E7%A4%BA"><span class="nav-number">3.</span> <span class="nav-text">界面展示</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%8C%E6%88%90%E8%BF%9B%E5%BA%A6"><span class="nav-number">4.</span> <span class="nav-text">完成进度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8A%80%E6%9C%AF%E5%AE%9E%E7%8E%B0"><span class="nav-number">5.</span> <span class="nav-text">技术实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%95%8C%E9%9D%A2"><span class="nav-number">5.1.</span> <span class="nav-text">界面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mpvue-1"><span class="nav-number">5.2.</span> <span class="nav-text">mpvue</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">小田</p>
+  <div class="site-description" itemprop="description">前端小菜鸡(〃∀〃)</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-name">Архив</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">Категории</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">Тэги</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://xiaotiandada.github.io/2018/09/09/mpvue%E5%A4%96%E5%8D%96%E5%B0%8F%E7%A8%8B%E5%BA%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="小田">
+      <meta itemprop="description" content="前端小菜鸡(〃∀〃)">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小田'blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          mpvue外卖小程序
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Размещено</span>
+
+      <time title="Создано: 2018-09-09 00:37:52" itemprop="dateCreated datePublished" datetime="2018-09-09T00:37:52+08:00">2018-09-09</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Изменено</span>
+        <time title="Изменено: 2019-07-16 00:43:49" itemprop="dateModified" datetime="2019-07-16T00:43:49+08:00">2019-07-16</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">в категории</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/mpvue/" itemprop="url" rel="index"><span itemprop="name">mpvue</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>首先说说为什么自己会想着写一个小程序emmmmmm 感觉没有为什么 就是想写了 我就干了<del>~</del>hhhhh</p>
+<p>我就粗略看了一下小程序的官方文档和mpvue的文档 然后就开撸了。 </p>
+<p><a target="_blank" rel="noopener" href="https://github.com/xiaotiandada/takeaway">项目仓库</a> 欢迎start和pr哦~~</p>
+<p>为了节省大家的宝贵时间，不废话 直接进入正题；</p>
+<hr>
+<a id="more"></a>
+
+<h1 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h1><h2 id="mpvue"><a href="#mpvue" class="headerlink" title="mpvue"></a>mpvue</h2><p><a target="_blank" rel="noopener" href="http://mpvue.com/">mpvue</a> 是一个使用 Vue.js 开发小程序的前端框架。框架基于 Vue.js……(可以看官网介绍~).</p>
+<h2 id="iview-weapp"><a href="#iview-weapp" class="headerlink" title="iview weapp"></a>iview weapp</h2><p><a target="_blank" rel="noopener" href="https://weapp.iviewui.com/">iview weapp </a> 一套高质量的<br>微信小程序 UI 组件库.</p>
+<h1 id="界面展示"><a href="#界面展示" class="headerlink" title="界面展示"></a>界面展示</h1><p><img src="mpvue%E5%A4%96%E5%8D%96%E5%B0%8F%E7%A8%8B%E5%BA%8F/mpvue1.png" alt="mpvue"><br><img src="mpvue%E5%A4%96%E5%8D%96%E5%B0%8F%E7%A8%8B%E5%BA%8F/mpvue2.png" alt="mpvue"><br><img src="mpvue%E5%A4%96%E5%8D%96%E5%B0%8F%E7%A8%8B%E5%BA%8F/mpvue3.png" alt="mpvue"><br><img src="mpvue%E5%A4%96%E5%8D%96%E5%B0%8F%E7%A8%8B%E5%BA%8F/mpvue4.png" alt="mpvue"><br><img src="mpvue%E5%A4%96%E5%8D%96%E5%B0%8F%E7%A8%8B%E5%BA%8F/mpvue5.png" alt="mpvue"></p>
+<p>大概的界面就是这样(界面是模仿得饿了么 我也只会模仿点页面了hhhhh)</p>
+<h1 id="完成进度"><a href="#完成进度" class="headerlink" title="完成进度"></a>完成进度</h1><ul>
+<li><input checked="" disabled="" type="checkbox"> 小程序的基本界面展示</li>
+<li><input checked="" disabled="" type="checkbox"> 简单的购买流程</li>
+<li><input checked="" disabled="" type="checkbox"> 使用全局状态保存部分数据</li>
+<li><input checked="" disabled="" type="checkbox"> 使用Fly请求数据</li>
+<li><input checked="" disabled="" type="checkbox"> 使用Easy-mock模拟数据</li>
+<li><input checked="" disabled="" type="checkbox"> ……</li>
+<li><input disabled="" type="checkbox"> 没有数据库保存真实数据</li>
+<li><input disabled="" type="checkbox"> 没有根据多个数据渲染店和商品</li>
+<li><input disabled="" type="checkbox"> 没有做添加地址的数据校验等</li>
+<li><input disabled="" type="checkbox"> 订单页面还需要优化 折叠显示等</li>
+<li><input disabled="" type="checkbox"> 商家端还未开发</li>
+<li><input disabled="" type="checkbox"> ……</li>
+</ul>
+<p>其实还有很多功能没写，因为这是刚开始上班没事做的时候撸的(所以兴趣才是最好的老师)，然后现在事情比较忙就可能先放下了 如果有大佬或者有时间的大佬可以帮忙完善或者pr emmm  你直接拿走再写也是可以的~</p>
+<h1 id="技术实现"><a href="#技术实现" class="headerlink" title="技术实现"></a>技术实现</h1><p>技术实现过程和一些踩过的坑</p>
+<h2 id="界面"><a href="#界面" class="headerlink" title="界面"></a>界面</h2><p>界面主要使用 iview weapp 组件库 然后 有一些组件库没有的自己原生写法来撸，这里还好没啥坑 但是在布局上面似乎有一个1px的问题 我好像没处理 不知道哪位大佬能发现 并且教我怎么解决~~ 单位主要使用小程序的rpx(很好用) 只需要根据iPhone6的尺寸来使用就可以了，详情可以看<a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxss.html">官方文档</a>.</p>
+<p>iview weapp input 似乎不能使用双向数据绑定，需要自己重新撸.</p>
+<p>底部的tabBar我是用的json来配置的 省得自己写 方便</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">tabBar: &#123;</span><br><span class="line">      color: &#x27;#6f6f6f&#x27;,</span><br><span class="line">      selectedColor: &#x27;#18a3ff&#x27;,</span><br><span class="line">      backgroundColor: &#x27;#ffffff&#x27;,</span><br><span class="line">      borderStyle: &#x27;black&#x27;,</span><br><span class="line">      list: [</span><br><span class="line">        &#123;</span><br><span class="line">          pagePath: &#x27;pages/index/main&#x27;,</span><br><span class="line">          iconPath: &#x27;static/img/wm.png&#x27;,</span><br><span class="line">          selectedIconPath: &#x27;static/img/wms.png&#x27;,</span><br><span class="line">          text: &#x27;外卖&#x27;</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          pagePath: &#x27;pages/order/main&#x27;,</span><br><span class="line">          iconPath: &#x27;static/img/dd.png&#x27;,</span><br><span class="line">          selectedIconPath: &#x27;static/img/dds.png&#x27;,</span><br><span class="line">          text: &#x27;订单&#x27;</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          pagePath: &#x27;pages/shopp/main&#x27;,</span><br><span class="line">          iconPath: &#x27;static/img/tj1.png&#x27;,</span><br><span class="line">          selectedIconPath: &#x27;static/img/tj1s.png&#x27;,</span><br><span class="line">          text: &#x27;推荐&#x27;</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          pagePath: &#x27;pages/user/main&#x27;,</span><br><span class="line">          iconPath: &#x27;static/img/user.png&#x27;,</span><br><span class="line">          selectedIconPath: &#x27;static/img/users.png&#x27;,</span><br><span class="line">          text: &#x27;我的&#x27;</span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>这块的话可能需要大家查看小程序的文档来配置，其实也简单 跟玩一样就配置的非常好看</p>
+<p>可能最麻烦的也是很简单的一个坑 如何引入 其实iview weapp 官方文档写的很清楚了 但是只是大家不知道这么配置而已 我来扣个代码演示一下.</p>
+<p>到 GitHub 下载 iView Weapp 的代码，将 dist 目录拷贝到自己的项目中。然后按照如下的方式使用组件，以 Button 为例，其它组件在对应的文档页查看：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">1. 添加需要的组件 在页面的 json 中配置（路径根据自己项目位置配置）</span><br><span class="line"><span class="comment">// 添加 config json</span></span><br><span class="line">export default &#123;</span><br><span class="line">  config: &#123;</span><br><span class="line">    <span class="comment">// 这儿添加要用的小程序组件</span></span><br><span class="line">    usingComponents: &#123;</span><br><span class="line">      &#x27;i-button&#x27;: &#x27;../../dist/button/index&#x27;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2. 在 wxml 中使用组件</span><br><span class="line"><span class="tag">&lt;<span class="name">i-button</span> <span class="attr">type</span>=<span class="string">&quot;primary&quot;</span> <span class="attr">bind:click</span>=<span class="string">&quot;handleClick&quot;</span>&gt;</span>这是一个按钮<span class="tag">&lt;/<span class="name">i-button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>是不是很简单！！！ 没看明白的也可以看我的<a target="_blank" rel="noopener" href="https://github.com/xiaotiandada/takeaway">github</a>仓库哦~</p>
+<p>界面这块大概就是这么多 也可能我写掉了 后续想起来我会更一下的hhhh(懒)</p>
+<h2 id="mpvue-1"><a href="#mpvue-1" class="headerlink" title="mpvue"></a>mpvue</h2><p>mpvue 新建页面需要重新 npm run dev 这个官方文档已经明确说明过了，由于一个页面只用重启一次 问题不大。</p>
+<p>小程序的请求似乎不能用axios 所以使用了Fly 来代替，至于为什么 可以看github里面的<a target="_blank" rel="noopener" href="https://github.com/Meituan-Dianping/mpvue/issues/109">issues</a></p>
+<p>mpvue 支持小程序和vuejs的事件 详情可以<a target="_blank" rel="noopener" href="http://mpvue.com/mpvue/#_13">查看文档</a></p>
+<p>然后可能最坑的就是页面转跳了吧… 其实官方文档有写 <a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/api/ui-navigate.html#wxnavigatetoobject">目前页面路径最多只能十层。</a> 比如说我再添加地址的时候 使用了wx.navigateTo(OBJECT) 然后返回到地址的列表页面然后继续重复添加地址 到达一定的数量之后 就不会再跳转，而且返回的也是之前重复的页面 用户体验很不好 所以需要一个解决的办法。文字太多可能看不懂 我来画个图。</p>
+<p><img src="mpvue%E5%A4%96%E5%8D%96%E5%B0%8F%E7%A8%8B%E5%BA%8F/mpvue6.png" alt="mpvue"></p>
+<p>关于登录一块的话 我没有做什么处理 直接用新的用户信息接口就可以了</p>
+<p><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/blogdetail?action=get_post_info&lang=zh_CN&token=1894828834&docid=0000a26e1aca6012e896a517556c01&idescene=6&devtools=1&idescene=6">小程序与小游戏获取用户信息接口调整</a></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">open-data</span> <span class="attr">type</span>=<span class="string">&quot;groupName&quot;</span> <span class="attr">open-gid</span>=<span class="string">&quot;xxxxxx&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">open-data</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">open-data</span> <span class="attr">type</span>=<span class="string">&quot;userAvatarUrl&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">open-data</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">open-data</span> <span class="attr">type</span>=<span class="string">&quot;userGender&quot;</span> <span class="attr">lang</span>=<span class="string">&quot;zh_CN&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">open-data</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>这样一总结下来感觉自己似乎没写多少功能Orz！！！</p>
+<p>但是这篇文章可能是我写的文字最多的一篇了 如果大家觉得还不错的话可以点个喜欢哦~~ 蟹蟹o(∩_∩)o 哈哈</p>
+<p>所以回到标题，兴趣才是最好的老师，接下面准备玩一玩electron-vue…..</p>
+<p>写得好累，介绍的不多 可能有遗漏 但是大部分的核心基本上都已经说了，如果大佬们想找我交流的 ，可以加我QQ github 邮箱 都ojbk的</p>
+<p>Qq：952822399 就留QQ吧 手指酸了emmmmm<del>~</del> 告辞 溜</p>
+<p>新开了个Qq群，大家也可以进来互相交流~ iD 718639024</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/06/26/%E6%8A%8AAE%E5%8A%A8%E7%94%BB%E8%BD%AC%E6%8D%A2%E6%88%90Web%E5%8E%9F%E7%94%9F%E5%8A%A8%E7%94%BB/" rel="prev" title="把AE动画转换成Web原生动画">
+                  <i class="fa fa-chevron-left"></i> 把AE动画转换成Web原生动画
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/10/03/electron-vu%E6%89%93%E9%80%A0%E4%BD%8E%E9%85%8D%E7%89%88%E7%BD%91%E6%98%93%E4%BA%91-Mv%E7%89%88/" rel="next" title="electron-vu打造低配版网易云(Mv版)">
+                  electron-vu打造低配版网易云(Mv版) <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小田</span>
+</div>
+  <div class="powered-by">Генератор — <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

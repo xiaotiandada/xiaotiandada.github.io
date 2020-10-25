@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="zh-Hans,fr-FR,h-hk,zh-tw,ru,en,default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xiaotiandada.github.io","root":"/","scheme":"Muse","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Поиск...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+  </script>
+
+  <meta name="description" content="如何用nodejs快速在Matataki发文, 利用node爬虫来获取网页的内容然后转发到matataki上面 这里就自己的blog做一个简单的example 这是可能需要用的接口文档⬇️⬇️⬇️ (docsify真香)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用nodejs快速在Matataki发文">
+<meta property="og:url" content="https://xiaotiandada.github.io/2020/01/27/%E7%94%A8nodejs%E5%BF%AB%E9%80%9F%E5%9C%A8Matataki%E5%8F%91%E6%96%87/index.html">
+<meta property="og:site_name" content="小田&#39;blog">
+<meta property="og:description" content="如何用nodejs快速在Matataki发文, 利用node爬虫来获取网页的内容然后转发到matataki上面 这里就自己的blog做一个简单的example 这是可能需要用的接口文档⬇️⬇️⬇️ (docsify真香)">
+<meta property="og:locale">
+<meta property="og:image" content="https://i.loli.net/2020/01/27/V5oPbDI9QANXcGJ.png">
+<meta property="og:image" content="https://i.loli.net/2020/01/27/Lp29OskI6whtKdx.png">
+<meta property="og:image" content="https://i.loli.net/2020/01/27/KzcSsa6kIovujWE.png">
+<meta property="og:image" content="https://i.loli.net/2020/01/28/u24DUxmbzJMjAkK.png">
+<meta property="article:published_time" content="2020-01-27T12:52:26.000Z">
+<meta property="article:modified_time" content="2020-10-23T06:27:35.610Z">
+<meta property="article:author" content="小田">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/01/27/V5oPbDI9QANXcGJ.png">
+
+
+<link rel="canonical" href="https://xiaotiandada.github.io/2020/01/27/%E7%94%A8nodejs%E5%BF%AB%E9%80%9F%E5%9C%A8Matataki%E5%8F%91%E6%96%87/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>用nodejs快速在Matataki发文 | 小田'blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Показать/скрыть меню">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">小田'blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">前端小菜鸡(〃∀〃)</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Содержание
+        </li>
+        <li class="sidebar-nav-overview">
+          Обзор
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B"><span class="nav-number">1.</span> <span class="nav-text">开始</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">小田</p>
+  <div class="site-description" itemprop="description">前端小菜鸡(〃∀〃)</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-name">Архив</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">Категории</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">Тэги</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://xiaotiandada.github.io/2020/01/27/%E7%94%A8nodejs%E5%BF%AB%E9%80%9F%E5%9C%A8Matataki%E5%8F%91%E6%96%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="小田">
+      <meta itemprop="description" content="前端小菜鸡(〃∀〃)">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小田'blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          用nodejs快速在Matataki发文
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Размещено</span>
+
+      <time title="Создано: 2020-01-27 20:52:26" itemprop="dateCreated datePublished" datetime="2020-01-27T20:52:26+08:00">2020-01-27</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Изменено</span>
+        <time title="Изменено: 2020-10-23 14:27:35" itemprop="dateModified" datetime="2020-10-23T14:27:35+08:00">2020-10-23</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">в категории</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/node/" itemprop="url" rel="index"><span itemprop="name">node</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>如何用nodejs快速在Matataki发文, 利用node爬虫来获取网页的内容然后转发到<a target="_blank" rel="noopener" href="https://www.matataki.io/">matataki</a>上面</p>
+<p>这里就自己的<a href="https://xiaotiandada.github.io/">blog</a>做一个简单的<strong>example</strong> 这是可能需要用的<a href="https://xiaotiandada.github.io/matatakiApi">接口文档</a>⬇️⬇️⬇️ (docsify真香)</p>
+<a id="more"></a>
+
+<p><img src="https://i.loli.net/2020/01/27/V5oPbDI9QANXcGJ.png"></p>
+<h3 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h3><ol>
+<li><p>首先我们先初始一个项目</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir matataki-post</span><br><span class="line">npm init -y</span><br><span class="line">touch index.js</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>理清思路</p>
+<p>就像怎么把大象🐘装进冰箱一样 1…. 2… 3… 首先我们需要在<a target="_blank" rel="noopener" href="https://www.matataki.io/article">matataki</a>上面注册一个账号, 我选择了邮箱 因为很简单也很方便 注册也挺快的, 然后去发布一篇文章 看看接口是如何调用的</p>
+<p><strong>编辑</strong></p>
+<p><img src="https://i.loli.net/2020/01/27/Lp29OskI6whtKdx.png"></p>
+<p><strong>发布</strong></p>
+<p><img src="https://i.loli.net/2020/01/27/KzcSsa6kIovujWE.png"></p>
+<p>分析Networ </p>
+<p>编辑: 我们在编辑文章的时候可以看出上传图片调用接口是 /post/uploadImage, 于是我们可以忽略其他接口调用</p>
+<p>发布: 发布的时候, 可以看出我们一共调用了两个核心的接口, 一个是ipfs上传, 一个是文章上传</p>
+</li>
+</ol>
+<p>   <strong>思路</strong></p>
+   <figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 1、获取内容</span><br><span class="line">	&#x2F;&#x2F; 1、获取html</span><br><span class="line">	&#x2F;&#x2F; 2、解析dom获取内容</span><br><span class="line">&#x2F;&#x2F; 2、发布文章</span><br><span class="line">	&#x2F;&#x2F; 1、转存文章封面 因为文章的图片是外站的 我们需要转存到matataki上面才行</span><br><span class="line">	&#x2F;&#x2F; 2、上传ipfs</span><br><span class="line">	&#x2F;&#x2F; 3、上传文章</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="3">
+<li><p>获取网页内容并解析dom</p>
+<p>因为我的blog是静态页面 所以用<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/superagent">superagent</a>就可以抓取到内容了, 如果是客户端渲染抓去内容可能有问题, 可以考虑用<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/puppeteer">puppetter</a>做爬虫, 然后用<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/cheerio">cheerio</a>来解析dom 回味jq,  请求用<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/axios">axios</a>因为做前端习惯了🍑</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i superagent cheerio axios</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> superagent = <span class="built_in">require</span>(<span class="string">&quot;superagent&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> cheerio = <span class="built_in">require</span>(<span class="string">&quot;cheerio&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> axios = <span class="built_in">require</span>(<span class="string">&quot;axios&quot;</span>);</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="comment">// 获取内容</span></span><br><span class="line"><span class="keyword">const</span> getHtml = <span class="keyword">async</span> url =&gt; &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="comment">// 根据url获取内容</span></span><br><span class="line">    <span class="keyword">const</span> res = <span class="keyword">await</span> superagent.get(url);</span><br><span class="line">    <span class="keyword">return</span> res.text;</span><br><span class="line">  &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">    <span class="built_in">console</span>.error(err);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 拆dom 这块根据自己页面自定义</span></span><br><span class="line"><span class="keyword">const</span> getDom = <span class="function"><span class="params">html</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (!html) <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">// 没html返回</span></span><br><span class="line">  <span class="keyword">const</span> $ = cheerio.load(html);</span><br><span class="line">  <span class="comment">// 我的标题</span></span><br><span class="line">  <span class="keyword">let</span> title = $(<span class="string">&quot;#main #posts .post-header .post-title&quot;</span>);</span><br><span class="line">  <span class="comment">// 描述</span></span><br><span class="line">  <span class="keyword">let</span> desc = $(<span class="string">&quot;#main #posts .post-body&quot;</span>).text();</span><br><span class="line">  <span class="comment">// 内容</span></span><br><span class="line">  <span class="keyword">let</span> content = $(<span class="string">&quot;#main #posts .post-body&quot;</span>).html();</span><br><span class="line">  <span class="comment">// 文章封面</span></span><br><span class="line">  <span class="keyword">let</span> cover = $(<span class="string">&quot;#main #posts .post-body img&quot;</span>);</span><br><span class="line">	</span><br><span class="line">  <span class="comment">// 如果有标题</span></span><br><span class="line">  <span class="keyword">let</span> titleRes = title.length &gt;= <span class="number">1</span> ? $(title[<span class="number">0</span>]).text() : <span class="string">&quot;&quot;</span>;</span><br><span class="line">  <span class="comment">// 如果有图片</span></span><br><span class="line">  <span class="keyword">let</span> coverRes = cover.length &gt;= <span class="number">1</span> ? $(cover[<span class="number">0</span>]).attr(<span class="string">&quot;src&quot;</span>) : <span class="string">&quot;&quot;</span>;</span><br><span class="line">	</span><br><span class="line">  <span class="comment">// 把数据返回出去</span></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    title: titleRes,</span><br><span class="line">    desc,</span><br><span class="line">    content,</span><br><span class="line">    cover: coverRes</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>这块还是挺简单的233<del>~</del></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 然后我们可以调用方法 启动</span></span><br><span class="line">node index</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果不出意外的话, 数据就能正常返回了 懒得截图了</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>发布文章</p>
+<p>首先我们需要一些平台需要的信息, </p>
+<ul>
+<li><strong>TOKEN</strong>, 可以去控制台的<strong>Cookies</strong>里面寻找, 找到一个<strong>key</strong>为 <strong>ACCESS_TOKEN</strong> 然后复制信息</li>
+<li> <strong>URL</strong> 就是需要转发的文章 </li>
+<li><strong>AUTHOR</strong>是你这个账号在平台的用户名</li>
+<li> <strong>PLATFORM</strong> 是你这个账号的类型, 比如我是邮箱账号 我就是为 <strong>email</strong></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> TOKEN = <span class="string">&quot;&quot;</span>; <span class="comment">// 身份证明</span></span><br><span class="line"><span class="keyword">const</span> URL = <span class="string">&quot;&quot;</span>; <span class="comment">// 需要发的文章</span></span><br><span class="line"><span class="keyword">const</span> AUTHOR = <span class="string">&quot;&quot;</span>; <span class="comment">// 用户名</span></span><br><span class="line"><span class="keyword">const</span> PLATFORM = <span class="string">&quot;email&quot;</span>; <span class="comment">// 账号类型 邮箱账号</span></span><br></pre></td></tr></table></figure>
+
+<p>然后我们需要一个<strong>config</strong>文件 我也这种做法对不对 反正能用🍑 如果你觉得直接写在index.js要方便 可以简化这步</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// config.js</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="comment">// 接口地址</span></span><br><span class="line">  api: &#123;</span><br><span class="line">    development: <span class="string">&quot;&quot;</span>,</span><br><span class="line">    production: <span class="string">&quot;https://api.smartsignature.io&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 页面地址</span></span><br><span class="line">  webUrl: &#123;</span><br><span class="line">    development: <span class="string">&quot;&quot;</span>,</span><br><span class="line">    production: <span class="string">&quot;https://www.matataki.io&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// index.js</span></span><br><span class="line"><span class="keyword">const</span> config = <span class="built_in">require</span>(<span class="string">&#x27;./config&#x27;</span>) <span class="comment">// config</span></span><br><span class="line"><span class="keyword">const</span> mode = process.env.NODE_ENV || <span class="string">&#x27;production&#x27;</span>; <span class="comment">// 模式</span></span><br><span class="line"><span class="keyword">const</span> API = config.api[mode]; <span class="comment">// 接口</span></span><br><span class="line"><span class="keyword">const</span> webUrl = config.webUrl[mode]; <span class="comment">// 页面地址</span></span><br></pre></td></tr></table></figure>
+
+<p>增加两个命令  <strong>dev</strong>  <strong>start</strong> 来区分  <strong>development</strong> 和 <strong>production</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line">  <span class="string">&quot;test&quot;</span>: <span class="string">&quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span>,</span><br><span class="line">  <span class="string">&quot;dev&quot;</span>: <span class="string">&quot;NODE_ENV=development node index&quot;</span>,</span><br><span class="line">  <span class="string">&quot;start&quot;</span>: <span class="string">&quot;NODE_ENV=production node index&quot;</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>把内容发布到<strong>ipfs</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> qs = <span class="built_in">require</span>(<span class="string">&quot;qs&quot;</span>);</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;开始获取Html...&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> resHtml = <span class="keyword">await</span> getHtml(URL);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;获取Dom...&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> resDom = <span class="keyword">await</span> getDom(resHtml);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> data = &#123;</span><br><span class="line">    title: resDom.title.trim(),</span><br><span class="line">    author: AUTHOR,</span><br><span class="line">    desc: resDom.desc.trim(),</span><br><span class="line">    content: resDom.content.trim()</span><br><span class="line">  &#125;;</span><br><span class="line">  data.desc = data.desc.replace(<span class="regexp">/[\r\n]/g</span>, <span class="string">&quot;&quot;</span>); <span class="comment">// 去除回撤换行</span></span><br><span class="line">  data.content = data.content.replace(<span class="regexp">/[\r\n]/g</span>, <span class="string">&quot;&quot;</span>); <span class="comment">// 去除回撤换行</span></span><br><span class="line">  <span class="keyword">let</span> hash = <span class="keyword">await</span> postIpfs(data);</span><br><span class="line">  <span class="keyword">if</span> (!hash) <span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&quot;not hash&quot;</span>, hash);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 发布到ipfs</span></span><br><span class="line"><span class="keyword">const</span> postIpfs = <span class="keyword">async</span> (&#123; title, author, desc, content &#125;) =&gt; &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!TOKEN) <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&quot;没有token&quot;</span>);</span><br><span class="line">    <span class="keyword">const</span> stringifyData = qs.stringify(&#123;</span><br><span class="line">      <span class="string">&quot;data[title]&quot;</span>: title,</span><br><span class="line">      <span class="string">&quot;data[author]&quot;</span>: author,</span><br><span class="line">      <span class="string">&quot;data[desc]&quot;</span>: desc,</span><br><span class="line">      <span class="string">&quot;data[content]&quot;</span>: content</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">let</span> res = <span class="keyword">await</span> axios(&#123;</span><br><span class="line">      method: <span class="string">&quot;post&quot;</span>,</span><br><span class="line">      url: <span class="string">`<span class="subst">$&#123;API&#125;</span>/post/ipfs`</span>,</span><br><span class="line">      data: stringifyData,</span><br><span class="line">      headers: &#123; <span class="string">&quot;x-access-token&quot;</span>: TOKEN &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">// console.log(res.data);</span></span><br><span class="line">    <span class="keyword">if</span> (res.status === <span class="number">200</span> &amp;&amp; res.data.code === <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> res.data.hash;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(error);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>需要的 <strong>x-access-token</strong> 已经在前面定义过了, 成功请求后会返回<strong>hash</strong>地址</p>
+<p>然后转存图片</p>
+<blockquote>
+<p>下载图片这块, 按照<strong>search</strong>到的<strong>code</strong>没有修改, 使用<strong>request</strong>请求图片, 并且写入文件, 当然我也发现一个不错的第三方库, <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/image-downloader">image-downloader</a> 这个可以很轻松的下载图片</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> FormData = <span class="built_in">require</span>(<span class="string">&#x27;form-data&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> request = <span class="built_in">require</span>(<span class="string">&#x27;request&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>)</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="comment">// 图片转存</span></span><br><span class="line"><span class="keyword">const</span> downloadImage = <span class="keyword">async</span> url =&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (!url) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;没有url地址&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// https://github.com/Kerminate/douban-movies/blob/9119c276b2785b329f62cca684bc6d6459a7c57e/server/tasks/smms.js</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 下载图片</span></span><br><span class="line">  <span class="keyword">const</span> downResources = <span class="function">(<span class="params">url, imgPath</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">      request</span><br><span class="line">        .get(url)</span><br><span class="line">        .pipe(fs.createWriteStream(imgPath))</span><br><span class="line">        .on(<span class="string">&#x27;finish&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">          resolve()</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> fileName = <span class="string">&#x27;photo.png&#x27;</span></span><br><span class="line">  <span class="keyword">const</span> imgPath = path.resolve(__dirname, <span class="string">&#x27;./photo.jpg&#x27;</span>)</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">await</span> downResources(url, imgPath)</span><br><span class="line">    <span class="comment">// fix Callback must be a function</span></span><br><span class="line">    <span class="keyword">const</span> buffer = <span class="keyword">await</span> fs.readFileSync(imgPath)</span><br><span class="line">    <span class="keyword">const</span> base64Image = Buffer.from(buffer).toString(<span class="string">&#x27;base64&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> form = <span class="keyword">new</span> FormData()</span><br><span class="line">    form.append(<span class="string">&#x27;smfile&#x27;</span>, Buffer.from(base64Image, <span class="string">&#x27;base64&#x27;</span>), &#123;</span><br><span class="line">      filename: fileName</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">let</span> headers = form.getHeaders()</span><br><span class="line">    headers[<span class="string">&#x27;x-access-token&#x27;</span>] = TOKEN</span><br><span class="line">    <span class="keyword">const</span> res = <span class="keyword">await</span> axios(&#123;</span><br><span class="line">        method: <span class="string">&#x27;POST&#x27;</span>,</span><br><span class="line">        url: <span class="string">`<span class="subst">$&#123;API&#125;</span>/post/uploadImage`</span>,</span><br><span class="line">        headers: headers,</span><br><span class="line">        data: form</span><br><span class="line">      &#125;)</span><br><span class="line">    <span class="comment">// console.log(res.data)</span></span><br><span class="line">    <span class="keyword">if</span> (res.status === <span class="number">200</span> &amp;&amp; res.data.code === <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> res.data.data.cover</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&#x27;fail, status: &#x27;</span>, res.status)</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;update error&#x27;</span>, err)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>图片上传的核心我是从<strong>github</strong>里面<strong>search</strong>的</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="comment">// 这里的一些转换我没有弄明白, 前端一般直接一个file或者一个blob就上去了</span></span><br><span class="line"><span class="comment">// 在node里面这个Buffer我还没有理解 希望大佬们看到了能教我一手👋!!!</span></span><br><span class="line"><span class="keyword">const</span> base64Image = Buffer.from(buffer).toString(<span class="string">&#x27;base64&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> form = <span class="keyword">new</span> FormData()</span><br><span class="line">form.append(<span class="string">&#x27;smfile&#x27;</span>, Buffer.from(base64Image, <span class="string">&#x27;base64&#x27;</span>), &#123;</span><br><span class="line">  filename: fileName</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// ...</span></span><br></pre></td></tr></table></figure>
+
+<p>上传成功后会返回一个<strong>url</strong>地址, 如果是<strong>smms</strong>之类的图床上传记得多写一些判断他会判断<strong>重复</strong>的图片</p>
+<p>图片也有了之后就是上传文章了</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 发布文章</span></span><br><span class="line"><span class="keyword">const</span> post = <span class="keyword">async</span> data =&gt; &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> res = <span class="keyword">await</span> axios(&#123;</span><br><span class="line">      method: <span class="string">&quot;post&quot;</span>,</span><br><span class="line">      url: <span class="string">`<span class="subst">$&#123;API&#125;</span>/post/publish`</span>,</span><br><span class="line">      data: data,</span><br><span class="line">      headers: &#123; <span class="string">&quot;x-access-token&quot;</span>: TOKEN &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">// console.log(data, res.data);</span></span><br><span class="line">    <span class="keyword">if</span> (res.status === <span class="number">200</span> &amp;&amp; res.data.code === <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> res.data;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&#x27;fail&#x27;</span>, res.data)</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;error&#x27;</span>, error)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;发送到Matataki...&#x27;</span>);</span><br><span class="line">	<span class="comment">// 大部分的参数按照我这个默认就好了</span></span><br><span class="line">  <span class="keyword">let</span> resPost = <span class="keyword">await</span> post(&#123;</span><br><span class="line">    author: AUTHOR,</span><br><span class="line">    cover,</span><br><span class="line">    fissionFactor: <span class="number">2000</span>,</span><br><span class="line">    hash: hash,</span><br><span class="line">    platform: PLATFORM,</span><br><span class="line">    publickey: <span class="literal">null</span>,</span><br><span class="line">    sign: <span class="literal">null</span>,</span><br><span class="line">    msgParams: <span class="literal">null</span>,</span><br><span class="line">    signId: <span class="literal">null</span>,</span><br><span class="line">    title: resDom.title,</span><br><span class="line">    is_original: <span class="number">0</span>,</span><br><span class="line">    tags: <span class="string">&quot;&quot;</span>,</span><br><span class="line">    cc_license: <span class="literal">null</span>,</span><br><span class="line">    commentPayPoint: <span class="number">1</span>,</span><br><span class="line">    shortContent: <span class="string">&quot;&quot;</span></span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">if</span> (resPost) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`发送成功, 您的文章地址: <span class="subst">$&#123;webUrl&#125;</span>/p/<span class="subst">$&#123;resPost.data&#125;</span>`</span>)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;发送失败!!!&#x27;</span>)</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>成功后会返回一个文章<strong>id</strong>然后我们去访问<code> console.log(`发送成功, 您的文章地址: $&#123;webUrl&#125;/p/$&#123;resPost.data&#125;`)</code></p>
+</li>
+</ol>
+<p>到此流程就完全结束了!!! 归纳调用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 开始</span></span><br><span class="line"><span class="keyword">const</span> init = <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;开始获取Html...&#x27;</span>);</span><br><span class="line">  <span class="keyword">let</span> resHtml = <span class="keyword">await</span> getHtml(URL);</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;获取Dom...&#x27;</span>);</span><br><span class="line">  <span class="keyword">let</span> resDom = <span class="keyword">await</span> getDom(resHtml);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;开始发送到ipfs...&#x27;</span>);</span><br><span class="line">  <span class="keyword">let</span> data = &#123;</span><br><span class="line">    title: resDom.title.trim(),</span><br><span class="line">    author: AUTHOR,</span><br><span class="line">    desc: resDom.desc.trim(),</span><br><span class="line">    content: resDom.content.trim()</span><br><span class="line">  &#125;;</span><br><span class="line">  data.desc = data.desc.replace(<span class="regexp">/[\r\n]/g</span>, <span class="string">&quot;&quot;</span>); <span class="comment">// 去除回撤换行</span></span><br><span class="line">  data.content = data.content.replace(<span class="regexp">/[\r\n]/g</span>, <span class="string">&quot;&quot;</span>); <span class="comment">// 去除回撤换行</span></span><br><span class="line">  <span class="keyword">let</span> hash = <span class="keyword">await</span> postIpfs(data);</span><br><span class="line">  <span class="keyword">if</span> (!hash) <span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&quot;not hash&quot;</span>, hash);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;转存下载图片...&#x27;</span>);</span><br><span class="line">  <span class="keyword">let</span> cover = <span class="keyword">await</span> downloadImage(resDom.cover);</span><br><span class="line">  <span class="keyword">if</span> (!cover) <span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&#x27;下载图片失败&#x27;</span>)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;发送到Matataki...&#x27;</span>);</span><br><span class="line">  <span class="keyword">let</span> resPost = <span class="keyword">await</span> post(&#123;</span><br><span class="line">    author: AUTHOR,</span><br><span class="line">    cover,</span><br><span class="line">    fissionFactor: <span class="number">2000</span>,</span><br><span class="line">    hash: hash,</span><br><span class="line">    platform: PLATFORM,</span><br><span class="line">    publickey: <span class="literal">null</span>,</span><br><span class="line">    sign: <span class="literal">null</span>,</span><br><span class="line">    msgParams: <span class="literal">null</span>,</span><br><span class="line">    signId: <span class="literal">null</span>,</span><br><span class="line">    title: resDom.title,</span><br><span class="line">    is_original: <span class="number">0</span>,</span><br><span class="line">    tags: <span class="string">&quot;&quot;</span>,</span><br><span class="line">    cc_license: <span class="literal">null</span>,</span><br><span class="line">    commentPayPoint: <span class="number">1</span>,</span><br><span class="line">    shortContent: <span class="string">&quot;&quot;</span></span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">if</span> (resPost) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`发送成功, 您的文章地址: <span class="subst">$&#123;webUrl&#125;</span>/p/<span class="subst">$&#123;resPost.data&#125;</span>`</span>)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;发送失败!!!&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">init()</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2020/01/28/u24DUxmbzJMjAkK.png"></p>
+<p>调用结果 看起来还不错🍑</p>
+<p> <a target="_blank" rel="noopener" href="https://www.matataki.io/p/1991">预览地址 1991</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/xiaotiandada/matataki-post">仓库地址</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/xiaotiandada">我的Github</a></p>
+<hr>
+<p>由于这是一个简单的<strong>example</strong> 所以不会弄得太复杂 简单的爬虫加上调用接口即可。</p>
+<p>因为不太会node 全完自己瞎鼓捣, 如果写的不对或者不好的地方希望大佬们多多指点 指点</p>
+<p>也欢迎加入QQ Group ID:718639024 来吐槽我🤮🤮🤮</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/01/21/matataki%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/" rel="prev" title="matataki测试文章">
+                  <i class="fa fa-chevron-left"></i> matataki测试文章
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/02/26/compose-javascript/" rel="next" title="compose javascript">
+                  compose javascript <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小田</span>
+</div>
+  <div class="powered-by">Генератор — <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

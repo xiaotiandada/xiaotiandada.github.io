@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="zh-Hans,fr-FR,h-hk,zh-tw,ru,en,default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xiaotiandada.github.io","root":"/","scheme":"Muse","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Поиск...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+  </script>
+
+  <meta name="description" content="第一次还原这样的效果吧(我真菜😢😢😢!!!), 完成度70-80%(叹气😕) 项目地址">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网易云APP启动界面【模仿】">
+<meta property="og:url" content="https://xiaotiandada.github.io/2019/07/04/%E7%BD%91%E6%98%93%E4%BA%91APP%E5%90%AF%E5%8A%A8%E7%95%8C%E9%9D%A2%E3%80%90%E6%A8%A1%E4%BB%BF%E3%80%91/index.html">
+<meta property="og:site_name" content="小田&#39;blog">
+<meta property="og:description" content="第一次还原这样的效果吧(我真菜😢😢😢!!!), 完成度70-80%(叹气😕) 项目地址">
+<meta property="og:locale">
+<meta property="og:image" content="https://xiaotiandada.github.io/2019/07/04/%E7%BD%91%E6%98%93%E4%BA%91APP%E5%90%AF%E5%8A%A8%E7%95%8C%E9%9D%A2%E3%80%90%E6%A8%A1%E4%BB%BF%E3%80%91/网易云APP启动界面【模仿】/app1.png">
+<meta property="og:image" content="https://xiaotiandada.github.io/2019/07/04/%E7%BD%91%E6%98%93%E4%BA%91APP%E5%90%AF%E5%8A%A8%E7%95%8C%E9%9D%A2%E3%80%90%E6%A8%A1%E4%BB%BF%E3%80%91/网易云APP启动界面【模仿】/app2.png">
+<meta property="og:image" content="https://xiaotiandada.github.io/2019/07/04/%E7%BD%91%E6%98%93%E4%BA%91APP%E5%90%AF%E5%8A%A8%E7%95%8C%E9%9D%A2%E3%80%90%E6%A8%A1%E4%BB%BF%E3%80%91/%E7%BD%91%E6%98%93%E4%BA%91APP%E5%90%AF%E5%8A%A8%E7%95%8C%E9%9D%A2%E3%80%90%E6%A8%A1%E4%BB%BF%E3%80%91/1.png">
+<meta property="og:image" content="https://xiaotiandada.github.io/2019/07/04/%E7%BD%91%E6%98%93%E4%BA%91APP%E5%90%AF%E5%8A%A8%E7%95%8C%E9%9D%A2%E3%80%90%E6%A8%A1%E4%BB%BF%E3%80%91/%E7%BD%91%E6%98%93%E4%BA%91APP%E5%90%AF%E5%8A%A8%E7%95%8C%E9%9D%A2%E3%80%90%E6%A8%A1%E4%BB%BF%E3%80%91/2.png">
+<meta property="og:image" content="https://xiaotiandada.github.io/2019/07/04/%E7%BD%91%E6%98%93%E4%BA%91APP%E5%90%AF%E5%8A%A8%E7%95%8C%E9%9D%A2%E3%80%90%E6%A8%A1%E4%BB%BF%E3%80%91/%E7%BD%91%E6%98%93%E4%BA%91APP%E5%90%AF%E5%8A%A8%E7%95%8C%E9%9D%A2%E3%80%90%E6%A8%A1%E4%BB%BF%E3%80%91/3.png">
+<meta property="article:published_time" content="2019-07-04T14:24:23.000Z">
+<meta property="article:modified_time" content="2020-10-23T06:27:35.612Z">
+<meta property="article:author" content="小田">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xiaotiandada.github.io/2019/07/04/%E7%BD%91%E6%98%93%E4%BA%91APP%E5%90%AF%E5%8A%A8%E7%95%8C%E9%9D%A2%E3%80%90%E6%A8%A1%E4%BB%BF%E3%80%91/网易云APP启动界面【模仿】/app1.png">
+
+
+<link rel="canonical" href="https://xiaotiandada.github.io/2019/07/04/%E7%BD%91%E6%98%93%E4%BA%91APP%E5%90%AF%E5%8A%A8%E7%95%8C%E9%9D%A2%E3%80%90%E6%A8%A1%E4%BB%BF%E3%80%91/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>网易云APP启动界面【模仿】 | 小田'blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Показать/скрыть меню">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">小田'blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">前端小菜鸡(〃∀〃)</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Содержание
+        </li>
+        <li class="sidebar-nav-overview">
+          Обзор
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B4%A0%E6%9D%90"><span class="nav-number">1.</span> <span class="nav-text">素材</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A5%E5%85%B7"><span class="nav-number">2.</span> <span class="nav-text">工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%98%E5%8E%9F%E8%BF%87%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text">还原过程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E7%9A%84%E9%80%82%E9%85%8D"><span class="nav-number">3.1.</span> <span class="nav-text">简单的适配</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B4%A0%E6%9D%90%E5%AF%BC%E5%87%BA"><span class="nav-number">4.</span> <span class="nav-text">素材导出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8Lottie"><span class="nav-number">5.</span> <span class="nav-text">使用Lottie</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">小田</p>
+  <div class="site-description" itemprop="description">前端小菜鸡(〃∀〃)</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-name">Архив</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">Категории</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">Тэги</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://xiaotiandada.github.io/2019/07/04/%E7%BD%91%E6%98%93%E4%BA%91APP%E5%90%AF%E5%8A%A8%E7%95%8C%E9%9D%A2%E3%80%90%E6%A8%A1%E4%BB%BF%E3%80%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="小田">
+      <meta itemprop="description" content="前端小菜鸡(〃∀〃)">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小田'blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          网易云APP启动界面【模仿】
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Размещено</span>
+
+      <time title="Создано: 2019-07-04 22:24:23" itemprop="dateCreated datePublished" datetime="2019-07-04T22:24:23+08:00">2019-07-04</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Изменено</span>
+        <time title="Изменено: 2020-10-23 14:27:35" itemprop="dateModified" datetime="2020-10-23T14:27:35+08:00">2020-10-23</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">в категории</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%8A%A8%E6%95%88/" itemprop="url" rel="index"><span itemprop="name">动效</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>第一次还原这样的效果吧(我真菜😢😢😢!!!), 完成度70-80%(叹气😕)</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/xiaotiandada/interest-page">项目地址</a></p>
+<a id="more"></a>
+
+
+<p><strong>预览</strong></p>
+<img width="300" src="网易云APP启动界面【模仿】/app1.png" />
+<img width="300" src="网易云APP启动界面【模仿】/app2.png" />
+
+
+<h3 id="素材"><a href="#素材" class="headerlink" title="素材"></a>素材</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.lottiefiles.com/">https://www.lottiefiles.com/</a> 我从这里找的,有源文件和JSON</li>
+</ul>
+<h3 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h3><ul>
+<li><p>工具</p>
+<ul>
+<li>AE</li>
+<li>PS</li>
+<li>PxCook</li>
+</ul>
+</li>
+<li><p>Code</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/airbnb/lottie-web">lottie-web</a></li>
+<li>webpack (辅助)</li>
+</ul>
+</li>
+</ul>
+<h3 id="还原过程"><a href="#还原过程" class="headerlink" title="还原过程"></a>还原过程</h3><h4 id="简单的适配"><a href="#简单的适配" class="headerlink" title="简单的适配"></a>简单的适配</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> htmlWidth = <span class="built_in">document</span>.documentElement.clientWidth || <span class="built_in">document</span>.body.clientWidth</span><br><span class="line"><span class="keyword">let</span> htmlDom = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;html&#x27;</span>)</span><br><span class="line">htmlDom.style.fontSize = htmlWidth / <span class="number">10</span> + <span class="string">&#x27;px&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>其实适配的方法有很多种,个人比较懒就简单的搜哈先 下面给大家贴出了一些文章</p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://www.imweb.io/topic/5a523cc0a192c3b460fce3a5">https://www.imweb.io/topic/5a523cc0a192c3b460fce3a5</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="http://www.alloyteam.com/2016/03/mobile-web-adaptation-tool-rem/">http://www.alloyteam.com/2016/03/mobile-web-adaptation-tool-rem/</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000007526917">https://segmentfault.com/a/1190000007526917</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.google.com/">Google</a></p>
+</li>
+</ul>
+<p>手淘的方案也非常好,挺好用的 <a target="_blank" rel="noopener" href="https://github.com/amfe/lib-flexible">https://github.com/amfe/lib-flexible</a></p>
+<p><strong>Vant的方案</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Rem 适配</span></span><br><span class="line"><span class="comment">// Vant 中的样式默认使用px作为单位，如果需要使用rem单位，推荐使用以下两个工具</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// postcss-pxtorem 是一款 postcss 插件，用于将单位转化为 rem</span></span><br><span class="line"><span class="comment">// lib-flexible 用于设置 rem 基准值</span></span><br><span class="line"><span class="comment">// 下面提供了一份基本的 postcss 配置，可以在此配置的基础上根据项目需求进行修改</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  plugins: &#123;</span><br><span class="line">    <span class="string">&#x27;autoprefixer&#x27;</span>: &#123;</span><br><span class="line">      browsers: [<span class="string">&#x27;Android &gt;= 4.0&#x27;</span>, <span class="string">&#x27;iOS &gt;= 7&#x27;</span>]</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">&#x27;postcss-pxtorem&#x27;</span>: &#123;</span><br><span class="line">      rootValue: <span class="number">37.5</span>,</span><br><span class="line">      propList: [<span class="string">&#x27;*&#x27;</span>]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://youzan.github.io/vant/#/zh-CN/quickstart">https://youzan.github.io/vant/#/zh-CN/quickstart</a></p>
+</blockquote>
+<h3 id="素材导出"><a href="#素材导出" class="headerlink" title="素材导出"></a>素材导出</h3><p><strong>bodymovin</strong></p>
+<ul>
+<li><p>使用Ae的插件bodymovin导出Json文件, 我们装上之后把一些用不到的元素按钮隐藏先. 教程靠大家自己<a target="_blank" rel="noopener" href="https://www.google.com/">Google</a>了</p>
+</li>
+<li><p>然后需要psd的可以在AE中导出(方法一样Google 233😏😏😏)</p>
+</li>
+<li><p>icon可以在PSD导出, 然后尺寸什么的在PxCook Ps了吗标注,量尺寸什么的,甚至在在线的标注工具标记(方法很多🤨🤨🤨)</p>
+</li>
+</ul>
+<h3 id="使用Lottie"><a href="#使用Lottie" class="headerlink" title="使用Lottie"></a>使用Lottie</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">npm install lottie-web</span><br><span class="line"></span><br><span class="line">lottie.loadAnimation(&#123;</span><br><span class="line">  container: element, <span class="comment">// the dom element that will contain the animation</span></span><br><span class="line">  renderer: <span class="string">&#x27;svg&#x27;</span>,</span><br><span class="line">  loop: <span class="literal">true</span>,</span><br><span class="line">  autoplay: <span class="literal">true</span>,</span><br><span class="line">  path: <span class="string">&#x27;data.json&#x27;</span> <span class="comment">// the path to the animation json</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>基本的使用还是很简单的👨🏻‍💻</p>
+<p>我们可以看见下面有时间轴, 可以看到动画时长什么的,然后我根据这个还原出来的效果不尽人意,(自己太菜 慢慢学习怎么还原这样的稿吧🙁🙁🙁)</p>
+<p><img src="%E7%BD%91%E6%98%93%E4%BA%91APP%E5%90%AF%E5%8A%A8%E7%95%8C%E9%9D%A2%E3%80%90%E6%A8%A1%E4%BB%BF%E3%80%91/1.png"></p>
+<blockquote>
+<p>查看动画时间</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">animation</span>: <span class="selector-tag">logo-button-bottom</span> 1<span class="selector-class">.5s</span>;</span><br><span class="line"><span class="selector-tag">animation-fill-mode</span>: <span class="selector-tag">forwards</span>;</span><br></pre></td></tr></table></figure>
+<p><img src="%E7%BD%91%E6%98%93%E4%BA%91APP%E5%90%AF%E5%8A%A8%E7%95%8C%E9%9D%A2%E3%80%90%E6%A8%A1%E4%BB%BF%E3%80%91/2.png"></p>
+<blockquote>
+<p>查看效果执行</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@keyframes</span> logo-button-bottom &#123;</span><br><span class="line">  0% &#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translate</span>(-<span class="number">50%</span>, <span class="number">80</span>/<span class="number">75rem</span>);</span><br><span class="line">    <span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  20% &#123;</span><br><span class="line">    <span class="attribute">opacity</span>: <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  100% &#123;</span><br><span class="line">    <span class="attribute">opacity</span>: <span class="number">1</span>;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translate</span>(-<span class="number">50%</span>, <span class="number">0</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="%E7%BD%91%E6%98%93%E4%BA%91APP%E5%90%AF%E5%8A%A8%E7%95%8C%E9%9D%A2%E3%80%90%E6%A8%A1%E4%BB%BF%E3%80%91/3.png"></p>
+<blockquote>
+<p>查看效果的动画曲线</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">animation</span>: <span class="selector-tag">logo-button-bottom</span> 1<span class="selector-class">.5s</span> <span class="selector-tag">ease-out</span>;</span><br></pre></td></tr></table></figure>
+
+<p>大概就是这么多了吧… … 看了看 垃圾文章无疑了 2333</p>
+<p>开了个Qq群，大家也可以进来互相交流~ iD 718639024</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/06/13/ShuffleanArray/" rel="prev" title="ShuffleanArray">
+                  <i class="fa fa-chevron-left"></i> ShuffleanArray
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/07/07/svg%E5%8A%A8%E7%94%BB%E7%94%A8%E5%A4%8D%E6%9D%82%E4%BA%A4%E4%BA%92%E5%8A%A8%E7%94%BB%E6%94%B9%E5%96%84%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C-%E7%BB%83%E4%B9%A0/" rel="next" title="svg动画用复杂交互动画改善用户体验-练习">
+                  svg动画用复杂交互动画改善用户体验-练习 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小田</span>
+</div>
+  <div class="powered-by">Генератор — <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

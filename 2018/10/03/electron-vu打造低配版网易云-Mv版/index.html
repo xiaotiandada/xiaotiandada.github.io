@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="zh-Hans,fr-FR,h-hk,zh-tw,ru,en,default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xiaotiandada.github.io","root":"/","scheme":"Muse","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Поиск...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+  </script>
+
+  <meta name="description" content="前言仓库地址 想体验一下写桌面程序，所以使用electron,然后为了快速开发 选择了electron-vue. 找了一些Api 最后发现还是网易云的Api比较好使，然后很多大佬写了网易云音乐了，所以我就走一波歪路~~ 最后就是开干，上键盘一梭哈(尽量少写文字，节省大家阅读时间)。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="electron-vu打造低配版网易云(Mv版)">
+<meta property="og:url" content="https://xiaotiandada.github.io/2018/10/03/electron-vu%E6%89%93%E9%80%A0%E4%BD%8E%E9%85%8D%E7%89%88%E7%BD%91%E6%98%93%E4%BA%91-Mv%E7%89%88/index.html">
+<meta property="og:site_name" content="小田&#39;blog">
+<meta property="og:description" content="前言仓库地址 想体验一下写桌面程序，所以使用electron,然后为了快速开发 选择了electron-vue. 找了一些Api 最后发现还是网易云的Api比较好使，然后很多大佬写了网易云音乐了，所以我就走一波歪路~~ 最后就是开干，上键盘一梭哈(尽量少写文字，节省大家阅读时间)。">
+<meta property="og:locale">
+<meta property="og:image" content="https://xiaotiandada.github.io/2018/10/03/electron-vu%E6%89%93%E9%80%A0%E4%BD%8E%E9%85%8D%E7%89%88%E7%BD%91%E6%98%93%E4%BA%91-Mv%E7%89%88/electron-vu%E6%89%93%E9%80%A0%E4%BD%8E%E9%85%8D%E7%89%88%E7%BD%91%E6%98%93%E4%BA%91-Mv%E7%89%88/e11.jpg">
+<meta property="og:image" content="https://xiaotiandada.github.io/2018/10/03/electron-vu%E6%89%93%E9%80%A0%E4%BD%8E%E9%85%8D%E7%89%88%E7%BD%91%E6%98%93%E4%BA%91-Mv%E7%89%88/electron-vu%E6%89%93%E9%80%A0%E4%BD%8E%E9%85%8D%E7%89%88%E7%BD%91%E6%98%93%E4%BA%91-Mv%E7%89%88/e1.png">
+<meta property="og:image" content="https://xiaotiandada.github.io/2018/10/03/electron-vu%E6%89%93%E9%80%A0%E4%BD%8E%E9%85%8D%E7%89%88%E7%BD%91%E6%98%93%E4%BA%91-Mv%E7%89%88/electron-vu%E6%89%93%E9%80%A0%E4%BD%8E%E9%85%8D%E7%89%88%E7%BD%91%E6%98%93%E4%BA%91-Mv%E7%89%88/e2.png">
+<meta property="og:image" content="https://xiaotiandada.github.io/2018/10/03/electron-vu%E6%89%93%E9%80%A0%E4%BD%8E%E9%85%8D%E7%89%88%E7%BD%91%E6%98%93%E4%BA%91-Mv%E7%89%88/electron-vu%E6%89%93%E9%80%A0%E4%BD%8E%E9%85%8D%E7%89%88%E7%BD%91%E6%98%93%E4%BA%91-Mv%E7%89%88/e3.png">
+<meta property="og:image" content="https://xiaotiandada.github.io/2018/10/03/electron-vu%E6%89%93%E9%80%A0%E4%BD%8E%E9%85%8D%E7%89%88%E7%BD%91%E6%98%93%E4%BA%91-Mv%E7%89%88/electron-vu%E6%89%93%E9%80%A0%E4%BD%8E%E9%85%8D%E7%89%88%E7%BD%91%E6%98%93%E4%BA%91-Mv%E7%89%88/e22.jpg">
+<meta property="article:published_time" content="2018-10-02T17:01:12.000Z">
+<meta property="article:modified_time" content="2019-07-15T16:43:42.120Z">
+<meta property="article:author" content="小田">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xiaotiandada.github.io/2018/10/03/electron-vu%E6%89%93%E9%80%A0%E4%BD%8E%E9%85%8D%E7%89%88%E7%BD%91%E6%98%93%E4%BA%91-Mv%E7%89%88/electron-vu%E6%89%93%E9%80%A0%E4%BD%8E%E9%85%8D%E7%89%88%E7%BD%91%E6%98%93%E4%BA%91-Mv%E7%89%88/e11.jpg">
+
+
+<link rel="canonical" href="https://xiaotiandada.github.io/2018/10/03/electron-vu%E6%89%93%E9%80%A0%E4%BD%8E%E9%85%8D%E7%89%88%E7%BD%91%E6%98%93%E4%BA%91-Mv%E7%89%88/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>electron-vu打造低配版网易云(Mv版) | 小田'blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Показать/скрыть меню">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">小田'blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">前端小菜鸡(〃∀〃)</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Содержание
+        </li>
+        <li class="sidebar-nav-overview">
+          Обзор
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8A%80%E6%9C%AF%E6%A0%88"><span class="nav-number">2.</span> <span class="nav-text">技术栈</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#electron-vue"><span class="nav-number">2.1.</span> <span class="nav-text">electron-vue</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#element"><span class="nav-number">2.2.</span> <span class="nav-text">element</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#axios"><span class="nav-number">2.3.</span> <span class="nav-text">axios</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vue-dplayer"><span class="nav-number">2.4.</span> <span class="nav-text">vue-dplayer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Api"><span class="nav-number">2.5.</span> <span class="nav-text">Api</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%95%8C%E9%9D%A2%E5%B1%95%E7%A4%BA"><span class="nav-number">3.</span> <span class="nav-text">界面展示</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%8C%E6%88%90%E8%BF%9B%E5%BA%A6"><span class="nav-number">4.</span> <span class="nav-text">完成进度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8A%80%E6%9C%AF%E5%AE%9E%E7%8E%B0"><span class="nav-number">5.</span> <span class="nav-text">技术实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%8A%B6%E6%80%81%E6%A0%8F"><span class="nav-number">5.1.</span> <span class="nav-text">自定义状态栏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%84%E8%AE%BA%E8%BD%AC%E5%BC%B9%E5%B9%95"><span class="nav-number">5.2.</span> <span class="nav-text">评论转弹幕</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">5.3.</span> <span class="nav-text">其他</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">小田</p>
+  <div class="site-description" itemprop="description">前端小菜鸡(〃∀〃)</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-name">Архив</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">Категории</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">Тэги</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://xiaotiandada.github.io/2018/10/03/electron-vu%E6%89%93%E9%80%A0%E4%BD%8E%E9%85%8D%E7%89%88%E7%BD%91%E6%98%93%E4%BA%91-Mv%E7%89%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="小田">
+      <meta itemprop="description" content="前端小菜鸡(〃∀〃)">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小田'blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          electron-vu打造低配版网易云(Mv版)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Размещено</span>
+
+      <time title="Создано: 2018-10-03 01:01:12" itemprop="dateCreated datePublished" datetime="2018-10-03T01:01:12+08:00">2018-10-03</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Изменено</span>
+        <time title="Изменено: 2019-07-16 00:43:42" itemprop="dateModified" datetime="2019-07-16T00:43:42+08:00">2019-07-16</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">в категории</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/electron/" itemprop="url" rel="index"><span itemprop="name">electron</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><a target="_blank" rel="noopener" href="https://github.com/xiaotiandada/E-video">仓库地址</a></p>
+<p>想体验一下写桌面程序，所以使用electron,然后为了快速开发 选择了electron-vue.</p>
+<p>找了一些Api 最后发现还是网易云的Api比较好使，然后很多大佬写了网易云音乐了，所以我就走一波歪路~~</p>
+<p>最后就是开干，上键盘一梭哈(尽量少写文字，节省大家阅读时间)。</p>
+<a id="more"></a>
+
+
+<p><img src="electron-vu%E6%89%93%E9%80%A0%E4%BD%8E%E9%85%8D%E7%89%88%E7%BD%91%E6%98%93%E4%BA%91-Mv%E7%89%88/e11.jpg" alt="梭哈"></p>
+<h1 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h1><blockquote>
+<p>核心用到的东西</p>
+</blockquote>
+<h2 id="electron-vue"><a href="#electron-vue" class="headerlink" title="electron-vue"></a>electron-vue</h2><p><a target="_blank" rel="noopener" href="https://github.com/SimulatedGREG/electron-vue">electron-vue</a> - 基于 vue (基本上是它听起来的样子) 来构造 electron 应用程序的样板代码。</p>
+<h2 id="element"><a href="#element" class="headerlink" title="element"></a>element</h2><p><a target="_blank" rel="noopener" href="http://element.eleme.io/#/zh-CN">element</a> - Element，一套为开发者、设计师和产品经理准备的基于 Vue 2.0 的桌面端组件库.</p>
+<h2 id="axios"><a href="#axios" class="headerlink" title="axios"></a>axios</h2><p><a target="_blank" rel="noopener" href="https://github.com/axios/axios">axios</a> - 基于Promise的HTTP客户端，用于浏览器和node.js(Google 自动翻译，这个大家都懂).</p>
+<h2 id="vue-dplayer"><a href="#vue-dplayer" class="headerlink" title="vue-dplayer"></a>vue-dplayer</h2><p><a target="_blank" rel="noopener" href="https://github.com/MoePlayer/vue-dplayer">vue-dplayer</a> - 基于DPlayer的Vue 2.x视频播放器组件.</p>
+<h2 id="Api"><a href="#Api" class="headerlink" title="Api"></a>Api</h2><p><a target="_blank" rel="noopener" href="https://github.com/Binaryify/NeteaseCloudMusicApi">网易云音乐Node.js API服务</a> - 网易云音乐Node.js API服务(我是部署在自己服务器上面了).</p>
+<h1 id="界面展示"><a href="#界面展示" class="headerlink" title="界面展示"></a>界面展示</h1><p><img src="electron-vu%E6%89%93%E9%80%A0%E4%BD%8E%E9%85%8D%E7%89%88%E7%BD%91%E6%98%93%E4%BA%91-Mv%E7%89%88/e1.png" alt="1"><br><img src="electron-vu%E6%89%93%E9%80%A0%E4%BD%8E%E9%85%8D%E7%89%88%E7%BD%91%E6%98%93%E4%BA%91-Mv%E7%89%88/e2.png" alt="2"><br><img src="electron-vu%E6%89%93%E9%80%A0%E4%BD%8E%E9%85%8D%E7%89%88%E7%BD%91%E6%98%93%E4%BA%91-Mv%E7%89%88/e3.png" alt="3"></p>
+<p>界面很简单，展示Mv然后可以播放，评论会以弹幕的形式显示出来</p>
+<blockquote>
+<p>(弹幕处理得不太好，而且写了很久才写了这么点界面 哎o(︶︿︶)o 唉).</p>
+</blockquote>
+<h1 id="完成进度"><a href="#完成进度" class="headerlink" title="完成进度"></a>完成进度</h1><ul>
+<li><input checked="" disabled="" type="checkbox"> 基本页面展示</li>
+<li><input checked="" disabled="" type="checkbox"> 自定义状态栏 支持放大、缩小、关闭</li>
+<li><input checked="" disabled="" type="checkbox"> 播放Mv 请求点击的Mv然后播放视频</li>
+<li><input checked="" disabled="" type="checkbox"> 显示弹幕 评论转换弹幕显示</li>
+<li><input checked="" disabled="" type="checkbox"> 切换页面 上一页、下一页、首页、尾页</li>
+<li><input disabled="" type="checkbox"> 弹幕处理的不好</li>
+<li><input disabled="" type="checkbox"> 没有性能优化</li>
+<li><input disabled="" type="checkbox"> 没有分离组件</li>
+<li><input disabled="" type="checkbox"> 打包没有处理icon(懒~~)</li>
+<li><input disabled="" type="checkbox"> 忘记了…娱乐项目 没有注意很多 随缘随缘</li>
+</ul>
+<h1 id="技术实现"><a href="#技术实现" class="headerlink" title="技术实现"></a>技术实现</h1><blockquote>
+<p>技术实现过程和一些踩过的坑</p>
+</blockquote>
+<h2 id="自定义状态栏"><a href="#自定义状态栏" class="headerlink" title="自定义状态栏"></a>自定义状态栏</h2><p>因为win自带的状态栏太丑了，所以自己模拟了一个，electron-vue 通过 ipcMain 发送消息</p>
+<p><a target="_blank" rel="noopener" href="https://electronjs.org/docs/api/ipc-main#ipcmain">ipcMain</a> - 从主进程到渲染进程的异步通信。</p>
+<blockquote>
+<p>ipcMain模块是EventEmitter类的一个实例。 当在主进程中使用时，它处理从渲染器进程（网页）发送出来的异步和同步信息。 从渲染器进程发送的消息将被发送到该模块。 – copy c &amp; v</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/liyangyang08/article/details/78608822?locationNum=7&fps=1">参考文章</a></p>
+<ol>
+<li>在 index.js 修改窗口大小.</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://electronjs.org/docs/api/browser-window#winsetcontentsizewidth-height-animate">BrowserWindow</a> - 创建和控制浏览器窗口。</p>
+<blockquote>
+<p>里面的参数自己可以看文档哦~</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">mainWindow = <span class="keyword">new</span> BrowserWindow(&#123;</span><br><span class="line">   height: <span class="number">710</span>,</span><br><span class="line">   width: <span class="number">1200</span>,</span><br><span class="line">   useContentSize: <span class="literal">true</span>,</span><br><span class="line">   frame: <span class="literal">false</span></span><br><span class="line"> &#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>设置之后，有一个细节需要了解一下.</p>
+<p><a target="_blank" rel="noopener" href="https://electronjs.org/docs/api/frameless-window">可拖拽区</a> - 默认情况下, 无框窗口是 non-draggable 的….. (总之就是，你需要设置一下)</p>
+<p>要使整个窗口可拖拽, 您可以添加 -webkit-app-region: drag 作为 body 的样式:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;body style=&quot;-webkit-app-region: drag&quot;&gt;&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+<p>请注意, 如果您已使整个窗口draggable, 则必须将按钮标记为 non-draggable, 否则用户将无法单击它们:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">button</span> &#123;</span><br><span class="line">  <span class="attribute">-webkit-app-region</span>: no-drag;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果你设置自定义标题栏为 draggable, 你也需要标题栏中所有的按钮都设为 non-draggable。</p>
+<blockquote>
+<p>详情可以看文档呢。</p>
+</blockquote>
+<ol start="2">
+<li>模拟事件</li>
+</ol>
+<p>参考文章里面有介绍到，流程大概就是这样。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 引入</span></span><br><span class="line"><span class="keyword">const</span> &#123;<span class="attr">ipcRenderer</span>: ipc&#125; = <span class="built_in">require</span>(<span class="string">&#x27;electron&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 自定义事件</span></span><br><span class="line">winMin () &#123;</span><br><span class="line">    ipc.send(<span class="string">&#x27;window-min&#x27;</span>)</span><br><span class="line">&#125;,</span><br><span class="line">winEnlargeOrNarrow () &#123;</span><br><span class="line">    ipc.send(<span class="string">&#x27;win-enlarge-or-narrow&#x27;</span>)</span><br><span class="line">&#125;,</span><br><span class="line">winClose () &#123;</span><br><span class="line">    ipc.send(<span class="string">&#x27;window-close&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 模拟 最小 放大 还原 关闭 事件</span></span><br><span class="line"><span class="comment"> * index.js 修改</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">ipcMain.on(<span class="string">&#x27;window-min&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  mainWindow.minimize()</span><br><span class="line">&#125;)</span><br><span class="line">ipcMain.on(<span class="string">&#x27;win-enlarge-or-narrow&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (mainWindow.isMaximized()) &#123;</span><br><span class="line">    mainWindow.unmaximize()</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    mainWindow.maximize()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">ipcMain.on(<span class="string">&#x27;window-close&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  mainWindow.close()</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>不想写的话，可以复制粘贴我的一梭哈.</p>
+</blockquote>
+<h2 id="评论转弹幕"><a href="#评论转弹幕" class="headerlink" title="评论转弹幕"></a>评论转弹幕</h2><p>播放器提供了相应的接口，只需要获取评论转换相应的数据就可以了。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">transformComments (commentsArr) &#123;&#125;</span><br><span class="line"></span><br><span class="line">dp.danmaku.draw(&#123;</span><br><span class="line">   text: <span class="string">&#x27;DIYgod is amazing&#x27;</span>,</span><br><span class="line">   color: <span class="string">&#x27;#fff&#x27;</span>,</span><br><span class="line">   type: <span class="string">&#x27;top&#x27;</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://github.com/xiaotiandada/E-video/blob/master/src/renderer/view/index.vue">源码地址</a></p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><blockquote>
+<p>封装方法</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">&#x27;axios&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> () =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> axios.create(&#123;</span><br><span class="line">    baseURL: <span class="string">&#x27;http://123.207.60.132:3000&#x27;</span>,</span><br><span class="line">    timeout: <span class="number">1000</span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-----------------</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> Api <span class="keyword">from</span> <span class="string">&#x27;./Api&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 默认30条数据，可以自定义</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param <span class="variable">limit</span></span></span></span><br><span class="line"><span class="comment">   * <span class="doctag">@returns <span class="type">&#123;*&#125;</span></span></span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  getTopMv (limit = <span class="number">30</span>, offset = <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> Api().get(<span class="string">`/top/mv?limit=<span class="subst">$&#123;limit&#125;</span>&amp;offset=<span class="subst">$&#123;offset&#125;</span>`</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  getMvId (id) &#123;</span><br><span class="line">    <span class="keyword">return</span> Api().get(<span class="string">`/mv?mvid=<span class="subst">$&#123;id&#125;</span>`</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  getMvComments (id) &#123;</span><br><span class="line">    <span class="keyword">return</span> Api().get(<span class="string">`/comment/mv?id=<span class="subst">$&#123;id&#125;</span>`</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>有的懒得打注释了， 不懂得可以问我哦</p>
+</blockquote>
+<blockquote>
+<p>有更优化的方法也可以滴滴我</p>
+</blockquote>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>因为纯粹是为了体验，所以没写很多功能(不要干死我hhhhh)</p>
+<p>如果阅读中，有什么不明白的 可以问我，也可以去群里交流</p>
+<p>Qq：952822399 </p>
+<p>Qq群 iD 718639024</p>
+<p>大家也可以进来互相交流~</p>
+<p>最后就是厚脸皮的一步(觉得不错可以点个star哦<del>~</del>) <a target="_blank" rel="noopener" href="https://github.com/xiaotiandada/E-video">仓库地址</a></p>
+<p>同时也欢迎Pr 帮我修复不正确的地方！！</p>
+<p><img src="electron-vu%E6%89%93%E9%80%A0%E4%BD%8E%E9%85%8D%E7%89%88%E7%BD%91%E6%98%93%E4%BA%91-Mv%E7%89%88/e22.jpg" alt="比心"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/09/09/mpvue%E5%A4%96%E5%8D%96%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="prev" title="mpvue外卖小程序">
+                  <i class="fa fa-chevron-left"></i> mpvue外卖小程序
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/11/23/React%E6%A1%88%E5%88%97/" rel="next" title="React案列">
+                  React案列 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小田</span>
+</div>
+  <div class="powered-by">Генератор — <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="zh-Hans,fr-FR,h-hk,zh-tw,ru,en,default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xiaotiandada.github.io","root":"/","scheme":"Muse","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Поиск...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+  </script>
+
+  <meta name="description" content="React案列React 做的小案列  记录学习笔记什么的~  仓库地址 博客地址 学习资料-reactjs 学习资料-imooc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React案列">
+<meta property="og:url" content="https://xiaotiandada.github.io/2018/11/23/React%E6%A1%88%E5%88%97/index.html">
+<meta property="og:site_name" content="小田&#39;blog">
+<meta property="og:description" content="React案列React 做的小案列  记录学习笔记什么的~  仓库地址 博客地址 学习资料-reactjs 学习资料-imooc">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-11-23T09:47:51.000Z">
+<meta property="article:modified_time" content="2019-07-15T16:42:40.110Z">
+<meta property="article:author" content="小田">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://xiaotiandada.github.io/2018/11/23/React%E6%A1%88%E5%88%97/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>React案列 | 小田'blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Показать/скрыть меню">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">小田'blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">前端小菜鸡(〃∀〃)</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Содержание
+        </li>
+        <li class="sidebar-nav-overview">
+          Обзор
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#React%E6%A1%88%E5%88%97"><span class="nav-number">1.</span> <span class="nav-text">React案列</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#React%E6%A1%88%E5%88%97%E4%B8%80"><span class="nav-number">1.1.</span> <span class="nav-text">React案列一</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E6%98%93%E7%89%88-todoList"><span class="nav-number">1.1.1.</span> <span class="nav-text">简易版-todoList</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#todoList-%E7%BB%84%E4%BB%B6%E4%B8%8E%E9%80%9A%E4%BF%A1"><span class="nav-number">1.2.</span> <span class="nav-text">todoList 组件与通信</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#css-%E6%A0%B7%E5%BC%8F"><span class="nav-number">1.2.1.</span> <span class="nav-text">css 样式</span></a></li></ol></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">小田</p>
+  <div class="site-description" itemprop="description">前端小菜鸡(〃∀〃)</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-name">Архив</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">Категории</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">Тэги</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://xiaotiandada.github.io/2018/11/23/React%E6%A1%88%E5%88%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="小田">
+      <meta itemprop="description" content="前端小菜鸡(〃∀〃)">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小田'blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          React案列
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Размещено</span>
+
+      <time title="Создано: 2018-11-23 17:47:51" itemprop="dateCreated datePublished" datetime="2018-11-23T17:47:51+08:00">2018-11-23</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Изменено</span>
+        <time title="Изменено: 2019-07-16 00:42:40" itemprop="dateModified" datetime="2019-07-16T00:42:40+08:00">2019-07-16</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">в категории</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/React/" itemprop="url" rel="index"><span itemprop="name">React</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <hr>
+<h1 id="React案列"><a href="#React案列" class="headerlink" title="React案列"></a>React案列</h1><p>React 做的小案列</p>
+<blockquote>
+<p>记录学习笔记什么的~</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/xiaotiandada/react-case">仓库地址</a></p>
+<p><a href="https://xiaotiandada.github.io/">博客地址</a></p>
+<p><a target="_blank" rel="noopener" href="https://reactjs.org/">学习资料-reactjs</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.imooc.com/">学习资料-imooc</a></p>
+<a id="more"></a>
+
+
+
+<h2 id="React案列一"><a href="#React案列一" class="headerlink" title="React案列一"></a>React案列一</h2><h3 id="简易版-todoList"><a href="#简易版-todoList" class="headerlink" title="简易版-todoList"></a>简易版-todoList</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="comment">// import logo from &quot;./logo.svg&quot;;</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;./App.css&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 状态</span></span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">props</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">super</span>(props)</span><br><span class="line">    <span class="built_in">this</span>.state = &#123;</span><br><span class="line">      list: [],  <span class="comment">// 列表数据</span></span><br><span class="line">      inputValue: <span class="string">&#x27;&#x27;</span>  <span class="comment">// 输入框数据</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 添加列表数据</span></span><br><span class="line">  <span class="function"><span class="title">addList</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// es6 语法</span></span><br><span class="line">    <span class="built_in">this</span>.setState(&#123;</span><br><span class="line">      list: [...this.state.list, <span class="built_in">this</span>.state.inputValue],</span><br><span class="line">      inputValue: <span class="string">&#x27;&#x27;</span></span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 改变inputValue</span></span><br><span class="line">  <span class="function"><span class="title">changeInput</span>(<span class="params">e</span>)</span> &#123;</span><br><span class="line">    <span class="comment">// 目标值</span></span><br><span class="line">    <span class="keyword">let</span> value = e.target.value</span><br><span class="line">    <span class="built_in">this</span>.setState(&#123;</span><br><span class="line">      inputValue: value,</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 删除列表数据</span></span><br><span class="line">  <span class="function"><span class="title">delList</span>(<span class="params">index</span>)</span> &#123;</span><br><span class="line">    <span class="comment">// 拷贝值 删除</span></span><br><span class="line">    <span class="keyword">let</span> list = [...this.state.list]</span><br><span class="line">    list.splice(index, <span class="number">1</span>)</span><br><span class="line">    <span class="built_in">this</span>.setState(&#123;</span><br><span class="line">      list</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        <span class="comment">// 数据绑定  改变事件绑定this</span></span><br><span class="line">        &lt;input value=&#123;<span class="built_in">this</span>.state.inputValue&#125; onChange=&#123;<span class="built_in">this</span>.changeInput.bind(<span class="built_in">this</span>)&#125; type=<span class="string">&quot;text&quot;</span>/&gt;</span><br><span class="line">        <span class="comment">// 添加事件 绑定this</span></span><br><span class="line">        &lt;button onClick=&#123;<span class="built_in">this</span>.addList.bind(<span class="built_in">this</span>)&#125;&gt;添加&lt;/button&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">        &lt;ul&gt;</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="built_in">this</span>.state.list.map(<span class="function">(<span class="params">item,index</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> (</span><br><span class="line">              <span class="comment">// 删除事件 绑定this 传index</span></span><br><span class="line">              &lt;li key=&#123;index&#125; onClick=&#123;<span class="built_in">this</span>.delList.bind(<span class="built_in">this</span>, index)&#125;&gt;&#123;item&#125;&lt;/li&gt;</span><br><span class="line">            )</span><br><span class="line">          &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">        &lt;/ul&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>事件，需要state里面的值需要绑定this</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">onClick=&#123;<span class="built_in">this</span>.delList.bind(<span class="built_in">this</span>, index)&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>改变state 需要用 this.setState</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">this</span>.setState(&#123;&#125;)</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>input 双向绑定数据 不用改变事件 输入框内容不会改变 并且警告报错</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 改变inputValue</span></span><br><span class="line"><span class="function"><span class="title">changeInput</span>(<span class="params">e</span>)</span> &#123;</span><br><span class="line">  <span class="comment">// 目标值</span></span><br><span class="line">  <span class="keyword">let</span> value = e.target.value</span><br><span class="line">  <span class="built_in">this</span>.setState(&#123;</span><br><span class="line">    inputValue: value,</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;input value=&#123;<span class="built_in">this</span>.state.inputValue&#125; onChange=&#123;<span class="built_in">this</span>.changeInput.bind(<span class="built_in">this</span>)&#125; type=<span class="string">&quot;text&quot;</span>/&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>刚刚搜了一下</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39081974/article/details/81007576"> 参考文章 react中实现数据双向绑定</a></p>
+<hr>
+<h2 id="todoList-组件与通信"><a href="#todoList-组件与通信" class="headerlink" title="todoList 组件与通信"></a>todoList 组件与通信</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 父组件</span></span><br><span class="line"><span class="keyword">import</span> React, &#123; Component, Fragment &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> Item <span class="keyword">from</span> <span class="string">&#x27;./Item&#x27;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">props</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 绑定this 代码优化</span></span><br><span class="line">    <span class="built_in">this</span>.addList = <span class="built_in">this</span>.addList.bind(<span class="built_in">this</span>)</span><br><span class="line">    <span class="built_in">this</span>.changeInput = <span class="built_in">this</span>.changeInput.bind(<span class="built_in">this</span>)</span><br><span class="line">    <span class="built_in">this</span>.delList = <span class="built_in">this</span>.delList.bind(<span class="built_in">this</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="function"><span class="title">getHead</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;input value=&#123;<span class="built_in">this</span>.state.inputValue&#125; onChange=&#123;<span class="built_in">this</span>.changeInput&#125; type=<span class="string">&quot;text&quot;</span>/&gt;</span><br><span class="line">        &lt;button onClick=&#123;<span class="built_in">this</span>.addList&#125;&gt;添加&lt;/button&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    ) </span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">getItem</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      <span class="built_in">this</span>.state.list.map(<span class="function">(<span class="params">item,index</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">          &lt;Item </span><br><span class="line">            delList=&#123;<span class="built_in">this</span>.delList&#125;    <span class="comment">// 子组件调用父组件方法</span></span><br><span class="line">            key=&#123;index&#125;               <span class="comment">// 父组件通过属性传递值</span></span><br><span class="line">            content=&#123;item&#125;            <span class="comment">// 同</span></span><br><span class="line">            index=&#123;index&#125;             <span class="comment">// 同</span></span><br><span class="line">          /&gt;</span><br><span class="line">        )</span><br><span class="line">      &#125;)</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;Fragment&gt;                   <span class="comment">// 忽略外层包裹的 div 页面不显示</span></span><br><span class="line">        &#123;<span class="built_in">this</span>.getHead()&#125;           <span class="comment">// 函数返回 head</span></span><br><span class="line">        &lt;ul&gt;&#123;<span class="built_in">this</span>.getItem()&#125;&lt;<span class="regexp">/ul&gt;  /</span><span class="regexp">/ 函数返回 Item</span></span><br><span class="line"><span class="regexp">      &lt;/</span>Fragment&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 子组件</span></span><br><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;  <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Item</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">props</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">super</span>(props)</span><br><span class="line">    <span class="built_in">this</span>.delItem = <span class="built_in">this</span>.delItem.bind(<span class="built_in">this</span>)  <span class="comment">// 同上</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">delItem</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> &#123;delList, index&#125; = <span class="built_in">this</span>.props  <span class="comment">// 解构赋值</span></span><br><span class="line">    delList(index)                       <span class="comment">// 调用父级方法</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; content &#125; = <span class="built_in">this</span>.props;     <span class="comment">// 解构赋值</span></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;li onClick=&#123;<span class="built_in">this</span>.delItem&#125;&gt;&#123;content&#125;&lt;<span class="regexp">/li&gt;  /</span><span class="regexp">/ 调用删除方法</span></span><br><span class="line"><span class="regexp">    )</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default Item</span></span><br><span class="line"><span class="regexp"></span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="css-样式"><a href="#css-样式" class="headerlink" title="css 样式"></a>css 样式</h3><p>1.内样样式需要 </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">style=&#123;&#123;<span class="string">&#x27;background&#x27;</span>: <span class="string">&#x27;red&#x27;</span>,<span class="string">&#x27;color&#x27;</span>: <span class="string">&#x27;#fff&#x27;</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>定义类名不能用 class</li>
+</ol>
+<blockquote>
+<p>因为 class 已经用来 定义React组件</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">className=<span class="string">&#x27;head-button&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>Qq：952822399 </p>
+<p>Qq群 iD 718639024</p>
+<p>大家也可以进来互相交流~</p>
+<p>最后就是厚脸皮的一步(觉得不错可以点个star哦<del>~</del>) <a target="_blank" rel="noopener" href="https://github.com/xiaotiandada/E-video">仓库地址</a></p>
+<p>同时也欢迎Pr！！！</p>
+<p>同时也欢迎Pr！！！</p>
+<p>同时也欢迎Pr！！！</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/10/03/electron-vu%E6%89%93%E9%80%A0%E4%BD%8E%E9%85%8D%E7%89%88%E7%BD%91%E6%98%93%E4%BA%91-Mv%E7%89%88/" rel="prev" title="electron-vu打造低配版网易云(Mv版)">
+                  <i class="fa fa-chevron-left"></i> electron-vu打造低配版网易云(Mv版)
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/12/17/Echarts%E7%B3%BB%E5%88%97%E4%B9%8B%E5%A4%8D%E5%88%B6%E7%B2%98%E8%B4%B4%E5%A4%A7%E6%B3%95/" rel="next" title="Echarts系列之复制粘贴大法">
+                  Echarts系列之复制粘贴大法 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小田</span>
+</div>
+  <div class="powered-by">Генератор — <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
