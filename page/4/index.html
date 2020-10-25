@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-Hans,fr-FR,h-hk,zh-tw,ru,en,default">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -11,6 +11,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="GMYdT_r7fntK64QyVrdwvQ-99rUPr1Kx6Twk6SFmHOc">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -21,7 +22,7 @@
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"xiaotiandada.github.io","root":"/","scheme":"Muse","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Поиск...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+    var CONFIG = {"hostname":"xiaotiandada.github.io","root":"/","scheme":"Gemini","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
   </script>
 
   <meta name="description" content="前端小菜鸡(〃∀〃)">
@@ -30,7 +31,7 @@
 <meta property="og:url" content="https://xiaotiandada.github.io/page/4/index.html">
 <meta property="og:site_name" content="小田&#39;blog">
 <meta property="og:description" content="前端小菜鸡(〃∀〃)">
-<meta property="og:locale">
+<meta property="og:locale" content="en_US">
 <meta property="article:author" content="小田">
 <meta name="twitter:card" content="summary">
 
@@ -44,7 +45,7 @@
     sidebar: "",
     isHome : true,
     isPost : false,
-    lang   : 'zh-Hans'
+    lang   : 'en'
   };
 </script>
 
@@ -100,7 +101,10 @@
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Показать/скрыть меню">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
@@ -116,15 +120,52 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
 
 
 
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
         
@@ -140,10 +181,10 @@
     <div class="sidebar-inner sidebar-overview-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
-          Содержание
+          Table of Contents
         </li>
         <li class="sidebar-nav-overview">
-          Обзор
+          Overview
         </li>
       </ul>
 
@@ -154,6 +195,8 @@
 
       <section class="site-overview-wrap sidebar-panel">
         <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="小田"
+      src="https://avatars3.githubusercontent.com/u/24250627?s=460&u=51a93e07957381123eb9fbdd6407de36033b578d&v=4">
   <p class="site-author-name" itemprop="name">小田</p>
   <div class="site-description" itemprop="description">前端小菜鸡(〃∀〃)</div>
 </div>
@@ -162,21 +205,45 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives">
           <span class="site-state-item-count">65</span>
-          <span class="site-state-item-name">Архив</span>
+          <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
         <span class="site-state-item-count">29</span>
-        <span class="site-state-item-name">Категории</span>
+        <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">
         <span class="site-state-item-count">1</span>
-        <span class="site-state-item-name">Тэги</span>
+        <span class="site-state-item-name">tags</span>
       </div>
   </nav>
 </div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xiaotiandada" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xiaotiandada" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:istianlei@qq.com" title="E-Mail → mailto:istianlei@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
 
 
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      LINKS👭
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://www.shuizilong.com/house/" title="http:&#x2F;&#x2F;www.shuizilong.com&#x2F;house&#x2F;" rel="noopener" target="_blank">某岛</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://shellteo.top/" title="https:&#x2F;&#x2F;shellteo.top&#x2F;" rel="noopener" target="_blank">shellteo</a>
+        </li>
+    </ul>
+  </div>
 
       </section>
     </div>
@@ -208,11 +275,11 @@
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans,fr-FR,h-hk,zh-tw,ru,en,default">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
     <link itemprop="mainEntityOfPage" href="https://xiaotiandada.github.io/2019/09/15/Building-Components-Custom-Elements-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%83%E7%B4%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/24250627?s=460&u=51a93e07957381123eb9fbdd6407de36033b578d&v=4">
       <meta itemprop="name" content="小田">
       <meta itemprop="description" content="前端小菜鸡(〃∀〃)">
     </span>
@@ -232,22 +299,22 @@
       <span class="post-meta-item-icon">
         <i class="far fa-calendar"></i>
       </span>
-      <span class="post-meta-item-text">Размещено</span>
+      <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Создано: 2019-09-15 01:42:32" itemprop="dateCreated datePublished" datetime="2019-09-15T01:42:32+08:00">2019-09-15</time>
+      <time title="Created: 2019-09-15 01:42:32" itemprop="dateCreated datePublished" datetime="2019-09-15T01:42:32+08:00">2019-09-15</time>
     </span>
       <span class="post-meta-item">
         <span class="post-meta-item-icon">
           <i class="far fa-calendar-check"></i>
         </span>
-        <span class="post-meta-item-text">Изменено</span>
-        <time title="Изменено: 2020-10-26 01:19:52" itemprop="dateModified" datetime="2020-10-26T01:19:52+08:00">2020-10-26</time>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-10-26 01:19:52" itemprop="dateModified" datetime="2020-10-26T01:19:52+08:00">2020-10-26</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
       </span>
-      <span class="post-meta-item-text">в категории</span>
+      <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
           <a href="/categories/css/" itemprop="url" rel="index"><span itemprop="name">css</span></a>
         </span>
@@ -279,7 +346,7 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2019/09/15/Building-Components-Custom-Elements-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%83%E7%B4%A0/#more" rel="contents">
-                Читать полностью &raquo;
+                Read more &raquo;
               </a>
             </div>
           <!--/noindex-->
@@ -308,11 +375,11 @@
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans,fr-FR,h-hk,zh-tw,ru,en,default">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
     <link itemprop="mainEntityOfPage" href="https://xiaotiandada.github.io/2019/09/08/twitter-%E7%82%B9%E8%B5%9E%E7%AE%80%E6%98%93%E5%8A%A8%E7%94%BB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/24250627?s=460&u=51a93e07957381123eb9fbdd6407de36033b578d&v=4">
       <meta itemprop="name" content="小田">
       <meta itemprop="description" content="前端小菜鸡(〃∀〃)">
     </span>
@@ -332,22 +399,22 @@
       <span class="post-meta-item-icon">
         <i class="far fa-calendar"></i>
       </span>
-      <span class="post-meta-item-text">Размещено</span>
+      <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Создано: 2019-09-08 16:06:47" itemprop="dateCreated datePublished" datetime="2019-09-08T16:06:47+08:00">2019-09-08</time>
+      <time title="Created: 2019-09-08 16:06:47" itemprop="dateCreated datePublished" datetime="2019-09-08T16:06:47+08:00">2019-09-08</time>
     </span>
       <span class="post-meta-item">
         <span class="post-meta-item-icon">
           <i class="far fa-calendar-check"></i>
         </span>
-        <span class="post-meta-item-text">Изменено</span>
-        <time title="Изменено: 2020-10-23 14:27:35" itemprop="dateModified" datetime="2020-10-23T14:27:35+08:00">2020-10-23</time>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-10-23 14:27:35" itemprop="dateModified" datetime="2020-10-23T14:27:35+08:00">2020-10-23</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
       </span>
-      <span class="post-meta-item-text">в категории</span>
+      <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
           <a href="/categories/css/" itemprop="url" rel="index"><span itemprop="name">css</span></a>
         </span>
@@ -403,11 +470,11 @@
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans,fr-FR,h-hk,zh-tw,ru,en,default">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
     <link itemprop="mainEntityOfPage" href="https://xiaotiandada.github.io/2019/09/02/node-mysql-%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5%E3%80%90%E7%AE%80%E6%98%93%E7%89%88%E3%80%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/24250627?s=460&u=51a93e07957381123eb9fbdd6407de36033b578d&v=4">
       <meta itemprop="name" content="小田">
       <meta itemprop="description" content="前端小菜鸡(〃∀〃)">
     </span>
@@ -427,22 +494,22 @@
       <span class="post-meta-item-icon">
         <i class="far fa-calendar"></i>
       </span>
-      <span class="post-meta-item-text">Размещено</span>
+      <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Создано: 2019-09-02 14:35:40" itemprop="dateCreated datePublished" datetime="2019-09-02T14:35:40+08:00">2019-09-02</time>
+      <time title="Created: 2019-09-02 14:35:40" itemprop="dateCreated datePublished" datetime="2019-09-02T14:35:40+08:00">2019-09-02</time>
     </span>
       <span class="post-meta-item">
         <span class="post-meta-item-icon">
           <i class="far fa-calendar-check"></i>
         </span>
-        <span class="post-meta-item-text">Изменено</span>
-        <time title="Изменено: 2020-10-23 14:27:35" itemprop="dateModified" datetime="2020-10-23T14:27:35+08:00">2020-10-23</time>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-10-23 14:27:35" itemprop="dateModified" datetime="2020-10-23T14:27:35+08:00">2020-10-23</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
       </span>
-      <span class="post-meta-item-text">в категории</span>
+      <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
           <a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a>
         </span>
@@ -466,7 +533,7 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2019/09/02/node-mysql-%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5%E3%80%90%E7%AE%80%E6%98%93%E7%89%88%E3%80%91/#more" rel="contents">
-                Читать полностью &raquo;
+                Read more &raquo;
               </a>
             </div>
           <!--/noindex-->
@@ -495,11 +562,11 @@
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans,fr-FR,h-hk,zh-tw,ru,en,default">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
     <link itemprop="mainEntityOfPage" href="https://xiaotiandada.github.io/2019/08/29/node%E7%88%AC%E8%99%AB-%E7%AE%80%E6%98%93%E7%89%88%E3%80%90%E7%AB%99%E9%85%B7%E3%80%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/24250627?s=460&u=51a93e07957381123eb9fbdd6407de36033b578d&v=4">
       <meta itemprop="name" content="小田">
       <meta itemprop="description" content="前端小菜鸡(〃∀〃)">
     </span>
@@ -519,22 +586,22 @@
       <span class="post-meta-item-icon">
         <i class="far fa-calendar"></i>
       </span>
-      <span class="post-meta-item-text">Размещено</span>
+      <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Создано: 2019-08-29 13:35:12" itemprop="dateCreated datePublished" datetime="2019-08-29T13:35:12+08:00">2019-08-29</time>
+      <time title="Created: 2019-08-29 13:35:12" itemprop="dateCreated datePublished" datetime="2019-08-29T13:35:12+08:00">2019-08-29</time>
     </span>
       <span class="post-meta-item">
         <span class="post-meta-item-icon">
           <i class="far fa-calendar-check"></i>
         </span>
-        <span class="post-meta-item-text">Изменено</span>
-        <time title="Изменено: 2020-10-23 14:27:35" itemprop="dateModified" datetime="2020-10-23T14:27:35+08:00">2020-10-23</time>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-10-23 14:27:35" itemprop="dateModified" datetime="2020-10-23T14:27:35+08:00">2020-10-23</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
       </span>
-      <span class="post-meta-item-text">в категории</span>
+      <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
           <a href="/categories/node/" itemprop="url" rel="index"><span itemprop="name">node</span></a>
         </span>
@@ -554,7 +621,7 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2019/08/29/node%E7%88%AC%E8%99%AB-%E7%AE%80%E6%98%93%E7%89%88%E3%80%90%E7%AB%99%E9%85%B7%E3%80%91/#more" rel="contents">
-                Читать полностью &raquo;
+                Read more &raquo;
               </a>
             </div>
           <!--/noindex-->
@@ -583,11 +650,11 @@
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans,fr-FR,h-hk,zh-tw,ru,en,default">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
     <link itemprop="mainEntityOfPage" href="https://xiaotiandada.github.io/2019/08/19/dfs-%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2%E3%80%90js%E3%80%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/24250627?s=460&u=51a93e07957381123eb9fbdd6407de36033b578d&v=4">
       <meta itemprop="name" content="小田">
       <meta itemprop="description" content="前端小菜鸡(〃∀〃)">
     </span>
@@ -607,22 +674,22 @@
       <span class="post-meta-item-icon">
         <i class="far fa-calendar"></i>
       </span>
-      <span class="post-meta-item-text">Размещено</span>
+      <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Создано: 2019-08-19 12:32:52" itemprop="dateCreated datePublished" datetime="2019-08-19T12:32:52+08:00">2019-08-19</time>
+      <time title="Created: 2019-08-19 12:32:52" itemprop="dateCreated datePublished" datetime="2019-08-19T12:32:52+08:00">2019-08-19</time>
     </span>
       <span class="post-meta-item">
         <span class="post-meta-item-icon">
           <i class="far fa-calendar-check"></i>
         </span>
-        <span class="post-meta-item-text">Изменено</span>
-        <time title="Изменено: 2020-10-23 14:27:35" itemprop="dateModified" datetime="2020-10-23T14:27:35+08:00">2020-10-23</time>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-10-23 14:27:35" itemprop="dateModified" datetime="2020-10-23T14:27:35+08:00">2020-10-23</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
       </span>
-      <span class="post-meta-item-text">в категории</span>
+      <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
           <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
         </span>
@@ -727,11 +794,11 @@
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans,fr-FR,h-hk,zh-tw,ru,en,default">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
     <link itemprop="mainEntityOfPage" href="https://xiaotiandada.github.io/2019/08/16/less%E5%BE%AA%E7%8E%AF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/24250627?s=460&u=51a93e07957381123eb9fbdd6407de36033b578d&v=4">
       <meta itemprop="name" content="小田">
       <meta itemprop="description" content="前端小菜鸡(〃∀〃)">
     </span>
@@ -751,22 +818,22 @@
       <span class="post-meta-item-icon">
         <i class="far fa-calendar"></i>
       </span>
-      <span class="post-meta-item-text">Размещено</span>
+      <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Создано: 2019-08-16 11:55:30" itemprop="dateCreated datePublished" datetime="2019-08-16T11:55:30+08:00">2019-08-16</time>
+      <time title="Created: 2019-08-16 11:55:30" itemprop="dateCreated datePublished" datetime="2019-08-16T11:55:30+08:00">2019-08-16</time>
     </span>
       <span class="post-meta-item">
         <span class="post-meta-item-icon">
           <i class="far fa-calendar-check"></i>
         </span>
-        <span class="post-meta-item-text">Изменено</span>
-        <time title="Изменено: 2020-10-23 14:27:35" itemprop="dateModified" datetime="2020-10-23T14:27:35+08:00">2020-10-23</time>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-10-23 14:27:35" itemprop="dateModified" datetime="2020-10-23T14:27:35+08:00">2020-10-23</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
       </span>
-      <span class="post-meta-item-text">в категории</span>
+      <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
           <a href="/categories/Css/" itemprop="url" rel="index"><span itemprop="name">Css</span></a>
         </span>
@@ -786,7 +853,7 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2019/08/16/less%E5%BE%AA%E7%8E%AF/#more" rel="contents">
-                Читать полностью &raquo;
+                Read more &raquo;
               </a>
             </div>
           <!--/noindex-->
@@ -815,11 +882,11 @@
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans,fr-FR,h-hk,zh-tw,ru,en,default">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
     <link itemprop="mainEntityOfPage" href="https://xiaotiandada.github.io/2019/08/02/Safari%E7%AD%89%E6%B5%8F%E8%A7%88%E5%99%A8-border-eadius%E5%A4%B1%E6%95%88/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/24250627?s=460&u=51a93e07957381123eb9fbdd6407de36033b578d&v=4">
       <meta itemprop="name" content="小田">
       <meta itemprop="description" content="前端小菜鸡(〃∀〃)">
     </span>
@@ -839,22 +906,22 @@
       <span class="post-meta-item-icon">
         <i class="far fa-calendar"></i>
       </span>
-      <span class="post-meta-item-text">Размещено</span>
+      <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Создано: 2019-08-02 11:34:33" itemprop="dateCreated datePublished" datetime="2019-08-02T11:34:33+08:00">2019-08-02</time>
+      <time title="Created: 2019-08-02 11:34:33" itemprop="dateCreated datePublished" datetime="2019-08-02T11:34:33+08:00">2019-08-02</time>
     </span>
       <span class="post-meta-item">
         <span class="post-meta-item-icon">
           <i class="far fa-calendar-check"></i>
         </span>
-        <span class="post-meta-item-text">Изменено</span>
-        <time title="Изменено: 2020-10-23 14:27:35" itemprop="dateModified" datetime="2020-10-23T14:27:35+08:00">2020-10-23</time>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-10-23 14:27:35" itemprop="dateModified" datetime="2020-10-23T14:27:35+08:00">2020-10-23</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
       </span>
-      <span class="post-meta-item-text">в категории</span>
+      <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
           <a href="/categories/Css%E5%9D%91/" itemprop="url" rel="index"><span itemprop="name">Css坑</span></a>
         </span>
@@ -909,11 +976,11 @@
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans,fr-FR,h-hk,zh-tw,ru,en,default">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
     <link itemprop="mainEntityOfPage" href="https://xiaotiandada.github.io/2019/07/21/lodash-%E5%AD%A6%E4%B9%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/24250627?s=460&u=51a93e07957381123eb9fbdd6407de36033b578d&v=4">
       <meta itemprop="name" content="小田">
       <meta itemprop="description" content="前端小菜鸡(〃∀〃)">
     </span>
@@ -933,16 +1000,16 @@
       <span class="post-meta-item-icon">
         <i class="far fa-calendar"></i>
       </span>
-      <span class="post-meta-item-text">Размещено</span>
+      <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Создано: 2019-07-21 18:39:45" itemprop="dateCreated datePublished" datetime="2019-07-21T18:39:45+08:00">2019-07-21</time>
+      <time title="Created: 2019-07-21 18:39:45" itemprop="dateCreated datePublished" datetime="2019-07-21T18:39:45+08:00">2019-07-21</time>
     </span>
       <span class="post-meta-item">
         <span class="post-meta-item-icon">
           <i class="far fa-calendar-check"></i>
         </span>
-        <span class="post-meta-item-text">Изменено</span>
-        <time title="Изменено: 2020-07-11 15:30:00" itemprop="dateModified" datetime="2020-07-11T15:30:00+08:00">2020-07-11</time>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-07-11 15:30:00" itemprop="dateModified" datetime="2020-07-11T15:30:00+08:00">2020-07-11</time>
       </span>
 
   
@@ -960,7 +1027,7 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2019/07/21/lodash-%E5%AD%A6%E4%B9%A0/#more" rel="contents">
-                Читать полностью &raquo;
+                Read more &raquo;
               </a>
             </div>
           <!--/noindex-->
@@ -989,11 +1056,11 @@
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans,fr-FR,h-hk,zh-tw,ru,en,default">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
     <link itemprop="mainEntityOfPage" href="https://xiaotiandada.github.io/2019/07/19/multi-line-truncation-with-pure-css%E3%80%90%E4%BD%BF%E7%94%A8%E7%BA%AFCSS%E8%BF%9B%E8%A1%8C%E5%A4%9A%E8%A1%8C%E6%88%AA%E6%96%AD%E3%80%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/24250627?s=460&u=51a93e07957381123eb9fbdd6407de36033b578d&v=4">
       <meta itemprop="name" content="小田">
       <meta itemprop="description" content="前端小菜鸡(〃∀〃)">
     </span>
@@ -1013,22 +1080,22 @@
       <span class="post-meta-item-icon">
         <i class="far fa-calendar"></i>
       </span>
-      <span class="post-meta-item-text">Размещено</span>
+      <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Создано: 2019-07-19 01:37:58" itemprop="dateCreated datePublished" datetime="2019-07-19T01:37:58+08:00">2019-07-19</time>
+      <time title="Created: 2019-07-19 01:37:58" itemprop="dateCreated datePublished" datetime="2019-07-19T01:37:58+08:00">2019-07-19</time>
     </span>
       <span class="post-meta-item">
         <span class="post-meta-item-icon">
           <i class="far fa-calendar-check"></i>
         </span>
-        <span class="post-meta-item-text">Изменено</span>
-        <time title="Изменено: 2020-10-23 14:27:35" itemprop="dateModified" datetime="2020-10-23T14:27:35+08:00">2020-10-23</time>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-10-23 14:27:35" itemprop="dateModified" datetime="2020-10-23T14:27:35+08:00">2020-10-23</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
       </span>
-      <span class="post-meta-item-text">в категории</span>
+      <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
           <a href="/categories/Css/" itemprop="url" rel="index"><span itemprop="name">Css</span></a>
         </span>
@@ -1089,11 +1156,11 @@
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans,fr-FR,h-hk,zh-tw,ru,en,default">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
     <link itemprop="mainEntityOfPage" href="https://xiaotiandada.github.io/2019/07/16/Managing-Multiple-Backgrounds-with-Custom-Properties%E3%80%90%E4%BD%BF%E7%94%A8%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B1%9E%E6%80%A7%E7%AE%A1%E7%90%86%E5%A4%9A%E4%B8%AA%E8%83%8C%E6%99%AF%E3%80%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/24250627?s=460&u=51a93e07957381123eb9fbdd6407de36033b578d&v=4">
       <meta itemprop="name" content="小田">
       <meta itemprop="description" content="前端小菜鸡(〃∀〃)">
     </span>
@@ -1113,22 +1180,22 @@
       <span class="post-meta-item-icon">
         <i class="far fa-calendar"></i>
       </span>
-      <span class="post-meta-item-text">Размещено</span>
+      <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Создано: 2019-07-16 11:10:13" itemprop="dateCreated datePublished" datetime="2019-07-16T11:10:13+08:00">2019-07-16</time>
+      <time title="Created: 2019-07-16 11:10:13" itemprop="dateCreated datePublished" datetime="2019-07-16T11:10:13+08:00">2019-07-16</time>
     </span>
       <span class="post-meta-item">
         <span class="post-meta-item-icon">
           <i class="far fa-calendar-check"></i>
         </span>
-        <span class="post-meta-item-text">Изменено</span>
-        <time title="Изменено: 2020-10-23 14:27:35" itemprop="dateModified" datetime="2020-10-23T14:27:35+08:00">2020-10-23</time>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-10-23 14:27:35" itemprop="dateModified" datetime="2020-10-23T14:27:35+08:00">2020-10-23</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
       </span>
-      <span class="post-meta-item-text">в категории</span>
+      <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
           <a href="/categories/Css/" itemprop="url" rel="index"><span itemprop="name">Css</span></a>
         </span>
@@ -1202,7 +1269,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="Предыдущая страница"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="Следующая страница"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1249,7 +1316,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">小田</span>
 </div>
-  <div class="powered-by">Генератор — <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
   </div>
 
     </div>
@@ -1257,12 +1324,14 @@
 
   
   <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   
 
 
 
+
+  <script src="/js/local-search.js"></script>
 
 
 
