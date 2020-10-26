@@ -40,7 +40,7 @@
 <meta property="og:image" content="https://xiaotiandada.github.io/2019/09/15/Building-Components-Custom-Elements-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%83%E7%B4%A0/Building-Components-Custom-Elements-自定义元素/whenDefined.png">
 <meta property="og:image" content="https://xiaotiandada.github.io/2019/09/15/Building-Components-Custom-Elements-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%83%E7%B4%A0/Building-Components-Custom-Elements-自定义元素/in.png">
 <meta property="article:published_time" content="2019-09-14T17:42:32.000Z">
-<meta property="article:modified_time" content="2020-10-25T17:19:52.750Z">
+<meta property="article:modified_time" content="2020-10-25T18:18:24.454Z">
 <meta property="article:author" content="小田">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://xiaotiandada.github.io/2019/09/15/Building-Components-Custom-Elements-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%83%E7%B4%A0/Building-Components-Custom-Elements-自定义元素/button.png">
@@ -214,7 +214,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-count">66</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -318,7 +318,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-10-26 01:19:52" itemprop="dateModified" datetime="2020-10-26T01:19:52+08:00">2020-10-26</time>
+        <time title="Modified: 2020-10-26 02:18:24" itemprop="dateModified" datetime="2020-10-26T02:18:24+08:00">2020-10-26</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -356,181 +356,7 @@
 <a id="more"></a>
 
 <p><strong>查看demo</strong></p>
-<style for-run for-show>
-.popup-info {
-  width: 100px;
-  height: 100px;
-  position: relative;
-  top: 100px;
-  left: 300px;
-}
-.popup-info1 {
-  width: 100px;
-  height: 100px;
-  position: relative;
-  top: 160px;
-  left: 600px;
-}
-.popup-info img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  cursor: pointer;
-}
-.popup-info .info {
-  font-size: 20px;
-  width: 200px;
-  display: inline-block;
-  border: 1px solid black;
-  padding: 10px;
-  background: white;
-  border-radius: 4px;
-  opacity: 0;
-  transition: 0.6s all;
-  position: absolute;
-  bottom: 110px;
-  left: 0px;
-  z-index: 3;
-}
-.popup-info:hover .info{
-  opacity: 1;
-}
-</style>
-
-<template for-run for-show>
-
-<p><popup-info role="popup" img="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=4038933139,466219061&fm=26&gp=0.jpg" data-text="I Learn Js 💗"></popup-info><br><button id="remove">remove</button><br><button id="move">move</button><br><button id="toggle">toggle attribute</button></p>
-<p><popup-info1 role="popup" img="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=4038933139,466219061&fm=26&gp=0.jpg" data-text="I Learn Js 💗"></popup-info1></p>
-<p><button is="popup-button">popup-button!</button></p>
-</template>
-
-<script for-run for-show>
-class popupInfo extends HTMLElement {
-  constructor() {
-    super()
-
-  }
-  static get observedAttributes() {
-    return ['role']
-  }
-  // 生命周期钩子
-  connectedCallback() {
-    // 创建 div
-    let div = document.createElement('div')
-    div.setAttribute('role', 'popup-info')
-
-    // 创建 img
-    let img = document.createElement('img')
-    let src = this.getAttribute('img')
-
-    // 创建info信息
-    let info = document.createElement('span')
-    let text = this.getAttribute('data-text')
-
-    // 设置img内容
-    img.src = src
-    img.alt = text
-
-    // 设置info内容
-    info.classList.add('info')
-    info.innerText = text
-
-    // 添加class
-    div.classList.add('popup-info')
-
-    // 添加内容 img info
-    div.appendChild(img)
-    div.appendChild(info)
-
-    this.appendChild(div)
-  }
-  disconnectedCallback() {
-    console.log('我没有了呀')
-  }
-  attributeChangedCallback(attrName, oldVal, newVal) {
-    console.log('当前的属性:', attrName)
-    console.log('当前的属性 old:', oldVal)
-    console.log('当前的属性 new:', newVal)
-  }
-  adoptedCallback() {
-    console.log('adoptedCallback 自定义元素被移入新的 document')
-  }
-}
-
-customElements.define('popup-info', popupInfo)
-
-
-// 测试 自定义元素被移入新的 document
-const testAdoptedCallback = ()=> {
-  // 创建 iframe
-  const createWindow = () => {
-    let iframe = document.createElement('iframe')
-    document.body.appendChild(iframe)
-    return iframe.contentWindow
-  }
-  let cw = createWindow()
-  // 创建 自定义元素
-  let cw1 = document.querySelector('popup-info')
-
-  // 创建的元素插入到 新创建的iframe
-  cw.document.body.appendChild(cw1)
-}
-
-const move = () => {
-  let move = document.querySelector('#move')
-  move.onclick = function() {
-    testAdoptedCallback()
-  }
-}
-move()
-
-// 测试移除 popup-info
-const remove = () => {
-  let remove = document.querySelector('#remove')
-  remove.onclick = function() {
-    document.querySelector('popup-info').remove()
-  }
-}
-remove()
-
-// 测试属性被修改 toggle
-const toggle = () => {
-  let i = 0
-  let toggle = document.querySelector('#toggle')
-  toggle.onclick = function() {
-    i++
-    document.querySelector('popup-info').setAttribute('role', `popup-info-change, ${i}`)
-  }
-}
-toggle()
-
-
-
-class popupInfo1 extends popupInfo {
-  constructor() {
-    super()
-  }
-  connectedCallback() {
-    this.innerText = 'extends popupInfo'
-  }
-}
-
-customElements.define('popup-info1', popupInfo1)
-
-
-class popupButton extends HTMLButtonElement {
-  constructor() {
-    super()
-  }
-  connectedCallback() {
-    this.innerText += ' extends'
-  }
-}
-
-customElements.define('popup-button', popupButton, {extends: 'button'})
-
-</script>
-
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">for-run</span> <span class="attr">for-show</span>&gt;</span></span><br><span class="line"><span class="css"><span class="selector-class">.popup-info</span> &#123;</span></span><br><span class="line">  width: 100px;</span><br><span class="line">  height: 100px;</span><br><span class="line">  position: relative;</span><br><span class="line">  top: 100px;</span><br><span class="line">  left: 300px;</span><br><span class="line">&#125;</span><br><span class="line"><span class="css"><span class="selector-class">.popup-info1</span> &#123;</span></span><br><span class="line">  width: 100px;</span><br><span class="line">  height: 100px;</span><br><span class="line">  position: relative;</span><br><span class="line">  top: 160px;</span><br><span class="line">  left: 600px;</span><br><span class="line">&#125;</span><br><span class="line"><span class="css"><span class="selector-class">.popup-info</span> <span class="selector-tag">img</span> &#123;</span></span><br><span class="line">  width: 100%;</span><br><span class="line">  height: 100%;</span><br><span class="line">  object-fit: cover;</span><br><span class="line">  cursor: pointer;</span><br><span class="line">&#125;</span><br><span class="line"><span class="css"><span class="selector-class">.popup-info</span> <span class="selector-class">.info</span> &#123;</span></span><br><span class="line">  font-size: 20px;</span><br><span class="line">  width: 200px;</span><br><span class="line">  display: inline-block;</span><br><span class="line">  border: 1px solid black;</span><br><span class="line">  padding: 10px;</span><br><span class="line">  background: white;</span><br><span class="line">  border-radius: 4px;</span><br><span class="line">  opacity: 0;</span><br><span class="line"><span class="css">  <span class="selector-tag">transition</span>: 0<span class="selector-class">.6s</span> <span class="selector-tag">all</span>;</span></span><br><span class="line">  position: absolute;</span><br><span class="line">  bottom: 110px;</span><br><span class="line">  left: 0px;</span><br><span class="line">  z-index: 3;</span><br><span class="line">&#125;</span><br><span class="line"><span class="css"><span class="selector-class">.popup-info</span><span class="selector-pseudo">:hover</span> <span class="selector-class">.info</span>&#123;</span></span><br><span class="line">  opacity: 1;</span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">for-run</span> <span class="attr">for-show</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">popup-info</span> <span class="attr">role</span>=<span class="string">&quot;popup&quot;</span> <span class="attr">img</span>=<span class="string">&quot;https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=4038933139,466219061&amp;fm=26&amp;gp=0.jpg&quot;</span> <span class="attr">data-text</span>=<span class="string">&quot;I Learn Js 💗&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">popup-info</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;remove&quot;</span>&gt;</span>remove<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;move&quot;</span>&gt;</span>move<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;toggle&quot;</span>&gt;</span>toggle attribute<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">popup-info1</span> <span class="attr">role</span>=<span class="string">&quot;popup&quot;</span> <span class="attr">img</span>=<span class="string">&quot;https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=4038933139,466219061&amp;fm=26&amp;gp=0.jpg&quot;</span> <span class="attr">data-text</span>=<span class="string">&quot;I Learn Js 💗&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">popup-info1</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">is</span>=<span class="string">&quot;popup-button&quot;</span>&gt;</span>popup-button!<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">for-run</span> <span class="attr">for-show</span>&gt;</span></span><br><span class="line"><span class="javascript"><span class="class"><span class="keyword">class</span> <span class="title">popupInfo</span> <span class="keyword">extends</span> <span class="title">HTMLElement</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">  <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span> &#123;</span></span><br><span class="line"><span class="javascript">    <span class="built_in">super</span>()</span></span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"><span class="javascript">  <span class="keyword">static</span> <span class="keyword">get</span> <span class="title">observedAttributes</span>() &#123;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">return</span> [<span class="string">&#x27;role&#x27;</span>]</span></span><br><span class="line">  &#125;</span><br><span class="line"><span class="javascript">  <span class="comment">// 生命周期钩子</span></span></span><br><span class="line"><span class="javascript">  <span class="function"><span class="title">connectedCallback</span>(<span class="params"></span>)</span> &#123;</span></span><br><span class="line"><span class="javascript">    <span class="comment">// 创建 div</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">let</span> div = <span class="built_in">document</span>.createElement(<span class="string">&#x27;div&#x27;</span>)</span></span><br><span class="line"><span class="javascript">    div.setAttribute(<span class="string">&#x27;role&#x27;</span>, <span class="string">&#x27;popup-info&#x27;</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">    <span class="comment">// 创建 img</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">let</span> img = <span class="built_in">document</span>.createElement(<span class="string">&#x27;img&#x27;</span>)</span></span><br><span class="line"><span class="javascript">    <span class="keyword">let</span> src = <span class="built_in">this</span>.getAttribute(<span class="string">&#x27;img&#x27;</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">    <span class="comment">// 创建info信息</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">let</span> info = <span class="built_in">document</span>.createElement(<span class="string">&#x27;span&#x27;</span>)</span></span><br><span class="line"><span class="javascript">    <span class="keyword">let</span> text = <span class="built_in">this</span>.getAttribute(<span class="string">&#x27;data-text&#x27;</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">    <span class="comment">// 设置img内容</span></span></span><br><span class="line">    img.src = src</span><br><span class="line">    img.alt = text</span><br><span class="line"></span><br><span class="line"><span class="javascript">    <span class="comment">// 设置info内容</span></span></span><br><span class="line"><span class="javascript">    info.classList.add(<span class="string">&#x27;info&#x27;</span>)</span></span><br><span class="line">    info.innerText = text</span><br><span class="line"></span><br><span class="line"><span class="javascript">    <span class="comment">// 添加class</span></span></span><br><span class="line"><span class="javascript">    div.classList.add(<span class="string">&#x27;popup-info&#x27;</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">    <span class="comment">// 添加内容 img info</span></span></span><br><span class="line">    div.appendChild(img)</span><br><span class="line">    div.appendChild(info)</span><br><span class="line"></span><br><span class="line"><span class="javascript">    <span class="built_in">this</span>.appendChild(div)</span></span><br><span class="line">  &#125;</span><br><span class="line"><span class="javascript">  <span class="function"><span class="title">disconnectedCallback</span>(<span class="params"></span>)</span> &#123;</span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(<span class="string">&#x27;我没有了呀&#x27;</span>)</span></span><br><span class="line">  &#125;</span><br><span class="line"><span class="javascript">  <span class="function"><span class="title">attributeChangedCallback</span>(<span class="params">attrName, oldVal, newVal</span>)</span> &#123;</span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(<span class="string">&#x27;当前的属性:&#x27;</span>, attrName)</span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(<span class="string">&#x27;当前的属性 old:&#x27;</span>, oldVal)</span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(<span class="string">&#x27;当前的属性 new:&#x27;</span>, newVal)</span></span><br><span class="line">  &#125;</span><br><span class="line"><span class="javascript">  <span class="function"><span class="title">adoptedCallback</span>(<span class="params"></span>)</span> &#123;</span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(<span class="string">&#x27;adoptedCallback 自定义元素被移入新的 document&#x27;</span>)</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="javascript">customElements.define(<span class="string">&#x27;popup-info&#x27;</span>, popupInfo)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="javascript"><span class="comment">// 测试 自定义元素被移入新的 document</span></span></span><br><span class="line"><span class="javascript"><span class="keyword">const</span> testAdoptedCallback = <span class="function">()=&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">  <span class="comment">// 创建 iframe</span></span></span><br><span class="line"><span class="javascript">  <span class="keyword">const</span> createWindow = <span class="function">() =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">let</span> iframe = <span class="built_in">document</span>.createElement(<span class="string">&#x27;iframe&#x27;</span>)</span></span><br><span class="line"><span class="javascript">    <span class="built_in">document</span>.body.appendChild(iframe)</span></span><br><span class="line"><span class="javascript">    <span class="keyword">return</span> iframe.contentWindow</span></span><br><span class="line">  &#125;</span><br><span class="line"><span class="javascript">  <span class="keyword">let</span> cw = createWindow()</span></span><br><span class="line"><span class="javascript">  <span class="comment">// 创建 自定义元素</span></span></span><br><span class="line"><span class="javascript">  <span class="keyword">let</span> cw1 = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;popup-info&#x27;</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">  <span class="comment">// 创建的元素插入到 新创建的iframe</span></span></span><br><span class="line">  cw.document.body.appendChild(cw1)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="javascript"><span class="keyword">const</span> move = <span class="function">() =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">let</span> move = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;#move&#x27;</span>)</span></span><br><span class="line"><span class="javascript">  move.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line">    testAdoptedCallback()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">move()</span><br><span class="line"></span><br><span class="line"><span class="javascript"><span class="comment">// 测试移除 popup-info</span></span></span><br><span class="line"><span class="javascript"><span class="keyword">const</span> remove = <span class="function">() =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">let</span> remove = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;#remove&#x27;</span>)</span></span><br><span class="line"><span class="javascript">  remove.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">    <span class="built_in">document</span>.querySelector(<span class="string">&#x27;popup-info&#x27;</span>).remove()</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">remove()</span><br><span class="line"></span><br><span class="line"><span class="javascript"><span class="comment">// 测试属性被修改 toggle</span></span></span><br><span class="line"><span class="javascript"><span class="keyword">const</span> toggle = <span class="function">() =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">let</span> i = <span class="number">0</span></span></span><br><span class="line"><span class="javascript">  <span class="keyword">let</span> toggle = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;#toggle&#x27;</span>)</span></span><br><span class="line"><span class="javascript">  toggle.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line">    i++</span><br><span class="line"><span class="javascript">    <span class="built_in">document</span>.querySelector(<span class="string">&#x27;popup-info&#x27;</span>).setAttribute(<span class="string">&#x27;role&#x27;</span>, <span class="string">`popup-info-change, <span class="subst">$&#123;i&#125;</span>`</span>)</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">toggle()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="javascript"><span class="class"><span class="keyword">class</span> <span class="title">popupInfo1</span> <span class="keyword">extends</span> <span class="title">popupInfo</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">  <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span> &#123;</span></span><br><span class="line"><span class="javascript">    <span class="built_in">super</span>()</span></span><br><span class="line">  &#125;</span><br><span class="line"><span class="javascript">  <span class="function"><span class="title">connectedCallback</span>(<span class="params"></span>)</span> &#123;</span></span><br><span class="line"><span class="javascript">    <span class="built_in">this</span>.innerText = <span class="string">&#x27;extends popupInfo&#x27;</span></span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="javascript">customElements.define(<span class="string">&#x27;popup-info1&#x27;</span>, popupInfo1)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="javascript"><span class="class"><span class="keyword">class</span> <span class="title">popupButton</span> <span class="keyword">extends</span> <span class="title">HTMLButtonElement</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">  <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span> &#123;</span></span><br><span class="line"><span class="javascript">    <span class="built_in">super</span>()</span></span><br><span class="line">  &#125;</span><br><span class="line"><span class="javascript">  <span class="function"><span class="title">connectedCallback</span>(<span class="params"></span>)</span> &#123;</span></span><br><span class="line"><span class="javascript">    <span class="built_in">this</span>.innerText += <span class="string">&#x27; extends&#x27;</span></span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="javascript">customElements.define(<span class="string">&#x27;popup-button&#x27;</span>, popupButton, &#123;<span class="attr">extends</span>: <span class="string">&#x27;button&#x27;</span>&#125;)</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p><strong>定义新元素</strong></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">popupInfo</span> <span class="keyword">extends</span> <span class="title">HTMLElement</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">super</span>()</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">get</span> <span class="title">observedAttributes</span>() &#123;</span><br><span class="line">    <span class="keyword">return</span> [<span class="string">&#x27;role&#x27;</span>]</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 生命周期钩子</span></span><br><span class="line">  <span class="function"><span class="title">connectedCallback</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="comment">// 创建 div</span></span><br><span class="line">    <span class="keyword">let</span> div = <span class="built_in">document</span>.createElement(<span class="string">&#x27;div&#x27;</span>)</span><br><span class="line">    div.setAttribute(<span class="string">&#x27;role&#x27;</span>, <span class="string">&#x27;popup-info&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建 img</span></span><br><span class="line">    <span class="keyword">let</span> img = <span class="built_in">document</span>.createElement(<span class="string">&#x27;img&#x27;</span>)</span><br><span class="line">    <span class="keyword">let</span> src = <span class="built_in">this</span>.getAttribute(<span class="string">&#x27;img&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建info信息</span></span><br><span class="line">    <span class="keyword">let</span> info = <span class="built_in">document</span>.createElement(<span class="string">&#x27;span&#x27;</span>)</span><br><span class="line">    <span class="keyword">let</span> text = <span class="built_in">this</span>.getAttribute(<span class="string">&#x27;data-text&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置img内容</span></span><br><span class="line">    img.src = src</span><br><span class="line">    img.alt = text</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置info内容</span></span><br><span class="line">    info.classList.add(<span class="string">&#x27;info&#x27;</span>)</span><br><span class="line">    info.innerText = text</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 添加class</span></span><br><span class="line">    div.classList.add(<span class="string">&#x27;popup-info&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 添加内容 img info</span></span><br><span class="line">    div.appendChild(img)</span><br><span class="line">    div.appendChild(info)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">this</span>.appendChild(div)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">disconnectedCallback</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;我没有了呀&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">attributeChangedCallback</span>(<span class="params">attrName, oldVal, newVal</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;当前的属性:&#x27;</span>, attrName)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;当前的属性 old:&#x27;</span>, oldVal)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;当前的属性 new:&#x27;</span>, newVal)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">adoptedCallback</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;adoptedCallback 自定义元素被移入新的 document&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">customElements.define(<span class="string">&#x27;popup-info&#x27;</span>, popupInfo)</span><br><span class="line"></span><br></pre></td></tr></table></figure>

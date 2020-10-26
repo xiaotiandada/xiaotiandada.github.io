@@ -204,7 +204,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-count">66</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -276,6 +276,102 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://xiaotiandada.github.io/2019/09/24/hexo-%E5%AD%98%E6%94%BEdemo-source/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/24250627?s=460&u=51a93e07957381123eb9fbdd6407de36033b578d&v=4">
+      <meta itemprop="name" content="小田">
+      <meta itemprop="description" content="前端小菜鸡(〃∀〃)">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小田'blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/09/24/hexo-%E5%AD%98%E6%94%BEdemo-source/" class="post-title-link" itemprop="url">hexo 存放demo source</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-09-24 13:17:57" itemprop="dateCreated datePublished" datetime="2019-09-24T13:17:57+08:00">2019-09-24</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-10-23 14:27:35" itemprop="dateModified" datetime="2020-10-23T14:27:35+08:00">2020-10-23</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/gulp/" itemprop="url" rel="index"><span itemprop="name">gulp</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>开始自己想找个地方存放自己的文章demo,开了一个仓库感觉懒得维护,直接放进文件价里面又会被build编译</p>
+<p>然后搜了一个好像没有什么好的方案,自己想了一个’野路子’(gulp)</p>
+<p>使用简单的gulp命令就能解决这个需求!!!💗</p>
+<p><a target="_blank" rel="noopener" href="https://www.gulpjs.com.cn/">https://www.gulpjs.com.cn/</a></p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev gulp</span><br></pre></td></tr></table></figure>
+
+<h2 id="写-gulpfile-js"><a href="#写-gulpfile-js" class="headerlink" title="写 gulpfile.js"></a>写 gulpfile.js</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; src, dest &#125; = <span class="built_in">require</span>(<span class="string">&#x27;gulp&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">exports</span>.default = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;copy blog_source&#x27;</span>)</span><br><span class="line">  <span class="keyword">return</span> src(<span class="string">&#x27;blog_source/**/*&#x27;</span>)</span><br><span class="line">    .pipe(dest(<span class="string">&#x27;.deploy_git/blog_source&#x27;</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我只需要吧存放demo的文件夹全部copy过去不就好了吗!!!(机智)</p>
+<h2 id="修改原来的推送"><a href="#修改原来的推送" class="headerlink" title="修改原来的推送"></a>修改原来的推送</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># old</span></span><br><span class="line">hexo g -d</span><br><span class="line"></span><br><span class="line"><span class="comment"># now</span></span><br><span class="line"><span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;gd&quot;</span>: <span class="string">&quot;hexo g -d &amp;&amp; gulp&quot;</span></span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line">yarn gd</span><br></pre></td></tr></table></figure>
+
+<p>先执行原来的命令,然后执行gulp(完事) 这样大家需要demo也可以直接去仓库里面查看或者下载😄</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
     <link itemprop="mainEntityOfPage" href="https://xiaotiandada.github.io/2019/09/15/Building-Components-Custom-Elements-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%83%E7%B4%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -308,7 +404,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-10-26 01:19:52" itemprop="dateModified" datetime="2020-10-26T01:19:52+08:00">2020-10-26</time>
+        <time title="Modified: 2020-10-26 02:18:24" itemprop="dateModified" datetime="2020-10-26T02:18:24+08:00">2020-10-26</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1132,123 +1228,6 @@
 <p>建议大家看原文吧,按照个人理解(后续有空会重写或者更新)</p>
 </blockquote>
 
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://xiaotiandada.github.io/2019/07/16/Managing-Multiple-Backgrounds-with-Custom-Properties%E3%80%90%E4%BD%BF%E7%94%A8%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B1%9E%E6%80%A7%E7%AE%A1%E7%90%86%E5%A4%9A%E4%B8%AA%E8%83%8C%E6%99%AF%E3%80%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/24250627?s=460&u=51a93e07957381123eb9fbdd6407de36033b578d&v=4">
-      <meta itemprop="name" content="小田">
-      <meta itemprop="description" content="前端小菜鸡(〃∀〃)">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="小田'blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/07/16/Managing-Multiple-Backgrounds-with-Custom-Properties%E3%80%90%E4%BD%BF%E7%94%A8%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B1%9E%E6%80%A7%E7%AE%A1%E7%90%86%E5%A4%9A%E4%B8%AA%E8%83%8C%E6%99%AF%E3%80%91/" class="post-title-link" itemprop="url">Managing Multiple Backgrounds with Custom Properties【使用自定义属性管理多个背景】</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2019-07-16 11:10:13" itemprop="dateCreated datePublished" datetime="2019-07-16T11:10:13+08:00">2019-07-16</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-10-23 14:27:35" itemprop="dateModified" datetime="2020-10-23T14:27:35+08:00">2020-10-23</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Css/" itemprop="url" rel="index"><span itemprop="name">Css</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><strong>搬砖系列</strong></p>
-<p><a target="_blank" rel="noopener" href="https://css-tricks.com/managing-multiple-backgrounds-with-custom-properties/?unapproved=1749263&moderation-hash=4b2fa24b7eca1c9d9f90251a3d1ebe93#comment-1749263">Managing Multiple Backgrounds with Custom Properties</a></p>
-<p>防止大家打不开Page,我特地复制了下来(偷懒添加内容)</p>
-<blockquote>
-<p>强烈建议大家看原文</p>
-</blockquote>
-<p>One cool thing about CSS custom properties is that they can be a part of a value. Let’s say you’re using multiple backgrounds to pull off a a design. Each background will have its own color, image, repeat, position, etc. It can be verbose!</p>
-<p>关于CSS自定义属性的一个很酷的事情是它们可以成为值的一部分。假设您使用多个背景来实现设计。每个背景都有自己的颜色，图像，重复，位置等。它可以是冗长的！</p>
-<p>You have four images:</p>
-<p>你有四张图片：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="attribute">background-position</span>:</span><br><span class="line">    top <span class="number">10px</span> left <span class="number">10px</span>,</span><br><span class="line">    top <span class="number">10px</span> right <span class="number">10px</span>,</span><br><span class="line">    bottom <span class="number">10px</span> right <span class="number">10px</span>,</span><br><span class="line">    bottom <span class="number">10px</span> left <span class="number">10px</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="attribute">background-repeat</span>: no-repeat;</span><br><span class="line">  </span><br><span class="line">  <span class="attribute">background-image</span>:</span><br><span class="line">    <span class="built_in">url</span>(https://s3-us-west-<span class="number">2</span>.amazonaws.com/s.cdpn.io/<span class="number">3</span>/angles-top-left.svg),</span><br><span class="line">    <span class="built_in">url</span>(https://s3-us-west-<span class="number">2</span>.amazonaws.com/s.cdpn.io/<span class="number">3</span>/angles-top-right.svg),</span><br><span class="line">    <span class="built_in">url</span>(https://s3-us-west-<span class="number">2</span>.amazonaws.com/s.cdpn.io/<span class="number">3</span>/angles-bottom-right.svg),</span><br><span class="line">    <span class="built_in">url</span>(https://s3-us-west-<span class="number">2</span>.amazonaws.com/s.cdpn.io/<span class="number">3</span>/angles-bottom-left.svg);</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>You want to add a fifth in a media query:</p>
-<p>您想在媒体查询中添加第五个：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@media</span> (<span class="attribute">min-width:</span> <span class="number">1500px</span>) &#123;</span><br><span class="line">  <span class="selector-tag">body</span> &#123;</span><br><span class="line">    <span class="comment">/* REPEAT all existing backgrounds, then add a fifth. */</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>That’s going to be super verbose! You’ll have to repeat each of those four images again, then add the fifth. Lots of duplication there.</p>
-<p>这将是超级冗长的！你将不得不再次重复这四个图像中的每一个，然后添加第五个。那里有很多重复。</p>
-<p>One possibility is to create a variable for the base set, then add the fifth much more cleanly:</p>
-<p>一种可能性是为基本集创建一个变量，然后更干净地添加第五个变量：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">  <span class="attribute">--baseBackgrounds</span>: </span><br><span class="line">    <span class="built_in">url</span>(https://s3-us-west-<span class="number">2</span>.amazonaws.com/s.cdpn.io/<span class="number">3</span>/angles-top-left.svg),</span><br><span class="line">    <span class="built_in">url</span>(https://s3-us-west-<span class="number">2</span>.amazonaws.com/s.cdpn.io/<span class="number">3</span>/angles-top-right.svg),</span><br><span class="line">    <span class="built_in">url</span>(https://s3-us-west-<span class="number">2</span>.amazonaws.com/s.cdpn.io/<span class="number">3</span>/angles-bottom-right.svg),</span><br><span class="line">    <span class="built_in">url</span>(https://s3-us-west-<span class="number">2</span>.amazonaws.com/s.cdpn.io/<span class="number">3</span>/angles-bottom-left.svg);</span><br><span class="line"></span><br><span class="line">  <span class="attribute">background-position</span>:</span><br><span class="line">    top <span class="number">10px</span> left <span class="number">10px</span>,</span><br><span class="line">    top <span class="number">10px</span> right <span class="number">10px</span>,</span><br><span class="line">    bottom <span class="number">10px</span> right <span class="number">10px</span>,</span><br><span class="line">    bottom <span class="number">10px</span> left <span class="number">10px</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="attribute">background-repeat</span>: no-repeat;</span><br><span class="line">  </span><br><span class="line">  <span class="attribute">background-image</span>: <span class="built_in">var</span>(--baseBackgrounds);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@media</span> (<span class="attribute">min-width:</span> <span class="number">1500px</span>) &#123;</span><br><span class="line">  <span class="selector-tag">body</span> &#123;</span><br><span class="line">    <span class="attribute">background-image</span>: </span><br><span class="line">      <span class="built_in">var</span>(--baseBackgrounds),</span><br><span class="line">      <span class="built_in">url</span>(added-fifth-background.svg);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>But, it’s really up to you. It might make more sense and be easier manage if you made each background image into a variable, and then pieced them together as needed.</p>
-<p>但是，这完全取决于你。如果将每个背景图像变为变量，然后根据需要将它们拼接在一起，则可能更有意义并且更容易管理。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">  <span class="attribute">--bg1</span>: <span class="built_in">url</span>(https://s3-us-west-<span class="number">2</span>.amazonaws.com/s.cdpn.io/<span class="number">3</span>/angles-top-left.svg);</span><br><span class="line">  <span class="attribute">--bg2</span>: <span class="built_in">url</span>(https://s3-us-west-<span class="number">2</span>.amazonaws.com/s.cdpn.io/<span class="number">3</span>/angles-top-right.svg);</span><br><span class="line">  <span class="attribute">--bg3</span>: <span class="built_in">url</span>(https://s3-us-west-<span class="number">2</span>.amazonaws.com/s.cdpn.io/<span class="number">3</span>/angles-bottom-right.svg);</span><br><span class="line">  <span class="attribute">--bg4</span>: <span class="built_in">url</span>(https://s3-us-west-<span class="number">2</span>.amazonaws.com/s.cdpn.io/<span class="number">3</span>/angles-bottom-left.svg);</span><br><span class="line">  <span class="attribute">--bg5</span>: <span class="built_in">url</span>(https://s3-us-west-<span class="number">2</span>.amazonaws.com/s.cdpn.io/<span class="number">3</span>/angles-bottom-left.svg);</span><br><span class="line">  </span><br><span class="line">  <span class="attribute">background-image</span>: <span class="built_in">var</span>(--bg1), <span class="built_in">var</span>(--bg2), <span class="built_in">var</span>(--bg3), <span class="built_in">var</span>(--bg4);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@media</span> (<span class="attribute">min-width:</span> <span class="number">1500px</span>) &#123;</span><br><span class="line">  <span class="selector-tag">body</span> &#123;</span><br><span class="line">    <span class="attribute">background-image</span>: <span class="built_in">var</span>(--bg1), <span class="built_in">var</span>(--bg2), <span class="built_in">var</span>(--bg3), <span class="built_in">var</span>(--bg4), <span class="built_in">var</span>(--bg5);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Here’s a basic version of that, including a supports query:</p>
-<p>这是它的基本版本，包括支持查询：</p>
-<p>— 懒得用他的codepen了</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100vh</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="attribute">--cloud-1</span>: <span class="built_in">url</span>(https://s3-us-west-<span class="number">2</span>.amazonaws.com/s.cdpn.io/<span class="number">3</span>/cloud.png);</span><br><span class="line">  </span><br><span class="line">  <span class="attribute">--cloud-2</span>: <span class="built_in">url</span>(https://s3-us-west-<span class="number">2</span>.amazonaws.com/s.cdpn.io/<span class="number">3</span>/cloud.png);</span><br><span class="line">  </span><br><span class="line">  <span class="attribute">--sky</span>: <span class="built_in">linear-gradient</span>(</span><br><span class="line">    to bottom,</span><br><span class="line">    #<span class="number">80</span>D8FF,</span><br><span class="line">    #<span class="number">40</span>C4FF</span><br><span class="line">  );</span><br><span class="line">  <span class="attribute">--skyDark</span>: <span class="built_in">linear-gradient</span>(</span><br><span class="line">    to bottom,</span><br><span class="line">    #<span class="number">333</span>,</span><br><span class="line">    #<span class="number">111</span></span><br><span class="line">  );</span><br><span class="line">  </span><br><span class="line">  <span class="attribute">background-size</span>: </span><br><span class="line">    <span class="number">1000px</span>, <span class="number">1000px</span>, cover;</span><br><span class="line">  </span><br><span class="line">  <span class="attribute">background-position</span>: </span><br><span class="line">    top <span class="number">25%</span> right <span class="number">20%</span>, top -<span class="number">5%</span> left <span class="number">20%</span>, center;</span><br><span class="line">  </span><br><span class="line">  <span class="attribute">background-repeat</span>: </span><br><span class="line">    repeat-x, repeat-x, no-repeat;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@supports</span> (<span class="attribute">background-image:</span> url(foo.jpg), url(bar.jpg)) &#123;</span><br><span class="line">    <span class="selector-tag">body</span> &#123;</span><br><span class="line">      <span class="attribute">background-image</span>:</span><br><span class="line">        <span class="built_in">var</span>(--cloud-<span class="number">1</span>), <span class="built_in">var</span>(--cloud-<span class="number">2</span>), <span class="built_in">var</span>(--sky);</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="keyword">@media</span> (<span class="attribute">min-width:</span> <span class="number">700px</span>) &#123;</span><br><span class="line">    <span class="selector-tag">body</span> &#123;</span><br><span class="line">      <span class="attribute">background-image</span>:</span><br><span class="line">        <span class="built_in">var</span>(--cloud-<span class="number">1</span>), <span class="built_in">var</span>(--cloud-<span class="number">2</span>), <span class="built_in">var</span>(--skyDark);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Dynamically changing just the part of a value is a huge strength of CSS custom properties!</p>
-<p>动态更改值的一部分是CSS自定义属性的巨大优势！</p>
-<p>Note, too, that with backgrounds, it might be best to include the entire shorthand as the variable. That way, it’s much easier to piece everything together at once, rather than needing something like…</p>
-<p>另请注意，对于背景，最好将整个速记包含为变量。这样，一次将所有东西拼凑起来要容易得多，而不是需要……</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">--bg_1_url</span>: <span class="selector-tag">url</span>();</span><br><span class="line"><span class="selector-tag">--bg_1_size</span>: 100<span class="selector-tag">px</span>;</span><br><span class="line"><span class="selector-tag">--bg_1_repeat</span>: <span class="selector-tag">no-repeat</span>;</span><br><span class="line"><span class="comment">/* etc. */</span></span><br></pre></td></tr></table></figure>
-<p>It’s easier to put all of the properties into shorthand and use as needed:</p>
-<p>将所有属性放入速记并根据需要使用会更容易：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;  </span><br><span class="line">  <span class="attribute">--bg_1</span>: <span class="built_in">url</span>(https://s3-us-west-<span class="number">2</span>.amazonaws.com/s.cdpn.io/<span class="number">3</span>/angles-top-left.svg) top <span class="number">10px</span> left <span class="number">10px</span> / <span class="number">86px</span> no-repeat;</span><br><span class="line">  <span class="attribute">--bg_2</span>: <span class="built_in">url</span>(https://s3-us-west-<span class="number">2</span>.amazonaws.com/s.cdpn.io/<span class="number">3</span>/angles-top-right.svg) top <span class="number">10px</span> right <span class="number">10px</span> / <span class="number">86px</span> no-repeat;</span><br><span class="line">  <span class="attribute">--bg_3</span>: <span class="built_in">url</span>(https://s3-us-west-<span class="number">2</span>.amazonaws.com/s.cdpn.io/<span class="number">3</span>/angles-bottom-right.svg) bottom <span class="number">10px</span> right <span class="number">10px</span> / <span class="number">86px</span> no-repeat;</span><br><span class="line">  <span class="attribute">--bg_4</span>: <span class="built_in">url</span>(https://s3-us-west-<span class="number">2</span>.amazonaws.com/s.cdpn.io/<span class="number">3</span>/angles-bottom-left.svg) bottom <span class="number">10px</span> left <span class="number">10px</span>  / <span class="number">86px</span> no-repeat;</span><br><span class="line">    </span><br><span class="line">  <span class="attribute">background</span>:</span><br><span class="line">    <span class="built_in">var</span>(--bg_1), <span class="built_in">var</span>(--bg_2),<span class="built_in">var</span>(--bg_3),<span class="built_in">var</span>(--bg_4);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
