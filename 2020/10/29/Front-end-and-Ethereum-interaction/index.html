@@ -25,18 +25,20 @@
     var CONFIG = {"hostname":"xiaotiandada.github.io","root":"/","scheme":"Gemini","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
   </script>
 
-  <meta name="description" content="前端小菜鸡(〃∀〃)">
-<meta property="og:type" content="website">
-<meta property="og:title" content="小田&#39;blog">
-<meta property="og:url" content="https://xiaotiandada.github.io/archives/2020/index.html">
+  <meta name="description" content="留个坑…">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Front-end and Ethereum interaction">
+<meta property="og:url" content="https://xiaotiandada.github.io/2020/10/29/Front-end-and-Ethereum-interaction/index.html">
 <meta property="og:site_name" content="小田&#39;blog">
-<meta property="og:description" content="前端小菜鸡(〃∀〃)">
+<meta property="og:description" content="留个坑…">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-10-28T17:00:53.000Z">
+<meta property="article:modified_time" content="2020-10-28T17:07:31.459Z">
 <meta property="article:author" content="小田">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://xiaotiandada.github.io/archives/2020/">
+<link rel="canonical" href="https://xiaotiandada.github.io/2020/10/29/Front-end-and-Ethereum-interaction/">
 
 
 <script class="page-configurations">
@@ -44,12 +46,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>Archive | 小田'blog</title>
+  <title>Front-end and Ethereum interaction | 小田'blog</title>
   
 
 
@@ -178,7 +180,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -190,6 +192,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#web3js"><span class="nav-number">1.</span> <span class="nav-text">web3js</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ethers-js"><span class="nav-number">2.</span> <span class="nav-text">ethers.js</span></a></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -264,237 +267,142 @@
 </noscript>
 
 
-    <div class="main-inner archive posts-collapse">
+    <div class="main-inner post posts-expand">
       
 
       
 
   
-  
-  
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        
-        <span class="collection-header">Nice! 67 posts in total. Keep on posting.</span>
-      </div>
 
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://xiaotiandada.github.io/2020/10/29/Front-end-and-Ethereum-interaction/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/24250627?s=460&u=51a93e07957381123eb9fbdd6407de36033b578d&v=4">
+      <meta itemprop="name" content="小田">
+      <meta itemprop="description" content="前端小菜鸡(〃∀〃)">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小田'blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Front-end and Ethereum interaction
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
       
-    <div class="collection-year">
-      <span class="collection-header">2020</span>
+
+      <time title="Created: 2020-10-29 01:00:53 / Modified: 01:07:31" itemprop="dateCreated datePublished" datetime="2020-10-29T01:00:53+08:00">2020-10-29</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>留个坑…</p>
+<a id="more"></a>
+
+<p><a target="_blank" rel="noopener" href="https://ethereum.org/en/">https://ethereum.org/en/</a></p>
+<p><a target="_blank" rel="noopener" href="https://etherscan.io/">https://etherscan.io/</a></p>
+<h4 id="web3js"><a href="#web3js" class="headerlink" title="web3js"></a>web3js</h4><p><a target="_blank" rel="noopener" href="https://github.com/ethereum/web3.js">Github</a> <a target="_blank" rel="noopener" href="https://web3js.readthedocs.io/en/v1.3.0/">Doc</a></p>
+<h4 id="ethers-js"><a href="#ethers-js" class="headerlink" title="ethers.js"></a>ethers.js</h4><p><a target="_blank" rel="noopener" href="https://github.com/ethers-io/ethers.js/">Github</a> <a target="_blank" rel="noopener" href="https://docs.ethers.io/v5/">Doc</a></p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2020-10-29T01:00:53+08:00"
-              content="2020-10-29">
-          10-29
-        </time>
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="https://i.imgur.com/2wHCa68.jpg" alt="小田 WeChat Pay">
+        <span>WeChat Pay</span>
+      </div>
+      <div>
+        <img src="https://i.imgur.com/tuC8CCx.jpg" alt="小田 Alipay">
+        <span>Alipay</span>
       </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/10/29/Front-end-and-Ethereum-interaction/" itemprop="url">
-            <span itemprop="name">Front-end and Ethereum interaction</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2020-10-26T23:52:23+08:00"
-              content="2020-10-26">
-          10-26
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/10/26/mvvm-learn/" itemprop="url">
-            <span itemprop="name">mvvm learn</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2020-08-06T10:20:10+08:00"
-              content="2020-08-06">
-          08-06
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/08/06/1449-The-user-specified-as-a-definer-this-is-user-name-does-not-exist/" itemprop="url">
-            <span itemprop="name">1449 - The user specified as a definer ('this is user name'@'%') does not exist</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2020-08-06T00:28:58+08:00"
-              content="2020-08-06">
-          08-06
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/08/06/CSS-Grid-%E5%AD%A6%E4%B9%A0/" itemprop="url">
-            <span itemprop="name">CSS Grid 学习</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2020-08-02T22:52:54+08:00"
-              content="2020-08-02">
-          08-02
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/08/02/node-%E6%9C%8D%E5%8A%A1%E5%8F%B7-%E5%BE%AE%E4%BF%A1%E6%89%AB%E7%A0%81%E7%99%BB%E5%BD%95/" itemprop="url">
-            <span itemprop="name">node 服务号 微信扫码登录</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2020-08-02T22:20:54+08:00"
-              content="2020-08-02">
-          08-02
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/08/02/elasticsearch-node-%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" itemprop="url">
-            <span itemprop="name">elasticsearch node 简单使用</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2020-07-29T00:14:56+08:00"
-              content="2020-07-29">
-          07-29
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/07/29/You-Don-t-Need-JavaScript/" itemprop="url">
-            <span itemprop="name">You Don't Need JavaScript</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2020-07-12T16:56:33+08:00"
-              content="2020-07-12">
-          07-12
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/07/12/You-Dont-Need-Lodash-Underscore/" itemprop="url">
-            <span itemprop="name">You-Dont-Need-Lodash-Underscore</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2020-07-10T14:39:18+08:00"
-              content="2020-07-10">
-          07-10
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/07/10/Nginx-%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/" itemprop="url">
-            <span itemprop="name">Nginx 负载均衡</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2020-07-08T18:23:34+08:00"
-              content="2020-07-08">
-          07-08
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/07/08/%E8%AE%A9Mocha%E6%94%AF%E6%8C%81es6%E8%AF%AD%E6%B3%95/" itemprop="url">
-            <span itemprop="name">让Mocha支持es6语法</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-
-    </div>
   </div>
-  
-  
-  
+</div>
 
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/2020/page/2/">2</a><a class="page-number" href="/archives/2020/page/3/">3</a><a class="extend next" rel="next" href="/archives/2020/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
-  </nav>
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>小田
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="https://xiaotiandada.github.io/2020/10/29/Front-end-and-Ethereum-interaction/" title="Front-end and Ethereum interaction">https://xiaotiandada.github.io/2020/10/29/Front-end-and-Ethereum-interaction/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/10/26/mvvm-learn/" rel="prev" title="mvvm learn">
+                  <i class="fa fa-chevron-left"></i> mvvm learn
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
 
 
 
