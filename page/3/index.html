@@ -204,7 +204,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">68</span>
+          <span class="site-state-item-count">69</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -268,6 +268,95 @@
       
 
       
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://xiaotiandada.github.io/2020/01/27/%E7%94%A8nodejs%E5%BF%AB%E9%80%9F%E5%9C%A8Matataki%E5%8F%91%E6%96%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/24250627?s=460&u=51a93e07957381123eb9fbdd6407de36033b578d&v=4">
+      <meta itemprop="name" content="小田">
+      <meta itemprop="description" content="前端小菜鸡(〃∀〃)">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小田'blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/01/27/%E7%94%A8nodejs%E5%BF%AB%E9%80%9F%E5%9C%A8Matataki%E5%8F%91%E6%96%87/" class="post-title-link" itemprop="url">用nodejs快速在Matataki发文</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-01-27 20:52:26" itemprop="dateCreated datePublished" datetime="2020-01-27T20:52:26+08:00">2020-01-27</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-10-23 14:27:35" itemprop="dateModified" datetime="2020-10-23T14:27:35+08:00">2020-10-23</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/node/" itemprop="url" rel="index"><span itemprop="name">node</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>如何用nodejs快速在Matataki发文, 利用node爬虫来获取网页的内容然后转发到<a target="_blank" rel="noopener" href="https://www.matataki.io/">matataki</a>上面</p>
+<p>这里就自己的<a href="https://xiaotiandada.github.io/">blog</a>做一个简单的<strong>example</strong> 这是可能需要用的<a href="https://xiaotiandada.github.io/matatakiApi">接口文档</a>⬇️⬇️⬇️ (docsify真香)</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/01/27/%E7%94%A8nodejs%E5%BF%AB%E9%80%9F%E5%9C%A8Matataki%E5%8F%91%E6%96%87/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
     
 
 
@@ -1101,105 +1190,6 @@
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">HelloWorld</span> <span class="attr">v-scroll</span>=<span class="string">&quot;handleScroll&quot;</span> <span class="attr">class</span>=<span class="string">&quot;box&quot;</span> <span class="attr">msg</span>=<span class="string">&quot;Welcome to Your Vue.js App&quot;</span>/&gt;</span></span><br><span class="line">````</span><br><span class="line"></span><br><span class="line">可以是任何元素 使用 v-scroll=&quot;xxx&quot;</span><br><span class="line"></span><br><span class="line">```js</span><br><span class="line">// ....</span><br><span class="line">    handleScroll (evt, el) &#123;</span><br><span class="line">      // eslint-disable-next-line no-console</span><br><span class="line">      console.log(19, evt, el, window.scrollY)</span><br><span class="line">      // judeg window.scroll, execution TweenMax function</span><br><span class="line">      if (window.scrollY &gt; 50) &#123;</span><br><span class="line">        TweenMax.to(el, .3, &#123;</span><br><span class="line">          y: -10,</span><br><span class="line">          opacity: 1,</span><br><span class="line">          // eslint-disable-next-line no-undef</span><br><span class="line">          ease: Sine.easeOut</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">      // to meet the conditions return true else return false</span><br><span class="line">      return window.scrollY &gt; 100</span><br><span class="line">    &#125;</span><br><span class="line">// ...</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">transition</span>: <span class="number">1.5s</span> all <span class="built_in">cubic-bezier</span>(<span class="number">0.39</span>, <span class="number">0.575</span>, <span class="number">0.565</span>, <span class="number">1</span>);</span><br><span class="line">  <span class="comment">/* transform: translate3d(0, 10px, 0); */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://xiaotiandada.github.io/2019/10/12/%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D%E4%B8%A4%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B9%8B%E9%97%B4%E7%9A%84%E5%86%85%E5%AE%B9/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/24250627?s=460&u=51a93e07957381123eb9fbdd6407de36033b578d&v=4">
-      <meta itemprop="name" content="小田">
-      <meta itemprop="description" content="前端小菜鸡(〃∀〃)">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="小田'blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/12/%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D%E4%B8%A4%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B9%8B%E9%97%B4%E7%9A%84%E5%86%85%E5%AE%B9/" class="post-title-link" itemprop="url">正则匹配两个字符串之间的内容</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2019-10-12 00:32:54" itemprop="dateCreated datePublished" datetime="2019-10-12T00:32:54+08:00">2019-10-12</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-10-23 14:27:35" itemprop="dateModified" datetime="2020-10-23T14:27:35+08:00">2020-10-23</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%AD%A3%E5%88%99/" itemprop="url" rel="index"><span itemprop="name">正则</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><a target="_blank" rel="noopener" href="http://c.runoob.com/front-end/854">在线工具</a></p>
-<p><strong>匹配A字符与B字符之间的字符(包含AB)</strong></p>
-<p>A.*?B</p>
-<img width="300" src="正则匹配两个字符串之间的内容/1.png">
-
-<p><strong>匹配A字符与B字符之间的字符(包含A不包含B)</strong></p>
-<p>A.*?(?=B)</p>
-<img width="300" src="正则匹配两个字符串之间的内容/2.png">
-
-<p><strong>匹配A字符与B字符之间的字符(不包含AB)</strong></p>
-<p>(?&lt;=A).*?(?=B)</p>
-<img width="300" src="正则匹配两个字符串之间的内容/3.png">
-
-
-
-<hr>
-<blockquote>
-<p>资料</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">### 正则中的 ?&#x3D; 、?&lt;&#x3D; 、?!、 ?&lt;!&#x3D;</span><br><span class="line"></span><br><span class="line">以前看正则的时候遇到?&#x3D; 、?&lt;&#x3D;，在网上搜索出来名字有称之为正向预查、负向预查的，有称之为前瞻、后顾的，看用法的话大概知道是怎么回事，但就是记不住啊，对于我来说，这名称太抽象(鬼扯)了。</span><br><span class="line"></span><br><span class="line">今天看书看到作者讲到正则，感觉自己又有所领悟，翻出来重新理解了一下。</span><br><span class="line"></span><br><span class="line">如今我的理解是这样的，我将&lt;记为方向，包含这个箭头说明是放在目标内容左边的：</span><br><span class="line"></span><br><span class="line">1. &#96;&#96;&#96;?&#x3D;&#96;&#96;&#96; ： 询问后面跟着的东西是否等于这个    &#x2F;b(?&#x3D;a)&#x2F;.test(&#39;bab&#39;)</span><br><span class="line"></span><br><span class="line">2. &#96;&#96;&#96;?&lt;&#x3D;&#96;&#96;&#96; ： 询问是否以这个东西开头  &#x2F;(?&lt;&#x3D;a)b&#x2F;.test(&#39;ab&#39;)</span><br><span class="line"></span><br><span class="line">3. &#96;&#96;&#96;?!&#96;&#96;&#96; : 询问后面跟着的东西是否不是这个  &#x2F;b(?!a)&#x2F;.test(&#39;bb&#39;)</span><br><span class="line"></span><br><span class="line">4. &#96;&#96;&#96;?&lt;!&#x3D;&#96;&#96;&#96; ：询问是否不是以这个东西开头  &#x2F;(?&lt;!&#x3D;a)b&#x2F;.test(&#39;bb&#39;)</span><br><span class="line"></span><br><span class="line">其实按照我这样理解的话，&#96;&#96;&#96;?!&#96;&#96;&#96; 后面要是加上&#96;&#96;&#96;&#x3D;&#96;&#96;&#96;就更加符合我的心理预期了，最后还有一点，匹配得到的结果并不包含 ?&#x3D;、?&lt;&#x3D;、?!和?&lt;!&#x3D;里面的内容</span><br><span class="line"></span><br><span class="line">### 顺便记录一下</span><br><span class="line"></span><br><span class="line">javascript的replace方法的第二个参数，如果是传入的字符串的话，有几个特殊的东西。</span><br><span class="line"></span><br><span class="line">1. &#96;&#96;&#96;$&amp;&#96;&#96; ： 表示匹配到的结果。&#39;javascript&#39;.replace(&#x2F;script&#x2F;, &#39;$&amp;$&amp;&#39;) -&gt;  ‘javascriptscript’</span><br><span class="line"></span><br><span class="line">2. &#96;&#96;&#96;$\&#96;&#96;&#96;&#96; ： 表示匹配到的结果的左边或者说前面的那一堆字符串。 &#39;javascript&#39;.replace(&#x2F;script&#x2F;, &#39;$&amp; 不是 $&#96;&#39;)  -&gt;  &quot;javascript 不是 java&quot;</span><br><span class="line"></span><br><span class="line">3. &#96;&#96;&#96;$&#39;&#96;&#96;&#96; ： 表示匹配到的结果的右边或者说后面的那一堆字符串。 &#39;我是猪&#39;.replace(&#x2F;我是&#x2F;, &quot;$&amp;$&#39;&quot;)  -&gt;   &quot;我是猪猪&quot;</span><br><span class="line"></span><br><span class="line">4. &#96;&#96;&#96;$$&#96;&#96;&#96; ： 表示$字符。</span><br><span class="line"></span><br><span class="line">作者：不过从心而已</span><br><span class="line">链接：https:&#x2F;&#x2F;www.jianshu.com&#x2F;p&#x2F;661af704198c</span><br><span class="line">来源：简书</span><br><span class="line">著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</span><br></pre></td></tr></table></figure>
       
     </div>
 

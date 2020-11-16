@@ -204,7 +204,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">68</span>
+          <span class="site-state-item-count">69</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -268,6 +268,105 @@
       
 
       
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://xiaotiandada.github.io/2019/10/12/%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D%E4%B8%A4%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B9%8B%E9%97%B4%E7%9A%84%E5%86%85%E5%AE%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/24250627?s=460&u=51a93e07957381123eb9fbdd6407de36033b578d&v=4">
+      <meta itemprop="name" content="小田">
+      <meta itemprop="description" content="前端小菜鸡(〃∀〃)">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小田'blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/12/%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D%E4%B8%A4%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B9%8B%E9%97%B4%E7%9A%84%E5%86%85%E5%AE%B9/" class="post-title-link" itemprop="url">正则匹配两个字符串之间的内容</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-10-12 00:32:54" itemprop="dateCreated datePublished" datetime="2019-10-12T00:32:54+08:00">2019-10-12</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-10-23 14:27:35" itemprop="dateModified" datetime="2020-10-23T14:27:35+08:00">2020-10-23</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%AD%A3%E5%88%99/" itemprop="url" rel="index"><span itemprop="name">正则</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><a target="_blank" rel="noopener" href="http://c.runoob.com/front-end/854">在线工具</a></p>
+<p><strong>匹配A字符与B字符之间的字符(包含AB)</strong></p>
+<p>A.*?B</p>
+<img width="300" src="正则匹配两个字符串之间的内容/1.png">
+
+<p><strong>匹配A字符与B字符之间的字符(包含A不包含B)</strong></p>
+<p>A.*?(?=B)</p>
+<img width="300" src="正则匹配两个字符串之间的内容/2.png">
+
+<p><strong>匹配A字符与B字符之间的字符(不包含AB)</strong></p>
+<p>(?&lt;=A).*?(?=B)</p>
+<img width="300" src="正则匹配两个字符串之间的内容/3.png">
+
+
+
+<hr>
+<blockquote>
+<p>资料</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">### 正则中的 ?&#x3D; 、?&lt;&#x3D; 、?!、 ?&lt;!&#x3D;</span><br><span class="line"></span><br><span class="line">以前看正则的时候遇到?&#x3D; 、?&lt;&#x3D;，在网上搜索出来名字有称之为正向预查、负向预查的，有称之为前瞻、后顾的，看用法的话大概知道是怎么回事，但就是记不住啊，对于我来说，这名称太抽象(鬼扯)了。</span><br><span class="line"></span><br><span class="line">今天看书看到作者讲到正则，感觉自己又有所领悟，翻出来重新理解了一下。</span><br><span class="line"></span><br><span class="line">如今我的理解是这样的，我将&lt;记为方向，包含这个箭头说明是放在目标内容左边的：</span><br><span class="line"></span><br><span class="line">1. &#96;&#96;&#96;?&#x3D;&#96;&#96;&#96; ： 询问后面跟着的东西是否等于这个    &#x2F;b(?&#x3D;a)&#x2F;.test(&#39;bab&#39;)</span><br><span class="line"></span><br><span class="line">2. &#96;&#96;&#96;?&lt;&#x3D;&#96;&#96;&#96; ： 询问是否以这个东西开头  &#x2F;(?&lt;&#x3D;a)b&#x2F;.test(&#39;ab&#39;)</span><br><span class="line"></span><br><span class="line">3. &#96;&#96;&#96;?!&#96;&#96;&#96; : 询问后面跟着的东西是否不是这个  &#x2F;b(?!a)&#x2F;.test(&#39;bb&#39;)</span><br><span class="line"></span><br><span class="line">4. &#96;&#96;&#96;?&lt;!&#x3D;&#96;&#96;&#96; ：询问是否不是以这个东西开头  &#x2F;(?&lt;!&#x3D;a)b&#x2F;.test(&#39;bb&#39;)</span><br><span class="line"></span><br><span class="line">其实按照我这样理解的话，&#96;&#96;&#96;?!&#96;&#96;&#96; 后面要是加上&#96;&#96;&#96;&#x3D;&#96;&#96;&#96;就更加符合我的心理预期了，最后还有一点，匹配得到的结果并不包含 ?&#x3D;、?&lt;&#x3D;、?!和?&lt;!&#x3D;里面的内容</span><br><span class="line"></span><br><span class="line">### 顺便记录一下</span><br><span class="line"></span><br><span class="line">javascript的replace方法的第二个参数，如果是传入的字符串的话，有几个特殊的东西。</span><br><span class="line"></span><br><span class="line">1. &#96;&#96;&#96;$&amp;&#96;&#96; ： 表示匹配到的结果。&#39;javascript&#39;.replace(&#x2F;script&#x2F;, &#39;$&amp;$&amp;&#39;) -&gt;  ‘javascriptscript’</span><br><span class="line"></span><br><span class="line">2. &#96;&#96;&#96;$\&#96;&#96;&#96;&#96; ： 表示匹配到的结果的左边或者说前面的那一堆字符串。 &#39;javascript&#39;.replace(&#x2F;script&#x2F;, &#39;$&amp; 不是 $&#96;&#39;)  -&gt;  &quot;javascript 不是 java&quot;</span><br><span class="line"></span><br><span class="line">3. &#96;&#96;&#96;$&#39;&#96;&#96;&#96; ： 表示匹配到的结果的右边或者说后面的那一堆字符串。 &#39;我是猪&#39;.replace(&#x2F;我是&#x2F;, &quot;$&amp;$&#39;&quot;)  -&gt;   &quot;我是猪猪&quot;</span><br><span class="line"></span><br><span class="line">4. &#96;&#96;&#96;$$&#96;&#96;&#96; ： 表示$字符。</span><br><span class="line"></span><br><span class="line">作者：不过从心而已</span><br><span class="line">链接：https:&#x2F;&#x2F;www.jianshu.com&#x2F;p&#x2F;661af704198c</span><br><span class="line">来源：简书</span><br><span class="line">著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
     
 
 
@@ -1137,100 +1236,6 @@
             </div>
           <!--/noindex-->
         
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://xiaotiandada.github.io/2019/08/02/Safari%E7%AD%89%E6%B5%8F%E8%A7%88%E5%99%A8-border-eadius%E5%A4%B1%E6%95%88/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/24250627?s=460&u=51a93e07957381123eb9fbdd6407de36033b578d&v=4">
-      <meta itemprop="name" content="小田">
-      <meta itemprop="description" content="前端小菜鸡(〃∀〃)">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="小田'blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/08/02/Safari%E7%AD%89%E6%B5%8F%E8%A7%88%E5%99%A8-border-eadius%E5%A4%B1%E6%95%88/" class="post-title-link" itemprop="url">Safari等浏览器 border-eadius失效...</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2019-08-02 11:34:33" itemprop="dateCreated datePublished" datetime="2019-08-02T11:34:33+08:00">2019-08-02</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-10-23 14:27:35" itemprop="dateModified" datetime="2020-10-23T14:27:35+08:00">2020-10-23</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Css%E5%9D%91/" itemprop="url" rel="index"><span itemprop="name">Css坑</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>今天产品反馈了一个<strong>Bug</strong>说是鼠标经过,图片会 <strong>圆角=》无圆角=》圆角</strong> 的过程来变化</p>
-<p>懒得贴图, 搜到这个文章肯定就会发生了hhh</p>
-<p>增加解决方案,方便更快搜到问题</p>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>给他的<strong>父级</strong>添加 transform</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">transform</span>: <span class="selector-tag">rotate</span>(0<span class="selector-tag">deg</span>);</span><br><span class="line"><span class="comment">/* 懒得加 -webkit */</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>我还不知道为什么会这样(可能是浏览器的解析不同???)</p>
-<h2 id="脑洞"><a href="#脑洞" class="headerlink" title="脑洞"></a>脑洞</h2><p>猜测影响失效的原因</p>
-<ul>
-<li>transition 去掉这个可以解决!!!但是没有动画只会很难看 不可取</li>
-<li>transform 猜测</li>
-<li>xxxxx</li>
-</ul>
-<p>如果大佬知道问题和原理所在,请告知菜🐔我!!!, 右侧和其他文章有联系方式!!!</p>
-
       
     </div>
 

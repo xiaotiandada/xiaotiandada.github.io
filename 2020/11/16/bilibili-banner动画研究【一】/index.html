@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="GMYdT_r7fntK64QyVrdwvQ-99rUPr1Kx6Twk6SFmHOc">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xiaotiandada.github.io","root":"/","scheme":"Gemini","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+  </script>
+
+  <meta name="description" content="https:&#x2F;&#x2F;www.bilibili.com&#x2F; 后面可能会被更新掉   为什么叫一？ 说不能还有别的好玩的动画学习！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="bilibili banner动画研究【一】">
+<meta property="og:url" content="https://xiaotiandada.github.io/2020/11/16/bilibili-banner%E5%8A%A8%E7%94%BB%E7%A0%94%E7%A9%B6%E3%80%90%E4%B8%80%E3%80%91/index.html">
+<meta property="og:site_name" content="小田&#39;blog">
+<meta property="og:description" content="https:&#x2F;&#x2F;www.bilibili.com&#x2F; 后面可能会被更新掉   为什么叫一？ 说不能还有别的好玩的动画学习！">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.imgur.com/2BWZJjY.jpg?1">
+<meta property="article:published_time" content="2020-11-16T13:52:56.000Z">
+<meta property="article:modified_time" content="2020-11-16T15:13:50.951Z">
+<meta property="article:author" content="小田">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/2BWZJjY.jpg?1">
+
+
+<link rel="canonical" href="https://xiaotiandada.github.io/2020/11/16/bilibili-banner%E5%8A%A8%E7%94%BB%E7%A0%94%E7%A9%B6%E3%80%90%E4%B8%80%E3%80%91/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>bilibili banner动画研究【一】 | 小田'blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">小田'blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">前端小菜鸡(〃∀〃)</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Banner-vue"><span class="nav-number">1.</span> <span class="nav-text">Banner.vue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AnimatedBanner"><span class="nav-number">2.</span> <span class="nav-text">AnimatedBanner</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="小田"
+      src="https://avatars3.githubusercontent.com/u/24250627?s=460&u=51a93e07957381123eb9fbdd6407de36033b578d&v=4">
+  <p class="site-author-name" itemprop="name">小田</p>
+  <div class="site-description" itemprop="description">前端小菜鸡(〃∀〃)</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">69</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xiaotiandada" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xiaotiandada" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:istianlei@qq.com" title="E-Mail → mailto:istianlei@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      LINKS👭
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://www.shuizilong.com/house/" title="http:&#x2F;&#x2F;www.shuizilong.com&#x2F;house&#x2F;" rel="noopener" target="_blank">某岛</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://shellteo.top/" title="https:&#x2F;&#x2F;shellteo.top&#x2F;" rel="noopener" target="_blank">shellteo</a>
+        </li>
+    </ul>
+  </div>
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://xiaotiandada.github.io/2020/11/16/bilibili-banner%E5%8A%A8%E7%94%BB%E7%A0%94%E7%A9%B6%E3%80%90%E4%B8%80%E3%80%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/24250627?s=460&u=51a93e07957381123eb9fbdd6407de36033b578d&v=4">
+      <meta itemprop="name" content="小田">
+      <meta itemprop="description" content="前端小菜鸡(〃∀〃)">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小田'blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          bilibili banner动画研究【一】
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2020-11-16 21:52:56 / Modified: 23:13:50" itemprop="dateCreated datePublished" datetime="2020-11-16T21:52:56+08:00">2020-11-16</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><img src="https://i.imgur.com/2BWZJjY.jpg?1" alt="动画效果"></p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/">https://www.bilibili.com/</a> 后面可能会被更新掉</p>
+<blockquote>
+<p> 为什么叫一？ 说不能还有别的好玩的动画学习！</p>
+</blockquote>
+<a id="more"></a>
+
+<iframe src="https://codesandbox.io/embed/bilibili-bannner-w49d7?fontsize=14&hidenavigation=1&theme=dark&view=preview"
+     style="width:100%; height:200px; border:0; border-radius: 4px; overflow:hidden;"
+     title="bilibili bannner"
+     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+   ></iframe>
+
+<p>主要两个组件完成，代码我也是复制b站大佬的🍑 然后自己理解理解思路</p>
+<h3 id="Banner-vue"><a href="#Banner-vue" class="headerlink" title="Banner.vue"></a>Banner.vue</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">computed: &#123;</span><br><span class="line">  <span class="function"><span class="title">locs</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">  		<span class="comment">//...</span></span><br><span class="line">      pic:</span><br><span class="line">        <span class="string">&quot;http://i0.hdslb.com/bfs/archive/0b7eef054547750e6bfeff6f36c83e83d2a058fb.png&quot;</span>,</span><br><span class="line">      litpic:</span><br><span class="line">        <span class="string">&quot;http://i0.hdslb.com/bfs/archive/622017dd4b0140432962d3ce0c6db99d77d2e937.png&quot;</span>,</span><br><span class="line">		<span class="comment">//...</span></span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="title">bannerImg</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="built_in">this</span>.locs &amp;&amp; <span class="built_in">this</span>.locs.pic).trim();</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="title">logoImg</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="built_in">this</span>.locs &amp;&amp; <span class="built_in">this</span>.locs.litpic).trim();</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>返回一张静止的页面，在没有加载完成或者不支持的时候显示</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 解析数据 提前定义好的具体看代码</span></span><br><span class="line"><span class="built_in">this</span>.layerConfig = <span class="built_in">JSON</span>.parse(<span class="string">&#x27;[...]&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>解析banner数据</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 只有在启用了动画banner的配置，且浏览器支持css filter时才加载动画banner的图片资源</span></span><br><span class="line"><span class="built_in">this</span>.animatedBannerSupport =</span><br><span class="line">  <span class="keyword">typeof</span> CSS !== <span class="string">&quot;undefined&quot;</span> &amp;&amp;</span><br><span class="line">  CSS.supports &amp;&amp;</span><br><span class="line">  CSS.supports(<span class="string">&quot;filter: blur(1px)&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>查看是否支持一些需要的条件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 根据每帧时长计算循环时间</span></span><br><span class="line"><span class="built_in">this</span>.layerConfig.map(<span class="function">(<span class="params">v</span>) =&gt;</span> &#123;</span><br><span class="line">  v.loopTime = v.images.reduce(<span class="function">(<span class="params">p, c</span>) =&gt;</span> p + (c.duration || <span class="number">0</span>), <span class="number">0</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>统计所有Time 利用 Reduce 累计</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="comment">// 加载所有图片资源</span></span><br><span class="line">  <span class="keyword">await</span> <span class="built_in">Promise</span>.all(</span><br><span class="line">    <span class="built_in">this</span>.layerConfig.map(<span class="keyword">async</span> (v) =&gt; &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&quot;v&quot;</span>, v);</span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">Promise</span>.all(</span><br><span class="line">        v.images.map(<span class="keyword">async</span> (i, index) =&gt; &#123;</span><br><span class="line">          <span class="keyword">const</span> img = <span class="built_in">document</span>.createElement(<span class="string">&quot;img&quot;</span>);</span><br><span class="line">          img.src = i.src;</span><br><span class="line">          <span class="keyword">await</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> (img.onload = resolve));</span><br><span class="line">          v.images[index].img = img;</span><br><span class="line">        &#125;)</span><br><span class="line">      );</span><br><span class="line">    &#125;)</span><br><span class="line">  );</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;this.layerConfig&quot;</span>, <span class="built_in">this</span>.layerConfig);</span><br><span class="line">  <span class="comment">// 切换为动画banner</span></span><br><span class="line">  <span class="built_in">this</span>.animatedBannerLoaded = <span class="literal">true</span>;</span><br><span class="line">&#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;load animated banner images error&quot;</span>, e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>利用Promise加载所有图片资源，两个Promise是因为images里面也是一个数组</p>
+<p>可以用这种方法提前加载图片 这样切换的时候就不会很卡顿 嗯 学习了！</p>
+<h3 id="AnimatedBanner"><a href="#AnimatedBanner" class="headerlink" title="AnimatedBanner"></a>AnimatedBanner</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">props: &#123;</span><br><span class="line">  layerConfig: &#123;</span><br><span class="line">    type: <span class="built_in">Array</span>,</span><br><span class="line">      required: <span class="literal">true</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>接收父组件处理好的数组数据</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> layerConfig = <span class="built_in">this</span>.layerConfig;</span><br><span class="line"><span class="keyword">if</span> (!layerConfig.length) &#123;</span><br><span class="line">  <span class="built_in">this</span>.$emit(<span class="string">&quot;error&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> container = <span class="built_in">this</span>.$refs[<span class="string">&quot;container&quot;</span>];</span><br><span class="line"><span class="keyword">let</span> containerHeight = container.clientHeight;</span><br><span class="line"><span class="keyword">let</span> containerWidth = container.clientWidth;</span><br><span class="line"><span class="keyword">let</span> containerScale = containerHeight / <span class="number">155</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 加载图片资源移动到组件外部， 这里只设置图片宽高</span></span><br><span class="line">layerConfig.forEach(<span class="function">(<span class="params">v</span>) =&gt;</span> &#123;</span><br><span class="line">  v.images.forEach(<span class="function">(<span class="params">i, index</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> img = v.images[index].img;</span><br><span class="line">    img.dataset.height = img.height;</span><br><span class="line">    img.dataset.width = img.width;</span><br><span class="line">    img.height =</span><br><span class="line">      img.dataset.height * containerScale * (v.initial.scale || <span class="number">1</span>);</span><br><span class="line">    img.width = img.dataset.width * containerScale * (v.initial.scale || <span class="number">1</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>如果没有调用$emit告诉父组件显示静态图片</p>
+<p>获取容器和宽高缩放等属性，并且设置父组件获取图片的宽高等属性 并且根据缩放比例计算</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始化图层</span></span><br><span class="line"><span class="keyword">const</span> layers = layerConfig.map(<span class="function">(<span class="params">v</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> layer = <span class="built_in">document</span>.createElement(<span class="string">&quot;div&quot;</span>);</span><br><span class="line">  layer.classList.add(<span class="string">&quot;layer&quot;</span>);</span><br><span class="line">  container.appendChild(layer);</span><br><span class="line">  <span class="keyword">return</span> layer;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>初始化图层到container</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始状态</span></span><br><span class="line"><span class="keyword">const</span> iaf = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    layers.map(<span class="function">(<span class="params">layer, i</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// console.log(&quot;layer log&quot;, i, layer);</span></span><br><span class="line">      <span class="keyword">const</span> v = layerConfig[i];</span><br><span class="line">      <span class="keyword">const</span> a = layer.firstChild;</span><br><span class="line">      <span class="comment">// console.log(&quot;a&quot;, a);</span></span><br><span class="line">      <span class="keyword">let</span> rotateStr = <span class="string">&quot;&quot;</span>;</span><br><span class="line">      <span class="keyword">let</span> translateStr = <span class="string">&quot;&quot;</span>;</span><br><span class="line">      <span class="keyword">if</span> (v.initial.rotate) &#123;</span><br><span class="line">        rotateStr = <span class="string">`rotate(<span class="subst">$&#123;v.initial.rotate&#125;</span>deg)`</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (v.initial.translate) &#123;</span><br><span class="line">        <span class="keyword">const</span> base = v.initial.translate || [<span class="number">0</span>, <span class="number">0</span>];</span><br><span class="line">        translateStr = <span class="string">`translate(<span class="subst">$&#123;base[<span class="number">0</span>]&#125;</span>px, <span class="subst">$&#123;base[<span class="number">1</span>]&#125;</span>px)`</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      a.style.transform = <span class="string">`<span class="subst">$&#123;translateStr&#125;</span> <span class="subst">$&#123;rotateStr&#125;</span>`</span>;</span><br><span class="line">      <span class="keyword">if</span> (v.initial.blur) &#123;</span><br><span class="line">        a.style.filter = <span class="string">`blur(<span class="subst">$&#123;<span class="built_in">Math</span>.abs(v.initial.blur)&#125;</span>px)`</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">    <span class="built_in">console</span>.error(e);</span><br><span class="line">    <span class="built_in">this</span>.$emit(<span class="string">&quot;error&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 切换下一帧的方法</span></span><br><span class="line"><span class="keyword">const</span> changeToNextFrame = <span class="function">(<span class="params">layer, images, i</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> next = i === images.length - <span class="number">1</span> ? <span class="number">0</span> : i + <span class="number">1</span>;</span><br><span class="line">    layer.removeChild(layer.firstChild);</span><br><span class="line">    layer.appendChild(images[next].img);</span><br><span class="line">    changeToNextFrame(layer, images, next);</span><br><span class="line">    requestAnimationFrame(af);</span><br><span class="line">  &#125;, images[i].duration);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 初始化图层内图片和帧动画</span></span><br><span class="line">layerConfig.map(<span class="function">(<span class="params">v, i</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> a = v.images[<span class="number">0</span>].img;</span><br><span class="line">  layers[i].appendChild(a);</span><br><span class="line">  requestAnimationFrame(iaf);</span><br><span class="line">  <span class="keyword">if</span> (v.images.length &gt; <span class="number">1</span> &amp;&amp; v.loopTime &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    changeToNextFrame(layers[i], v.images, <span class="number">0</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>初始化图层图片和一些默认样式并且开始帧动画</p>
+<p>利用定时器loop toggle img 删除第一个元素然后添加下一帧图片然后再调用自己</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.addEventListener(<span class="string">&quot;mouseleave&quot;</span>, <span class="built_in">this</span>.handleMouseLeave);</span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">&quot;mousemove&quot;</span>, <span class="built_in">this</span>.handleMouseMove);</span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">&quot;resize&quot;</span>, <span class="built_in">this</span>.handleResize);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">beforeDestroy</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  <span class="built_in">document</span>.removeEventListener(<span class="string">&quot;mouseleave&quot;</span>, <span class="built_in">this</span>.handleMouseLeave);</span><br><span class="line">  <span class="built_in">window</span>.removeEventListener(<span class="string">&quot;mousemove&quot;</span>, <span class="built_in">this</span>.handleMouseMove);</span><br><span class="line">  <span class="built_in">window</span>.removeEventListener(<span class="string">&quot;resize&quot;</span>, <span class="built_in">this</span>.handleResize);</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>监听一些事件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">this</span>.handleMouseMove = <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> offsetY = <span class="built_in">document</span>.documentElement.scrollTop + e.clientY;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;offsetY&quot;</span>, offsetY, e);</span><br><span class="line">  <span class="keyword">if</span> (offsetY &lt; containerHeight) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!entered) &#123;</span><br><span class="line">      entered = <span class="literal">true</span>;</span><br><span class="line">      enterX = e.clientX;</span><br><span class="line">    &#125;</span><br><span class="line">    displace = (e.clientX - enterX) / containerWidth;</span><br><span class="line">    cancelAnimationFrame(raf);</span><br><span class="line">    raf = requestAnimationFrame(af);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (entered) &#123;</span><br><span class="line">      entered = <span class="literal">false</span>;</span><br><span class="line">      handleLeave();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>鼠标经过容器执行af 先取消再继续，不在容器内调用 handleLeave</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">enterX = e.clientX;</span><br><span class="line">displace = (e.clientX - enterX) / containerWidth;</span><br></pre></td></tr></table></figure>
+
+<p>这两个的含义其实我还没太理解 后续需要用 displace 参与计算 应该就是用来判断往左还是右边的</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 根据鼠标位置改变状态</span></span><br><span class="line"><span class="keyword">const</span> af = <span class="function">(<span class="params">t</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    layers.map(<span class="function">(<span class="params">layer, i</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> v = layerConfig[i];</span><br><span class="line">      <span class="keyword">const</span> a = layer.firstChild;</span><br><span class="line">      <span class="keyword">if</span> (!v.offset || !a) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">const</span> baseRotate = v.initial.rotate || <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">const</span> baseTranslate = v.initial.trannslate || [<span class="number">0</span>, <span class="number">0</span>];</span><br><span class="line">      <span class="keyword">let</span> scaleStr = <span class="string">``</span>;</span><br><span class="line">      <span class="keyword">let</span> rotateStr = <span class="string">`rotate(<span class="subst">$&#123;v.initial.rotate || <span class="number">0</span>&#125;</span>deg)`</span>;</span><br><span class="line">      <span class="keyword">let</span> translateStr = <span class="string">`translate(<span class="subst">$&#123;baseTranslate[<span class="number">0</span>]&#125;</span>px, <span class="subst">$&#123;baseTranslate[<span class="number">1</span>]&#125;</span>px)`</span>;</span><br><span class="line"></span><br><span class="line">      <span class="built_in">console</span>.log(</span><br><span class="line">        <span class="string">&quot;rotateStr translateStr&quot;</span>,</span><br><span class="line">        rotateStr,</span><br><span class="line">        translateStr,</span><br><span class="line">        v.offset</span><br><span class="line">      );</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (v.offset.scale) &#123;</span><br><span class="line">        <span class="keyword">const</span> itp =</span><br><span class="line">              v.offsetCurve &amp;&amp; v.offsetCurve.scale</span><br><span class="line">        ? curveParameterToFunc(v.offsetCurve.scale)</span><br><span class="line">        : <span class="function">(<span class="params">x</span>) =&gt;</span> x;</span><br><span class="line">        <span class="keyword">const</span> offset = v.offset.scale * itp(displace);</span><br><span class="line">        scaleStr = <span class="string">`scale(<span class="subst">$&#123;<span class="number">1</span> + offset&#125;</span>)`</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (v.offset.rotate) &#123;</span><br><span class="line">        <span class="keyword">const</span> itp =</span><br><span class="line">              v.offsetCurve &amp;&amp; v.offsetCurve.rotate</span><br><span class="line">        ? curveParameterToFunc(v.offsetCurve.rotate)</span><br><span class="line">        : <span class="function">(<span class="params">x</span>) =&gt;</span> x;</span><br><span class="line">        <span class="keyword">const</span> offset = v.offset.rotate * itp(displace);</span><br><span class="line">        rotateStr = <span class="string">`rotate(<span class="subst">$&#123;baseRotate + offset&#125;</span>deg)`</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (v.offset.translate) &#123;</span><br><span class="line">        <span class="keyword">const</span> itp =</span><br><span class="line">              v.offsetCurve &amp;&amp; v.offsetCurve.translate</span><br><span class="line">        ? curveParameterToFunc(v.offsetCurve.translate)</span><br><span class="line">        : <span class="function">(<span class="params">x</span>) =&gt;</span> x;</span><br><span class="line">        <span class="keyword">const</span> offset = v.offset.translate.map(<span class="function">(<span class="params">v</span>) =&gt;</span> itp(displace) * v);</span><br><span class="line">        <span class="keyword">const</span> translate = baseTranslate.map(</span><br><span class="line">          (x, i) =&gt;</span><br><span class="line">          (x + offset[i]) * containerScale * (v.initial.scale || <span class="number">1</span>)</span><br><span class="line">        );</span><br><span class="line">        translateStr = <span class="string">`translate(<span class="subst">$&#123;translate[<span class="number">0</span>]&#125;</span>px, <span class="subst">$&#123;translate[<span class="number">1</span>]&#125;</span>px)`</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      a.style.transform = <span class="string">`<span class="subst">$&#123;scaleStr&#125;</span> <span class="subst">$&#123;translateStr&#125;</span> <span class="subst">$&#123;rotateStr&#125;</span>`</span>;</span><br><span class="line">      <span class="keyword">if</span> (v.offset.blur) &#123;</span><br><span class="line">        <span class="keyword">const</span> itp =</span><br><span class="line">              v.offsetCurve &amp;&amp; v.offsetCurve.blur</span><br><span class="line">        ? curveParameterToFunc(v.offsetCurve.blur)</span><br><span class="line">        : <span class="function">(<span class="params">x</span>) =&gt;</span> x;</span><br><span class="line">        <span class="keyword">const</span> blurOffset = itp(displace) * v.offset.blur;</span><br><span class="line">        a.style.filter = <span class="string">`blur(<span class="subst">$&#123;<span class="built_in">Math</span>.abs(</span></span></span><br><span class="line"><span class="string"><span class="subst">          (v.initial.blur || <span class="number">0</span>) + blurOffset</span></span></span><br><span class="line"><span class="string"><span class="subst">        )&#125;</span>px)`</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">    <span class="built_in">console</span>.error(e);</span><br><span class="line">    <span class="built_in">this</span>.$emit(<span class="string">&quot;error&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>关键代码在这里…</p>
+<ol>
+<li><p>判断有没有元素</p>
+</li>
+<li><p>获取一些初始的style</p>
+</li>
+<li><p>然后判断有没有offset scale rotate translate blur 然后执行动画</p>
+</li>
+<li><p>判断有没有 offset curve 如果有用 cubicBezier 没有就用默认参数</p>
+</li>
+<li><p>往右边 x2 &gt; x1 / width 正数</p>
+<ol>
+<li><p>Scale 默认是 1</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> offset = v.offset.scale * itp(displace);</span><br><span class="line">scaleStr = <span class="string">`scale(<span class="subst">$&#123;<span class="number">1</span> + offset&#125;</span>)`</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Rotate 根据上面定义的默认参数然后加上新角度</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> offset = v.offset.rotate * itp(displace);</span><br><span class="line">rotateStr = <span class="string">`rotate(<span class="subst">$&#123;baseRotate + offset&#125;</span>deg)`</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Translate 根据比例计算</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> offset = v.offset.translate.map(<span class="function">(<span class="params">v</span>) =&gt;</span> itp(displace) * v);</span><br><span class="line"><span class="keyword">const</span> translate = baseTranslate.map(</span><br><span class="line">  (x, i) =&gt;</span><br><span class="line">  (x + offset[i]) * containerScale * (v.initial.scale || <span class="number">1</span>)</span><br><span class="line">);</span><br><span class="line">translateStr = <span class="string">`translate(<span class="subst">$&#123;translate[<span class="number">0</span>]&#125;</span>px, <span class="subst">$&#123;translate[<span class="number">1</span>]&#125;</span>px)`</span>;</span><br></pre></td></tr></table></figure>
+
+<p>因为是个arr所以map loop，后面的 * 容器比例 * 初始化scale 应该是适配缩放的比例然后变化位置</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a.style.transform = <span class="string">`<span class="subst">$&#123;scaleStr&#125;</span> <span class="subst">$&#123;translateStr&#125;</span> <span class="subst">$&#123;rotateStr&#125;</span>`</span>;</span><br></pre></td></tr></table></figure>
+
+<p>最后设置属性</p>
+</li>
+<li><p>blur 初始的blur + 变化后的blur</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> blurOffset = itp(displace) * v.offset.blur;</span><br><span class="line">a.style.filter = <span class="string">`blur(<span class="subst">$&#123;<span class="built_in">Math</span>.abs(</span></span></span><br><span class="line"><span class="string"><span class="subst">  (v.initial.blur || <span class="number">0</span>) + blurOffset</span></span></span><br><span class="line"><span class="string"><span class="subst">)&#125;</span>px)`</span>;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> handleLeave = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> now = performance.now();</span><br><span class="line">  <span class="keyword">const</span> timeout = <span class="number">200</span>;</span><br><span class="line">  <span class="keyword">const</span> tempDisplace = displace;</span><br><span class="line">  cancelAnimationFrame(raf);</span><br><span class="line">  <span class="keyword">const</span> leaveAF = <span class="function">(<span class="params">t</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (t - now &lt; timeout) &#123;</span><br><span class="line">      displace = tempDisplace * (<span class="number">1</span> - (t - now) / <span class="number">200</span>);</span><br><span class="line">      af(t);</span><br><span class="line">      requestAnimationFrame(leaveAF);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      displace = <span class="number">0</span>;</span><br><span class="line">      af(t);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">  raf = requestAnimationFrame(leaveAF);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>鼠标离开后 在200time内displace会逐渐变小或扩大 取决于正数还是负数 超过时间后会设置为 0 然后调用动画恢复默认参数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">this</span>.handleResize = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  containerHeight = container.clientHeight;</span><br><span class="line">  containerWidth = container.clientWidth;</span><br><span class="line">  containerScale = containerHeight / <span class="number">155</span>;</span><br><span class="line">  layerConfig.forEach(<span class="function">(<span class="params">lc</span>) =&gt;</span> &#123;</span><br><span class="line">    lc.images.forEach(<span class="function">(<span class="params">i</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> img = i.img;</span><br><span class="line">      img.height =</span><br><span class="line">        img.dataset.height * containerScale * (lc.initial.scale || <span class="number">1</span>);</span><br><span class="line">      img.width =</span><br><span class="line">        img.dataset.width * containerScale * (lc.initial.scale || <span class="number">1</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">  cancelAnimationFrame(raf);</span><br><span class="line">  raf = requestAnimationFrame(<span class="function">(<span class="params">t</span>) =&gt;</span> &#123;</span><br><span class="line">    af(t);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p> 设置容器的样式参数然后取消动画再开始动画赋值给raf</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="https://i.imgur.com/2wHCa68.jpg" alt="小田 WeChat Pay">
+        <span>WeChat Pay</span>
+      </div>
+      <div>
+        <img src="https://i.imgur.com/tuC8CCx.jpg" alt="小田 Alipay">
+        <span>Alipay</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>小田
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="https://xiaotiandada.github.io/2020/11/16/bilibili-banner%E5%8A%A8%E7%94%BB%E7%A0%94%E7%A9%B6%E3%80%90%E4%B8%80%E3%80%91/" title="bilibili banner动画研究【一】">https://xiaotiandada.github.io/2020/11/16/bilibili-banner动画研究【一】/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/11/13/JFIF%E5%9B%BE%E7%89%87%E6%A0%BC%E5%BC%8F%E4%B8%8A%E4%BC%A0/" rel="prev" title="JFIF图片格式上传">
+                  <i class="fa fa-chevron-left"></i> JFIF图片格式上传
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小田</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
