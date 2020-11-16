@@ -25,20 +25,20 @@
     var CONFIG = {"hostname":"xiaotiandada.github.io","root":"/","scheme":"Gemini","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
   </script>
 
-  <meta name="description" content="掘金头像旋转动画 参考文章或者地址 文章  掘金头像地址  模仿地址">
+  <meta name="description" content="切换img图片完成帧动画效果">
 <meta property="og:type" content="article">
-<meta property="og:title" content="掘金头像旋转动画">
-<meta property="og:url" content="https://xiaotiandada.github.io/2018/06/04/%E6%8E%98%E9%87%91%E5%A4%B4%E5%83%8F%E6%97%8B%E8%BD%AC%E5%8A%A8%E7%94%BB/index.html">
+<meta property="og:title" content="图片帧动画">
+<meta property="og:url" content="https://xiaotiandada.github.io/2020/11/16/%E5%9B%BE%E7%89%87%E5%B8%A7%E5%8A%A8%E7%94%BB/index.html">
 <meta property="og:site_name" content="小田&#39;blog">
-<meta property="og:description" content="掘金头像旋转动画 参考文章或者地址 文章  掘金头像地址  模仿地址">
+<meta property="og:description" content="切换img图片完成帧动画效果">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2018-06-03T16:19:54.000Z">
-<meta property="article:modified_time" content="2019-07-09T15:42:37.970Z">
+<meta property="article:published_time" content="2020-11-16T15:16:37.000Z">
+<meta property="article:modified_time" content="2020-11-16T15:30:13.945Z">
 <meta property="article:author" content="小田">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://xiaotiandada.github.io/2018/06/04/%E6%8E%98%E9%87%91%E5%A4%B4%E5%83%8F%E6%97%8B%E8%BD%AC%E5%8A%A8%E7%94%BB/">
+<link rel="canonical" href="https://xiaotiandada.github.io/2020/11/16/%E5%9B%BE%E7%89%87%E5%B8%A7%E5%8A%A8%E7%94%BB/">
 
 
 <script class="page-configurations">
@@ -51,7 +51,7 @@
   };
 </script>
 
-  <title>掘金头像旋转动画 | 小田'blog</title>
+  <title>图片帧动画 | 小田'blog</title>
   
 
 
@@ -180,7 +180,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+    <div class="sidebar-inner sidebar-overview-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -192,7 +192,6 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%98%E9%87%91%E5%A4%B4%E5%83%8F%E6%97%8B%E8%BD%AC%E5%8A%A8%E7%94%BB"><span class="nav-number">1.</span> <span class="nav-text">掘金头像旋转动画</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.1.</span> <span class="nav-text">代码实现</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B5%84%E6%96%99%E5%8F%82%E8%80%83"><span class="nav-number">2.</span> <span class="nav-text">资料参考</span></a></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -280,7 +279,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://xiaotiandada.github.io/2018/06/04/%E6%8E%98%E9%87%91%E5%A4%B4%E5%83%8F%E6%97%8B%E8%BD%AC%E5%8A%A8%E7%94%BB/">
+    <link itemprop="mainEntityOfPage" href="https://xiaotiandada.github.io/2020/11/16/%E5%9B%BE%E7%89%87%E5%B8%A7%E5%8A%A8%E7%94%BB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/24250627?s=460&u=51a93e07957381123eb9fbdd6407de36033b578d&v=4">
@@ -293,7 +292,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          掘金头像旋转动画
+          图片帧动画
         </h1>
 
         <div class="post-meta-container">
@@ -303,24 +302,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
+      
 
-      <time title="Created: 2018-06-04 00:19:54" itemprop="dateCreated datePublished" datetime="2018-06-04T00:19:54+08:00">2018-06-04</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2019-07-09 23:42:37" itemprop="dateModified" datetime="2019-07-09T23:42:37+08:00">2019-07-09</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%8A%A8%E6%95%88/" itemprop="url" rel="index"><span itemprop="name">动效</span></a>
-        </span>
+      <time title="Created: 2020-11-16 23:16:37 / Modified: 23:30:13" itemprop="dateCreated datePublished" datetime="2020-11-16T23:16:37+08:00">2020-11-16</time>
     </span>
 
   
@@ -333,21 +317,26 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h3 id="掘金头像旋转动画"><a href="#掘金头像旋转动画" class="headerlink" title="掘金头像旋转动画"></a>掘金头像旋转动画</h3><hr>
-<p>参考文章或者地址</p>
-<p><a target="_blank" rel="noopener" href="https://juejin.im/post/5a9bc63f6fb9a028be357720">文章</a> </p>
-<p><a target="_blank" rel="noopener" href="https://juejin.im/user/58ce984d1b69e6006b82ff71">掘金头像地址</a></p>
-<p> <a href="https://xiaotiandada.github.io/Case/Anime/%E6%8E%98%E9%87%91%E5%A4%B4%E5%83%8F%E6%97%8B%E8%BD%AC%E5%8A%A8%E7%94%BB/">模仿地址</a></p>
- <a id="more"></a>
+        <p>切换img图片完成帧动画效果</p>
+<a id="more"></a>
 
-<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 结构</span></span><br><span class="line">&lt;div class=<span class="string">&quot;avatar&quot;</span>&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<iframe src="https://codesandbox.io/embed/tupianzhengdonghua-kb2hh?fontsize=14&hidenavigation=1&theme=dark&view=preview"
+     style="width:100%; height:200px; border:0; border-radius: 4px; overflow:hidden;"
+     title="图片帧动画"
+     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+   ></iframe>
 
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 样式</span></span><br><span class="line">.avatar &#123;</span><br><span class="line">  width: 100px;</span><br><span class="line">  height: 100px;</span><br><span class="line">  border-radius: 50%;</span><br><span class="line">  overflow: hidden;</span><br><span class="line">  margin: 0 auto;</span><br><span class="line">  background-image: url(https://avatars2.githubusercontent.com/u/24250627?s=460&amp;v=4);</span><br><span class="line">  background-size: cover;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.avatar:hover &#123;</span><br><span class="line">  -webkit-transform: rotate(666turn);</span><br><span class="line">  transform: rotate(666turn);</span><br><span class="line">  transition-delay: 1s;</span><br><span class="line">  transition-property: all;</span><br><span class="line">  transition-duration: 59s;</span><br><span class="line">  transition-timing-function: cubic-bezier(.34, 0, .84, 1)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 加载所有图片资源</span></span><br><span class="line"><span class="keyword">await</span> <span class="built_in">Promise</span>.all(</span><br><span class="line">  <span class="built_in">this</span>.layerConfig.map(<span class="keyword">async</span> (v) =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;v&quot;</span>, v);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.all(</span><br><span class="line">      v.images.map(<span class="keyword">async</span> (i, index) =&gt; &#123;</span><br><span class="line">        <span class="keyword">const</span> img = <span class="built_in">document</span>.createElement(<span class="string">&quot;img&quot;</span>);</span><br><span class="line">        img.src = i.src;</span><br><span class="line">        <span class="keyword">await</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> (img.onload = resolve));</span><br><span class="line">        v.images[index].img = img;</span><br><span class="line">      &#125;)</span><br><span class="line">    );</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
 
-<h3 id="资料参考"><a href="#资料参考" class="headerlink" title="资料参考"></a>资料参考</h3><p><a target="_blank" rel="noopener" href="http://www.css88.com/book/css/values/angle/turn.htm">turn</a></p>
-<p>转、圈（Turns）。一个圆共1圈</p>
-<p>90deg = 100grad = 0.25turn ≈ 1.570796326794897rad</p>
-<p>资料有兼容说明</p>
+<p>利用Promise先加载完所有图片</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始化图层</span></span><br><span class="line"><span class="keyword">const</span> layers = layerConfig.map(<span class="function">(<span class="params">v</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> layer = <span class="built_in">document</span>.createElement(<span class="string">&quot;div&quot;</span>);</span><br><span class="line">  layer.classList.add(<span class="string">&quot;layer&quot;</span>);</span><br><span class="line">  container.appendChild(layer);</span><br><span class="line">  <span class="keyword">return</span> layer;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 切换下一帧的方法</span></span><br><span class="line"><span class="keyword">const</span> changeToNextFrame = <span class="function">(<span class="params">layer, images, i</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> next = i === images.length - <span class="number">1</span> ? <span class="number">0</span> : i + <span class="number">1</span>;</span><br><span class="line">    layer.removeChild(layer.firstChild);</span><br><span class="line">    layer.appendChild(images[next].img);</span><br><span class="line">    changeToNextFrame(layer, images, next);</span><br><span class="line">  &#125;, images[i].duration);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 初始化图层内图片和帧动画</span></span><br><span class="line">layerConfig.map(<span class="function">(<span class="params">v, i</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> a = v.images[<span class="number">0</span>].img;</span><br><span class="line">  layers[i].appendChild(a);</span><br><span class="line">  <span class="keyword">if</span> (v.images.length &gt; <span class="number">1</span> &amp;&amp; v.loopTime &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    changeToNextFrame(layers[i], v.images, <span class="number">0</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>生成图层添加到页面</li>
+<li>添加图层图片和动画</li>
+<li>用SetTimeout切换图片</li>
+</ol>
 
     </div>
 
@@ -383,7 +372,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>Post link: </strong>
-      <a href="https://xiaotiandada.github.io/2018/06/04/%E6%8E%98%E9%87%91%E5%A4%B4%E5%83%8F%E6%97%8B%E8%BD%AC%E5%8A%A8%E7%94%BB/" title="掘金头像旋转动画">https://xiaotiandada.github.io/2018/06/04/掘金头像旋转动画/</a>
+      <a href="https://xiaotiandada.github.io/2020/11/16/%E5%9B%BE%E7%89%87%E5%B8%A7%E5%8A%A8%E7%94%BB/" title="图片帧动画">https://xiaotiandada.github.io/2020/11/16/图片帧动画/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
@@ -413,14 +402,11 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2018/05/19/%E6%A8%A1%E4%BB%BFsan%E7%9A%84hover%E5%8A%A8%E7%94%BB/" rel="prev" title="模仿san的hover动画">
-                  <i class="fa fa-chevron-left"></i> 模仿san的hover动画
+                <a href="/2020/11/16/bilibili-banner%E5%8A%A8%E7%94%BB%E7%A0%94%E7%A9%B6%E3%80%90%E4%B8%80%E3%80%91/" rel="prev" title="bilibili banner动画研究【一】">
+                  <i class="fa fa-chevron-left"></i> bilibili banner动画研究【一】
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2018/06/05/css%E5%B0%8F%E7%8C%AB%E7%AC%91%E8%B5%B7%E6%9D%A5%E7%9A%84%E5%8A%A8%E7%94%BB/" rel="next" title="css小猫笑起来的动画">
-                  css小猫笑起来的动画 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
